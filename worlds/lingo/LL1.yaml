@@ -2279,9 +2279,6 @@
       MASTERY:
         id: Master Room/Panel_mastery_mastery3
         tag: midwhite
-        required_door:
-          room: Orange Tower Seventh Floor
-          door: Mastery
       THE LIBRARY:
         id: EndPanel/Panel_library
         check: True
