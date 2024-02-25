@@ -39,8 +39,8 @@ class AssembleOptions(abc.ABCMeta):
         attrs["name_lookup"].update({option_id: name for name, option_id in new_options.items()})
         options.update(new_options)
         # apply aliases, without name_lookup
-        aliases = {name[6:].lower(): option_id for name, option_id in attrs.items() if
-                   name.startswith("alias_")}
+        aliases = attrs["aliases"] = {name[6:].lower(): option_id for name, option_id in attrs.items() if
+                                      name.startswith("alias_")}
 
         assert "random" not in aliases, "Choice option 'random' cannot be manually assigned."
 
@@ -108,6 +108,7 @@ class Option(typing.Generic[T], metaclass=AssembleOptions):
     # filled by AssembleOptions:
     name_lookup: typing.Dict[T, str]
     options: typing.Dict[str, int]
+    aliases: typing.Dict[T, str]
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({self.current_option_name})"
