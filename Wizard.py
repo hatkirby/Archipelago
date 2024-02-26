@@ -153,7 +153,7 @@ class Wizard(App):
                 self.grid.add_widget(TextInput())
 
         self.grid.bind(minimum_height=self.grid.setter("height"))
-        self.scrollview = OptionsPane(size_hint=(1, None))
+        self.scrollview = OptionsPane(size_hint=(1, 1))
         #self.scrollview.bind(height=self.container.setter('height'))
         self.scrollview.add_widget(self.grid)
         self.container.add_widget(self.scrollview)
