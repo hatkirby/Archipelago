@@ -1,0 +1,37 @@
+{
+    "regions": [
+        ["Menu", ["New Game"]],
+        ["Apartment", ["Nexus", "Suburb"]],
+        ["Beach", ["Nexus", "Fields", "Red Sea"]],
+        ["Bedroom", ["Nexus", "Overworld", "Drawer"]],
+        ["Blank", ["Nexus", "New Game", "Windmill"]],
+        ["Blue", ["Nexus", "Go"]],
+        ["Cell", ["Nexus", "Red Cave", "Circus"]],
+        ["Circus", ["Nexus", "Cell"]],
+        ["Cliff", ["Nexus", "Forest", "Space"]],
+        ["Crowd", ["Nexus", "Cliff"]],
+        ["Debug", ["Nexus", "Drawer"]],
+        ["Drawer", ["Nexus", "Bedroom", "Debug"]],
+        ["Fields", ["Nexus", "Overworld", "Forest", "Terminal", "Beach"]],
+        ["Forest", ["Nexus", "Fields", "Cliff"]],
+        ["Go", ["Nexus", "Terminal", "Blue", "Happy"]],
+        ["Happy", ["Nexus", "Go"]],
+        ["Hotel", ["Nexus", "Space"]],
+        ["Nexus", [
+            "Apartment", "Beach", "Blank", "Blue", "Cell", "Circus", "Cliff",
+            "Crowd", "Debug", "Drawer", "Fields", "Forest", "Go", "Happy", "Hotel",
+            "Overworld", "Red Cave", "Red Sea", "Suburb", "Space", "Street", "Terminal",
+            "Windmill", "Boss Rush"
+            ]
+        ],
+        ["Overworld", ["Nexus", "Bedroom", "Suburb"]],
+        ["Red Cave", ["Nexus", "Red Sea", "Cell"]],
+        ["Red Sea", ["Nexus", "Red Cave", "Beach"]],
+        ["Suburb", ["Nexus", "Overworld", "Apartment"]],
+        ["Space", ["Nexus", "Cliff", "Hotel"]],
+        ["Street", ["Nexus", "Overworld"]],
+        ["Terminal", ["Nexus", "Fields", "Go"]],
+        ["Windmill", ["Nexus", "Fields", "Blank"]],
+        ["Boss Rush", ["Nexus"]]
+    ]
+}

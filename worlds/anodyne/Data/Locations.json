@@ -1,0 +1,244 @@
+{
+    "all_locations": [
+        "Apartment small key chest 1",
+        "Apartment small key chest 2",
+        "Silverfish card chest",
+        "Gas guy card chest",
+        "Apartment small key chest 3",
+        "Apartment small key chest 4",
+        "Watcher card chest",
+        "Fisherman card chest",
+        "Cat Statue Secret chest",
+        "Blue Cube Secret chest",
+        "Bedroom small key chest 1",
+        "Shieldy card chest",
+        "Slime card chest",
+        "Seer card chest",
+        "Bedroom small key chest 2",
+        "Pew Laser card chest",
+        "Bedroom small key chest 3",
+        "Broom card chest",
+        "Chaser card chest",
+        "Torch card chest",
+        "Circus small key chest 1",
+        "Contorts card chest",
+        "Fire pillar card chest",
+        "Circus small key chest 2",
+        "Circus small key chest 3",
+        "Circus small key chest 4",
+        "Lion card chest",
+        "Arthur and Javiera card chest",
+        "Dog card chest",
+        "Rock card chest",
+        "Frog card chest",
+        "Crowd small key chest 1",
+        "Crowd small key chest 2",
+        "Crowd small key chest 3",
+        "Person card chest",
+        "The Wall card chest",
+        "Extend upgrade chest",
+        "Crowd small key chest 4",
+        "Intra card chest",
+        "Marina Secret chest",
+        "Melos Secret chest",
+        "Black Cube Secret chest",
+        "White Cube Secret chest",
+        "Young card chest",
+        "Carved Rock card chest",
+        "Miao card chest",
+        "Mitra card chest",
+        "Goldman card chest",
+        "Rank card chest",
+        "Spam Can Secret chest",
+        "Glitch Secret chest",
+        "Electric Monster Secret chest",
+        "Mushroom card chest",
+        "Green Cube Secret chest",
+        "Swap upgrade chest",
+        "Red Cube Secret chest",
+        "Hotel small key chest 1",
+        "Dust Maid card chest",
+        "Dasher card chest",
+        "Hotel small key chest 2",
+        "Hotel small key chest 3",
+        "Burst plant card chest",
+        "Hotel small key chest 4",
+        "Hotel small key chest 5",
+        "Hotel small key chest 6",
+        "Hotel small key chest 7",
+        "Manager card chest",
+        "City man card chest",
+        "Null card chest",
+        "Edward card chest",
+        "Annoyer card chest",
+        "Slasher card chest",
+        "Red Cave small key chest 1",
+        "Red Cave small key chest 2",
+        "Mover card chest",
+        "Rogue card chest",
+        "Red Cave small key chest 3",
+        "Red Cave small key chest 4",
+        "Red Cave small key chest 5",
+        "Red Cave small key chest 6",
+        "Widen upgrade chest",
+        "Gold Poop Secret chest",
+        "Walker card chest",
+        "Rock creature card chest",
+        "Suburbian card chest",
+        "Killer card chest",
+        "Blue Cube King card chest",
+        "Orange Cube King card chest",
+        "Triangle NPC card chest",
+        "Heart Secret chest",
+        "Street small key chest 1",
+        "Broom chest",
+        "Follower card chest",
+        "Sage card chest",
+        "Windmill card chest",
+        "Golden Broom Secret chest"
+    ],
+    "locations_by_region": {
+        "Apartment": [
+            "Apartment small key chest 1",
+            "Apartment small key chest 2",
+            "Silverfish card chest",
+            "Gas guy card chest",
+            "Apartment small key chest 3",
+            "Apartment small key chest 4",
+            "Watcher card chest"
+        ],
+        "Beach": [
+            "Fisherman card chest",
+            "Cat Statue Secret chest",
+            "Blue Cube Secret chest"
+        ],
+        "Bedroom": [
+            "Bedroom small key chest 1",
+            "Shieldy card chest",
+            "Slime card chest",
+            "Seer card chest",
+            "Bedroom small key chest 2",
+            "Pew Laser card chest",
+            "Bedroom small key chest 3"
+        ],
+        "Blank": [
+            "Broom card chest"
+        ],
+        "Cell": [
+            "Chaser card chest",
+            "Torch card chest"
+        ],
+        "Circus": [
+            "Circus small key chest 1",
+            "Contorts card chest",
+            "Fire pillar card chest",
+            "Circus small key chest 2",
+            "Circus small key chest 3",
+            "Circus small key chest 4",
+            "Lion card chest",
+            "Arthur and Javiera card chest"
+        ],
+        "Cliff": [
+            "Dog card chest",
+            "Rock card chest"
+        ],
+        "Crowd": [
+            "Frog card chest",
+            "Crowd small key chest 1",
+            "Crowd small key chest 2",
+            "Crowd small key chest 3",
+            "Person card chest",
+            "The Wall card chest",
+            "Extend upgrade chest",
+            "Crowd small key chest 4"
+        ],
+        "Debug": [
+        	"Intra card chest",
+        	"Marina Secret chest",
+        	"Melos Secret chest",
+        	"Black Cube Secret chest",
+        	"White Cube Secret chest"
+        ],
+        "Drawer": [
+        	"Young card chest",
+        	"Carved Rock card chest"
+        ],
+        "Fields" : [
+        	"Miao card chest",
+        	"Mitra card chest",
+        	"Goldman card chest",
+        	"Rank card chest",
+        	"Spam Can Secret chest",
+        	"Glitch Secret chest",
+        	"Electric Monster Secret chest"
+        ],
+        "Forest" : [
+        	"Mushroom card chest",
+        	"Green Cube Secret chest"
+        ],
+        "Go" : [
+        	"Swap upgrade chest",
+        	"Red Cube Secret chest"
+        ],
+        "Hotel" : [
+        	"Hotel small key chest 1",
+        	"Dust Maid card chest",
+        	"Dasher card chest",
+        	"Hotel small key chest 2",
+        	"Hotel small key chest 3",
+        	"Burst plant card chest",
+        	"Hotel small key chest 4",
+        	"Hotel small key chest 5",
+        	"Hotel small key chest 6",
+        	"Hotel small key chest 7",
+        	"Manager card chest",
+        	"City man card chest"
+        ],
+        "Nexus" : [
+        	"Null card chest"
+        ],
+        "Overworld" : [
+        	"Edward card chest",
+        	"Annoyer card chest"
+        ],
+        "Red Cave" : [
+        	"Slasher card chest",
+        	"Red Cave small key chest 1",
+        	"Red Cave small key chest 2",
+        	"Mover card chest",
+        	"Rogue card chest",
+        	"Red Cave small key chest 3",
+        	"Red Cave small key chest 4",
+        	"Red Cave small key chest 5",
+        	"Red Cave small key chest 6",
+        	"Widen upgrade chest",
+        	"Gold Poop Secret chest",
+        	"Walker card chest",
+        	"Rock creature card chest"
+        ],
+        "Suburb" : [
+        	"Suburbian card chest",
+        	"Killer card chest"
+        ],
+        "Space" : [
+        	"Blue Cube King card chest",
+        	"Orange Cube King card chest",
+        	"Triangle NPC card chest",
+        	"Heart Secret chest"
+        ],
+        "Street" : [
+        	"Street small key chest 1",
+        	"Broom chest",
+        	"Follower card chest"
+        ],
+        "Terminal" : [
+        	"Sage card chest"
+        ],
+        "Windmill" : [
+        	"Windmill card chest"
+        ],
+        "Boss Rush" : [
+        	"Golden Broom Secret chest"
+        ]
+    }
+}
