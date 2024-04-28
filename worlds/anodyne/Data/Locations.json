@@ -8,8 +8,8 @@
         "Apartment small key chest 4",
         "Watcher card chest",
         "Fisherman card chest",
-        "Cat Statue Secret chest",
-        "Blue Cube Secret chest",
+        "Cat Statue chest",
+        "Blue Cube chest",
         "Bedroom small key chest 1",
         "Shieldy card chest",
         "Slime card chest",
@@ -39,23 +39,23 @@
         "Extend upgrade chest",
         "Crowd small key chest 4",
         "Intra card chest",
-        "Marina Secret chest",
-        "Melos Secret chest",
-        "Black Cube Secret chest",
-        "White Cube Secret chest",
+        "Marina chest",
+        "Melos chest",
+        "Black cube chest",
+        "White cube chest",
         "Young card chest",
         "Carved Rock card chest",
         "Miao card chest",
         "Mitra card chest",
         "Goldman card chest",
         "Rank card chest",
-        "Spam Can Secret chest",
-        "Glitch Secret chest",
-        "Electric Monster Secret chest",
+        "Spam Can chest",
+        "Glitch chest",
+        "Electric Monster chest",
         "Mushroom card chest",
-        "Green Cube Secret chest",
+        "Green cube chest",
         "Swap upgrade chest",
-        "Red Cube Secret chest",
+        "Red Cube chest",
         "Hotel small key chest 1",
         "Dust Maid card chest",
         "Dasher card chest",
@@ -81,7 +81,7 @@
         "Red Cave small key chest 5",
         "Red Cave small key chest 6",
         "Widen upgrade chest",
-        "Gold Poop Secret chest",
+        "Gold Poop chest",
         "Walker card chest",
         "Rock creature card chest",
         "Suburbian card chest",
@@ -89,13 +89,13 @@
         "Blue Cube King card chest",
         "Orange Cube King card chest",
         "Triangle NPC card chest",
-        "Heart Secret chest",
+        "Heart chest",
         "Street small key chest 1",
         "Broom chest",
         "Follower card chest",
         "Sage card chest",
         "Windmill card chest",
-        "Golden Broom Secret chest"
+        "Golden Broom chest"
     ],
     "locations_by_region": {
         "Apartment": [
@@ -109,8 +109,8 @@
         ],
         "Beach": [
             "Fisherman card chest",
-            "Cat Statue Secret chest",
-            "Blue Cube Secret chest"
+            "Cat Statue chest",
+            "Blue cube chest"
         ],
         "Bedroom": [
             "Bedroom small key chest 1",
@@ -154,10 +154,10 @@
         ],
         "Debug": [
         	"Intra card chest",
-        	"Marina Secret chest",
-        	"Melos Secret chest",
-        	"Black Cube Secret chest",
-        	"White Cube Secret chest"
+        	"Marina chest",
+        	"Melos chest",
+        	"Black cube chest",
+        	"White cube chest"
         ],
         "Drawer": [
         	"Young card chest",
@@ -168,17 +168,17 @@
         	"Mitra card chest",
         	"Goldman card chest",
         	"Rank card chest",
-        	"Spam Can Secret chest",
-        	"Glitch Secret chest",
-        	"Electric Monster Secret chest"
+        	"Spam Can chest",
+        	"Glitch chest",
+        	"Electric Monster chest"
         ],
         "Forest" : [
         	"Mushroom card chest",
-        	"Green Cube Secret chest"
+        	"Green cube chest"
         ],
         "Go" : [
         	"Swap upgrade chest",
-        	"Red Cube Secret chest"
+        	"Red cube chest"
         ],
         "Hotel" : [
         	"Hotel small key chest 1",
@@ -212,7 +212,7 @@
         	"Red Cave small key chest 5",
         	"Red Cave small key chest 6",
         	"Widen upgrade chest",
-        	"Gold Poop Secret chest",
+        	"Gold Poop chest",
         	"Walker card chest",
         	"Rock creature card chest"
         ],
@@ -224,7 +224,7 @@
         	"Blue Cube King card chest",
         	"Orange Cube King card chest",
         	"Triangle NPC card chest",
-        	"Heart Secret chest"
+        	"Heart chest"
         ],
         "Street" : [
         	"Street small key chest 1",
@@ -238,7 +238,38 @@
         	"Windmill card chest"
         ],
         "Boss Rush" : [
-        	"Golden Broom Secret chest"
+        	"Golden Broom chest"
         ]
-    }
+    },
+        "vanilla_key_locations": [
+            "Apartment small key chest 1",
+            "Apartment small key chest 2",
+            "Apartment small key chest 3",
+            "Apartment small key chest 4",
+            "Bedroom small key chest 1",
+            "Bedroom small key chest 2",
+            "Bedroom small key chest 3",
+            "Circus small key chest 1",
+            "Circus small key chest 2",
+            "Circus small key chest 3",
+            "Circus small key chest 4",
+            "Crowd small key chest 1",
+            "Crowd small key chest 2",
+            "Crowd small key chest 3",
+            "Crowd small key chest 4",
+            "Hotel small key chest 1",
+            "Hotel small key chest 2",
+            "Hotel small key chest 3",
+            "Hotel small key chest 4",
+            "Hotel small key chest 5",
+            "Hotel small key chest 6",
+            "Hotel small key chest 7",
+            "Red Cave small key chest 1",
+            "Red Cave small key chest 2",
+            "Red Cave small key chest 3",
+            "Red Cave small key chest 4",
+            "Red Cave small key chest 5",
+            "Red Cave small key chest 6",
+            "Street small key chest 1"
+        ]
 }
