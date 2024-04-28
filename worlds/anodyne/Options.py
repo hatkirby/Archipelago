@@ -1,6 +1,6 @@
 from typing import Dict
 
-from Options import Choice, Option, Toggle
+from Options import Choice, DeathLink, Option, Toggle
 
 class KeyShuffle(Choice):
     """Select which broom to start with"""
@@ -16,12 +16,12 @@ class KeyShuffle(Choice):
 class StartBroom(Choice):
     """Select which broom to start with."""
     display_name = "Starting Broom"
-    option_normal = 0
-    option_wide = 1
-    option_long = 2
-    option_swap = 3
-    option_none = 4
-    default = 4
+    option_none = 0
+    option_normal = 1
+    option_wide = 2
+    option_long = 3
+    option_swap = 4
+    default = 0
 
 class IncludeWiggleChest(Toggle):
     """Include the chest that requires the wiggle glitch to get to."""
@@ -30,10 +30,6 @@ class IncludeWiggleChest(Toggle):
 class IncludeGreenCubeChest(Toggle):
     """Include the chest that forces you to wait almost 2 hours to access it."""
     display_name = "Include green cube chest"
-
-class DeathLink(Toggle):
-    """When you die, everyone dies! The reverse is true too."""
-    display_name = "Death Link"
 
 anodyne_options: Dict[str, type(Option)] = {
     "key_shuffle" : KeyShuffle,
