@@ -38,7 +38,7 @@ class AnodyneGameWorld(World):
             item_class = ItemClassification.useful
         elif name in Constants.item_info["trap_items"]:
             item_class = ItemClassification.trap
-        elif name in Constants.item_info["filler"]:
+        else:
             item_class = ItemClassification.filler
 
         return AnodyneItem(name, item_class, self.item_name_to_id.get(name, None), self.player)

@@ -11,6 +11,7 @@ class KeyShuffle(Choice):
     option_own_world = 3
     option_any_world = 4
     option_different_world = 5
+    default = 0
 
 class StartBroom(Choice):
     """Select which broom to start with."""
@@ -18,8 +19,9 @@ class StartBroom(Choice):
     option_normal = 0
     option_wide = 1
     option_long = 2
-    option_swapper = 3
+    option_swap = 3
     option_none = 4
+    default = 4
 
 class IncludeWiggleChest(Toggle):
     """Include the chest that requires the wiggle glitch to get to."""
