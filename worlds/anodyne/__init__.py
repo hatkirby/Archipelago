@@ -31,36 +31,30 @@ class AnodyneGameWorld(World):
     location_name_to_id = Constants.location_name_to_id
 
 
-    def create_item(self, name: str) -> Item:
-        item_class = ItemClassification.filler
+    def create_item(self, name: str) -> Item:     
         if name in Constants.item_info["progression_items"]:
             item_class = ItemClassification.progression
         elif name in Constants.item_info["useful_items"]:
             item_class = ItemClassification.useful
         elif name in Constants.item_info["trap_items"]:
             item_class = ItemClassification.trap
+        else :
+            item_class = ItemClassification.filler
 
         return AnodyneItem(name, item_class, self.item_name_to_id.get(name, None), self.player)
-
-    def create_event(self, region_name: str, event_name: str) -> None:
-        region = self.multiworld.get_region(region_name, self.player)
-        loc = AnodyneLocation(self.player, event_name, None, region)
-        loc.place_locked_item(self.create_event_item(event_name))
-        region.locations.append(loc)
-
-    def create_event_item(self, name: str) -> None:
-        item = self.create_item(name)
-        item.classification = ItemClassification.progression
-        return item
 
     def create_regions(self) -> None:
         
         menu = Region("Menu", self.player, self.multiworld)
         world = Region("World", self.player, self.multiworld)
 
-        menu.add_exits(self.player, "Start Game", world)
+        world.add_locations(Constants.location_name_to_id)
+
         self.multiworld.regions.append(menu)
+        self.multiworld.regions.append(world)
     
+        menu.add_exits(["World"])
+
         #self.create_event("Go", "Defeat Briar")
         #self.create_event("Nexus", "Open 49 card gate")
 
@@ -69,4 +63,11 @@ class AnodyneGameWorld(World):
         for name in Constants.item_info["all_items"]:
             item_pool.append(self.create_item(name))
 
+        if(len(item_pool) < len(Constants.location_name_to_id)):
+            item_pool.extend(self.create_filler() for _ in range(len(Constants.location_name_to_id) - len(item_pool)))
+
         self.multiworld.itempool += item_pool
+        
+
+    def get_filler_item_name(self) -> str:
+        return "Key"
