@@ -1,6 +1,7 @@
+from dataclasses import dataclass
 from typing import Dict
 
-from Options import Choice, DeathLink, Option, Toggle
+from Options import Choice, DeathLink, ExcludeLocations, Option, PerGameCommonOptions, StartInventoryPool, Toggle
 
 class KeyShuffle(Choice):
     """Select which broom to start with"""
@@ -31,10 +32,11 @@ class IncludeGreenCubeChest(Toggle):
     """Include the chest that forces you to wait almost 2 hours to access it."""
     display_name = "Include green cube chest"
 
-anodyne_options: Dict[str, type(Option)] = {
-    "key_shuffle" : KeyShuffle,
-    "start_broom": StartBroom,
-    "wiggle_chest" : IncludeWiggleChest,
-    "green_cube_chest" : IncludeGreenCubeChest,
-    "death_link": DeathLink,
-}
+@dataclass
+class AnodyneGameOptions(PerGameCommonOptions):
+    key_shuffle : KeyShuffle
+    start_broom: StartBroom
+    wiggle_chest : IncludeWiggleChest
+    green_cube_chest : IncludeGreenCubeChest
+    death_link: DeathLink
+    start_inventory_from_pool: StartInventoryPool

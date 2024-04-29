@@ -1,7 +1,9 @@
 from typing import List
 
+from Options import StartInventoryPool
+
 from . import Constants
-from .Options import IncludeGreenCubeChest, IncludeWiggleChest, KeyShuffle, StartBroom, anodyne_options  # the options we defined earlier
+from .Options import AnodyneGameOptions, IncludeGreenCubeChest, IncludeWiggleChest, KeyShuffle, StartBroom  # the options we defined earlier
 from .Rules import get_button_rule
 
 from worlds.AutoWorld import WebWorld, World
@@ -24,12 +26,14 @@ class AnodyneGameWorld(World):
     and areas in Young's subconscious.
     """
     game = "Anodyne"  # name of the game/world
-    option_definitions = anodyne_options
-    topology_present = True  # show path to required location checks in spoiler
+    options_dataclass = AnodyneGameOptions
+    options: AnodyneGameOptions
+    topology_present = False  # show path to required location checks in spoiler
+
+    data_version = 1
 
     item_name_to_id = Constants.item_name_to_id
     location_name_to_id = Constants.location_name_to_id
-
 
     def create_item(self, name: str) -> Item:     
         if name in Constants.item_info["progression_items"]:
@@ -54,6 +58,11 @@ class AnodyneGameWorld(World):
         self.multiworld.regions.append(world)
     
         menu.add_exits(["World"])
+
+        green_cube_chest = bool(self.options.green_cube_chest)
+
+        #if not green_cube_chest:
+            #self.multiworld.exclude_locations[self.player].value.add("Green cube chest")
 
         #self.create_event("Go", "Defeat Briar")
         #self.create_event("Nexus", "Open 49 card gate")
@@ -80,38 +89,8 @@ class AnodyneGameWorld(World):
             for location in Constants.location_info["vanilla_key_locations"]:
                 placed_items += 1
                 self.multiworld.get_location(location, self.player).place_locked_item(self.create_item("Key"))
-
-        wiggle_chest:IncludeWiggleChest = self.options.wiggle_chest
-
-        #if wiggle_chest.current_key == 'false':
-
-
-        green_cube_chest:IncludeGreenCubeChest = self.options.green_cube_chest
-
-        #if green_cube_chest.current_key == 'false':
-            
-
-        start_broom:StartBroom = self.options.start_broom
-        start_broom_item:str = ""
-
-        if key_shuffle.current_key == 'normal':
-            start_broom_item = "Broom"
-        elif key_shuffle.current_key == 'wide':
-            start_broom_item = "Wide upgrade"
-        elif key_shuffle.current_key == 'long':
-            start_broom_item = "Long upgrade"
-        elif key_shuffle.current_key == 'swapper':
-            start_broom_item = "Swap upgrade"
-
-        if start_broom_item != "":
-            excluded_items.add(start_broom_item)
-
-        if green_cube_chest.current_key == 'false':
-            name:str = self.random.choice(Constants.item_info["filler"])
-            
-            excluded_items.add(name)
-            
-            self.multiworld.get_location("Green cube chest", self.player).place_locked_item(self.create_item(name))
+        
+        self.set_starting_broom()
 
         item_pool: List[AnodyneItem] = []
         for name in Constants.item_info["all_items"]:
@@ -128,8 +107,24 @@ class AnodyneGameWorld(World):
     def get_filler_item_name(self) -> str:
         return "Key"
     
+    def set_starting_broom(self):
+        start_broom:StartBroom = self.options.start_broom
+        start_broom_item:str = ""
+
+        if start_broom.current_key == "normal":
+            start_broom_item = "Broom"
+        elif start_broom.current_key == "wide":
+            start_broom_item = "Wide upgrade"
+        elif start_broom.current_key == "long":
+            start_broom_item = "Long upgrade"
+        elif start_broom.current_key == "swapper":
+            start_broom_item = "Swap upgrade"
+
+        if start_broom_item != "":
+            self.options.start_inventory_from_pool = StartInventoryPool({start_broom_item: 1})
+            #excluded_items.add(start_broom_item)
+    
     def fill_slot_data(self):
         return {
-            "death_link": self.options.death_link.value,
-            "start_broom": self.options.start_broom.value
+            "death_link": self.options.death_link.value
         }
