@@ -1,7 +1,8 @@
 from dataclasses import dataclass
 from typing import Dict
 
-from Options import Choice, DeathLink, ExcludeLocations, Option, PerGameCommonOptions, StartInventoryPool, Toggle
+from Options import Choice, DeathLink, PerGameCommonOptions, StartInventoryPool, Toggle
+
 
 class KeyShuffle(Choice):
     """Select which broom to start with"""
@@ -24,9 +25,12 @@ class StartBroom(Choice):
     option_swap = 4
     default = 0
 
-class IncludeWiggleChest(Toggle):
-    """Include the chest that requires the wiggle glitch to get to."""
-    display_name = "Include wiggle chest"
+class VictoryCondition(Choice):
+    """Select the end goal of your game."""
+    display_name = "Victory condition"
+    option_all_bosses = 0
+    option_all_cards = 1
+    default = 0
 
 class IncludeGreenCubeChest(Toggle):
     """Include the chest that forces you to wait almost 2 hours to access it."""
@@ -34,9 +38,9 @@ class IncludeGreenCubeChest(Toggle):
 
 @dataclass
 class AnodyneGameOptions(PerGameCommonOptions):
-    key_shuffle : KeyShuffle
+    key_shuffle: KeyShuffle
     start_broom: StartBroom
-    wiggle_chest : IncludeWiggleChest
-    green_cube_chest : IncludeGreenCubeChest
+    victory_condition: VictoryCondition
+    green_cube_chest: IncludeGreenCubeChest
     death_link: DeathLink
     start_inventory_from_pool: StartInventoryPool

@@ -1,7 +1,7 @@
 all_items = [
     "Broom",
     "Key",
-    "Jump",
+    "Jump shoes",
     "Wide upgrade",
     "Long upgrade",
     "Swap upgrade",
@@ -88,7 +88,6 @@ all_items = [
 
 progression_items = [
     "Broom",
-    "Key",
     "Jump",
     "Wide upgrade",
     "Long upgrade",
@@ -158,6 +157,7 @@ trap_items = [
 ]
 
 filler_items = [
+    "Key",
     "Golden poop",
     "Spam can",
     "Glitch",

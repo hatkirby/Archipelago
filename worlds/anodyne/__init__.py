@@ -1,13 +1,14 @@
-from typing import List
+import logging
+from typing import List, Callable
 
 from . import Constants
-from .Options import AnodyneGameOptions, IncludeGreenCubeChest, IncludeWiggleChest, KeyShuffle, \
-    StartBroom  # the options we defined earlier
-from .Rules import get_button_rule
-from .Data import Items, Locations
+
+from .Data import Items, Locations, Regions, Exits, Events
+from .Options import AnodyneGameOptions, IncludeGreenCubeChest, KeyShuffle, StartBroom, \
+    VictoryCondition  # , VictoryCondition
 
 from worlds.AutoWorld import WebWorld, World
-from BaseClasses import Region, Entrance, Location, Item, ItemClassification, CollectionState
+from BaseClasses import Region, Location, Item, ItemClassification, CollectionState
 
 
 class AnodyneLocation(Location):
@@ -51,28 +52,68 @@ class AnodyneGameWorld(World):
         return AnodyneItem(name, item_class, self.item_name_to_id.get(name, None), self.player)
 
     def create_regions(self) -> None:
+        for region_name in Regions.all_regions:
+            region = Region(region_name, self.player, self.multiworld)
+            if region_name in Locations.locations_by_region:
+                for location_name in Locations.locations_by_region[region_name]:
+                    location_id = Constants.location_name_to_id[location_name]
+                    region.add_locations({location_name: location_id})
+            self.multiworld.regions.append(region)
 
-        menu = Region("Menu", self.player, self.multiworld)
-        world = Region("World", self.player, self.multiworld)
+        for region in self.multiworld.get_regions(self.player):
+            if region.name in Exits.exits_by_region:
+                for exit_name in Exits.exits_by_region[region.name]:
+                    for i, exit_vals in enumerate(Exits.exits_by_region[region.name][exit_name]):
+                        exit1: str = exit_vals[0]
+                        exit2: str = exit_vals[1]
 
-        world.add_locations(Constants.location_name_to_id)
+                        requirements = exit_vals[2]
 
-        self.multiworld.regions.append(menu)
-        self.multiworld.regions.append(world)
+                        r1 = self.multiworld.get_region(exit1, self.player)
+                        r2 = self.multiworld.get_region(exit2, self.player)
 
-        menu.add_exits(["World"])
+                        e = r1.create_exit(exit_name + " " + str(i + 1))
+                        e.connect(r2)
+                        e.access_rule = lambda state: (
+                                all(Constants.check_access(state, self.player, item) for item in requirements)
+                        )
 
+            if region.name in Events.events_by_region:
+                for event_name in Events.events_by_region[region.name]:
+                    requirements = Events.events_by_region[region.name][event_name]
+                    self.create_event(region, event_name, lambda state: (
+                            all(Constants.check_access(state, self.player, item) for item in requirements)
+                        ))
+
+    def set_rules(self) -> None:
         green_cube_chest = bool(self.options.green_cube_chest)
 
         if not green_cube_chest:
             self.multiworld.exclude_locations[self.player].value.add("Green cube chest")
 
-        #self.create_event("Go", "Defeat Briar")
-        #self.create_event("Nexus", "Open 49 card gate")
+        victory_condition: VictoryCondition = self.options.victory_condition
+        requirements: list[str] = []
+
+        if victory_condition.current_key == "all_bosses":
+            requirements.append("Defeat Seer")
+            requirements.append("Defeat Rogue")
+            requirements.append("Defeat The Wall")
+            requirements.append("Defeat Manager")
+            requirements.append("Defeat Servants")
+            requirements.append("Defeat Watcher")
+            requirements.append("Defeat Sage")
+            requirements.append("Defeat Briar")
+        elif victory_condition.current_key == "all_cards":
+            requirements.append("Cards:49")
+            requirements.append("Open 49 card gate")
+
+        self.multiworld.completion_condition[self.player] = lambda state: (
+            all(Constants.check_access(state, self.player, item) for item in requirements)
+        )
 
     def create_items(self) -> None:
         placed_items = 0
-        excluded_items: set[str] = {"Jump",
+        excluded_items: set[str] = {"Jump shoes",
                                     "Key"}
         # TODO: Jump is not actually in the item pool atm, in the list to keep ids correct for game
 
@@ -92,8 +133,14 @@ class AnodyneGameWorld(World):
             )
             for name in Locations.vanilla_key_locations:
                 placed_items += 1
+
+                if name.startswith("Red Cave"):
+                    loc_name = "Red Cave"
+                else:
+                    loc_name = name.split(' ', 1)[0]
+
                 self.multiworld.get_location(name, self.player).place_locked_item(
-                    self.create_item("Key (" + name + ")"))
+                    self.create_item("Key (" + loc_name + ")"))
 
         start_broom: StartBroom = self.options.start_broom
         start_broom_item: str = ""
@@ -117,21 +164,16 @@ class AnodyneGameWorld(World):
                 placed_items += 1
                 item_pool.append(self.create_item(name))
 
-        if (placed_items < len(Constants.location_name_to_id)):
+        if placed_items < len(Constants.location_name_to_id):
             item_pool.extend(self.create_filler() for _ in range(len(Constants.location_name_to_id) - placed_items))
+
+        logging.info("Created items: " + str(len(self.item_names)) +
+                     "/" + str(len(Items.all_items)))
 
         self.multiworld.itempool += item_pool
 
     def get_filler_item_name(self) -> str:
         return "Key"
-
-    def count_cards(self) -> int:
-        card_count = 0
-        for card in Items.cards:
-            if self.multiworld.state.has(card, self.player):
-                card_count += 1
-
-        return card_count
 
     def count_keys(self, map_name: str) -> int:
         key_name: str = "Key (" + map_name + ")"
@@ -140,6 +182,17 @@ class AnodyneGameWorld(World):
             return 0
         else:
             return self.multiworld.state.item_count(key_name, self.player)
+
+    def create_event(self, region: Region, event_name: str, access_rule: Callable[[CollectionState], bool]) -> None:
+        loc = AnodyneLocation(self.player, event_name, None, region)
+        loc.place_locked_item(self.create_event_item(event_name))
+        loc.access_rule = access_rule
+        region.locations.append(loc)
+
+    def create_event_item(self, name: str) -> Item:
+        item = self.create_item(name)
+        item.classification = ItemClassification.progression
+        return item
 
     def fill_slot_data(self):
         return {

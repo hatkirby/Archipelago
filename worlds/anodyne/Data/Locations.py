@@ -12,7 +12,7 @@ all_locations = [
     "Watcher card chest",
     "Fisherman card chest",
     "Cat Statue chest",
-    "Blue Cube chest",
+    "Blue cube chest",
     # 40DE36CF-9238-F8B0-7A57-C6C8CA465CC2
     "Bedroom small key chest 1",
     "Shieldy card chest",
@@ -69,7 +69,7 @@ all_locations = [
     "Mushroom card chest",
     "Green cube chest",
     "Swap upgrade chest",
-    "Red Cube chest",
+    "Red cube chest",
     # 6C8870D4-7600-6FFD-B425-2D951E65E160
     "Hotel small key chest 1",
     "Dust maid card chest",
@@ -252,7 +252,7 @@ locations_by_region = {
         # 019CBC29-3614-9302-6848-DDAEDC7C49E5
         "Hotel small key chest 6"
     ],
-    "Nexus": [
+    "Nexus top": [
         "Null card chest"
     ],
     "Overworld": [
@@ -275,20 +275,20 @@ locations_by_region = {
         # CDA1FF45-0F88-4855-B0EC-A9B42376C33F
         "Red Cave small key chest 6",
     ],
-    "Red cave middle": [
+    "Red Cave center": [
         "Mover card chest",
         # 72BAD10E-598F-F238-0103-60E1B36F6240
         "Red Cave small key chest 1",
         # AE87F1D5-57E0-1749-7E1E-1D0BCC1BCAB4
         "Red Cave small key chest 2",
     ],
-    "Red cave right": [
+    "Red Cave right": [
         # A7672339-F3FB-C49E-33CE-42A49D7E4533
         "Red Cave small key chest 4",
         # 83286BFB-FFDA-237E-BA57-CA2E532E1DC7
         "Red Cave small key chest 5",
     ],
-    "Red cave bottom": [
+    "Red Cave bottom": [
         "Widen upgrade chest"
     ],
     "Red Cave Isaac": [

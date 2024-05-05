@@ -1,9 +1,10 @@
-regions = [
+all_regions = [
         "Menu",
         "Apartment floor 1",
         "Apartment floor 2",
         "Apartment floor 3",
-        "Beach", 
+        "Beach",
+        "Bedroom",
         "Bedroom drawer",
         "Blank start",
         "Blank windmill",
@@ -36,7 +37,7 @@ regions = [
         "Overworld post windmill",
         "Red Cave top", 
         "Red Cave left",
-        "Red Cave middle",
+        "Red Cave center",
         "Red Cave right", 
         "Red Cave bottom", 
         "Red Cave Isaac", 
@@ -68,7 +69,6 @@ regions_with_nexus_gate = [
         "Red Sea",
         "Suburb",
         "Space",
-        "Street",
         "Terminal",
         "Windmill"
     ]
