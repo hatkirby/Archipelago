@@ -57,7 +57,16 @@ class AnodyneGameWorld(World):
             if region_name in Locations.locations_by_region:
                 for location_name in Locations.locations_by_region[region_name]:
                     location_id = Constants.location_name_to_id[location_name]
+                    requirements: list[str] = Locations.all_locations[location_name]
+
                     region.add_locations({location_name: location_id})
+
+                    location = self.get_location(location_name)
+                    location.access_rule = (lambda reqs, name: (lambda state: (
+                        all(Constants.check_access(state, self.player, item, name)
+                            for item in requirements)
+                    )))(requirements, region.name)
+
             self.multiworld.regions.append(region)
 
         for region in self.multiworld.get_regions(self.player):
@@ -67,23 +76,24 @@ class AnodyneGameWorld(World):
                         exit1: str = exit_vals[0]
                         exit2: str = exit_vals[1]
 
-                        requirements = exit_vals[2]
+                        requirements: list[str] = exit_vals[2]
 
                         r1 = self.multiworld.get_region(exit1, self.player)
                         r2 = self.multiworld.get_region(exit2, self.player)
 
                         e = r1.create_exit(exit_name + " " + str(i + 1))
                         e.connect(r2)
-                        e.access_rule = lambda state: (
-                                all(Constants.check_access(state, self.player, item) for item in requirements)
-                        )
+                        e.access_rule = (lambda reqs, name: (lambda state: (
+                            all(Constants.check_access(state, self.player, item, name)
+                                for item in reqs))))(requirements, region.name)
 
             if region.name in Events.events_by_region:
                 for event_name in Events.events_by_region[region.name]:
-                    requirements = Events.events_by_region[region.name][event_name]
-                    self.create_event(region, event_name, lambda state: (
-                            all(Constants.check_access(state, self.player, item) for item in requirements)
-                        ))
+                    requirements: list[str] = Events.events_by_region[region.name][event_name]
+                    self.create_event(region, event_name, (lambda reqs, name: (lambda state: (
+                        all(Constants.check_access(state, self.player, item, name)
+                            for item in requirements)
+                    )))(requirements, region.name))
 
     def set_rules(self) -> None:
         green_cube_chest = bool(self.options.green_cube_chest)
@@ -108,7 +118,7 @@ class AnodyneGameWorld(World):
             requirements.append("Open 49 card gate")
 
         self.multiworld.completion_condition[self.player] = lambda state: (
-            all(Constants.check_access(state, self.player, item) for item in requirements)
+            all(Constants.check_access(state, self.player, item, "") for item in requirements)
         )
 
     def create_items(self) -> None:
@@ -131,16 +141,11 @@ class AnodyneGameWorld(World):
                     "Key (Street)"
                 ]
             )
-            for name in Locations.vanilla_key_locations:
-                placed_items += 1
-
-                if name.startswith("Red Cave"):
-                    loc_name = "Red Cave"
-                else:
-                    loc_name = name.split(' ', 1)[0]
-
-                self.multiworld.get_location(name, self.player).place_locked_item(
-                    self.create_item("Key (" + loc_name + ")"))
+            for region in Locations.vanilla_key_locations:
+                for location in Locations.vanilla_key_locations[region]:
+                    placed_items += 1
+                    self.multiworld.get_location(location, self.player).place_locked_item(
+                        self.create_item("Key (" + region + ")"))
 
         start_broom: StartBroom = self.options.start_broom
         start_broom_item: str = ""
@@ -174,14 +179,6 @@ class AnodyneGameWorld(World):
 
     def get_filler_item_name(self) -> str:
         return "Key"
-
-    def count_keys(self, map_name: str) -> int:
-        key_name: str = "Key (" + map_name + ")"
-
-        if key_name not in Items.all_items:
-            return 0
-        else:
-            return self.multiworld.state.item_count(key_name, self.player)
 
     def create_event(self, region: Region, event_name: str, access_rule: Callable[[CollectionState], bool]) -> None:
         loc = AnodyneLocation(self.player, event_name, None, region)

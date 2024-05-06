@@ -1,15 +1,15 @@
 events_by_region = {
     "Bedroom": {
         "Defeat Seer": ["Any Broom but swapper"],
-        "Green Key": ["Defeat Seer"]
+        "Green key": ["Defeat Seer"]
     },
     "Red Cave top": {
         "Defeat Rogue": ["Any Broom but swapper"],
-        "Red Key": ["Defeat Rogue"]
+        "Red key": ["Defeat Rogue"]
     },
     "Crowd floor 1": {
         "Defeat The Wall": ["Any Broom but swapper", "Jump"],
-        "Blue Key": ["Defeat The Wall"]
+        "Blue key": ["Defeat The Wall"]
     },
     "Fields": {
         "Goldman moved": [],
@@ -53,6 +53,6 @@ events_by_region = {
         "Happy completed": ["Blue completed"],
     },
     "Cliff": {
-        "Jump": [],
+        "Jump shoes": [],
     }
 }

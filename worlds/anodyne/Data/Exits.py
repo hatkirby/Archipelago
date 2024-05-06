@@ -133,7 +133,7 @@ exits_by_region = {
             ["Overworld", "Fields", ["Green key"]]
         ],
         "Fields to Forest exit": [
-            ["Fields", "Forest", "Goldman moved"],
+            ["Fields", "Forest", ["Goldman moved"]],
             ["Forest", "Fields", []]
          ],
         "Fields to Terminal exit": [
@@ -252,7 +252,7 @@ exits_by_region = {
     },
     "Street": {
         "Street to Overworld exit": [
-             ["Street", "Overworld", []],
+             ["Street", "Overworld", ["Keys:1"]],
          ]
     }
 }
