@@ -173,13 +173,13 @@ exits_by_region = {
     },
     "Hotel floor 4": {
         "Hotel floor 4 to Hotel floor 3": [
-            ["Hotel floor 4", "Hotel floor 3", ["Combat", "Jump"]],
-            ["Hotel floor 3", "Hotel floor 4", ["Combat", "Jump"]]
+            ["Hotel floor 4", "Hotel floor 3", ["Combat", "Jump shoes"]],
+            ["Hotel floor 3", "Hotel floor 4", ["Combat", "Jump shoes"]]
         ]
     },
     "Hotel floor 3": {
         "Hotel floor 3 to Hotel floor 2": [
-            ["Hotel floor 3", "Hotel floor 2", ["Keys:4"]],
+            ["Hotel floor 3", "Hotel floor 2", ["Keys:3"]],
             ["Hotel floor 2", "Hotel floor 3", []]
         ],
         "Hotel floor 3 to Hotel floor 2 right": [

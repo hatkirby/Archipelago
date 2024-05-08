@@ -94,6 +94,9 @@ class AnodyneGameWorld(World):
                         all(Constants.check_access(state, self.player, item, name)
                             for item in requirements)
                     )))(requirements, region.name))
+        from Utils import visualize_regions
+
+        visualize_regions(self.multiworld.get_region("Menu", self.player), "my_world.puml")
 
     def set_rules(self) -> None:
         green_cube_chest = bool(self.options.green_cube_chest)

@@ -3,7 +3,7 @@ import logging
 from typing import Callable, Dict, NamedTuple
 from BaseClasses import MultiWorld, CollectionState
 
-from .Data import Items, Locations
+from .Data import Items, Locations, Regions
 
 id_offset: int = 20130204
 
@@ -51,7 +51,8 @@ def check_access(state: CollectionState, player: int, rule: str, map_name: str) 
         return count >= count_cards(state, player)
     elif rule.startswith("Keys:"):
         count = int(rule[5:])
-        logging.info(f"Key {count} check in {map_name}")
+        map_name = Regions.dungeon_area_to_dungeon.get(map_name, map_name)
+        logging.info(f"Key {count} check in {map_name} having {count_keys(state,player,map_name)}")
         return count_keys(state, player, map_name) >= count
     else:
         logging.info(f"Item {rule} check in {map_name}")

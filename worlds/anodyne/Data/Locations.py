@@ -24,34 +24,34 @@ all_locations = {
     # 401939A4-41BA-E07E-3BA2-DC22513DCC5C
     "Bedroom small key chest 3": ["Combat"],
     "Broom card chest": [],
-    "Chaser card chest": ["Jump"],
-    "Torch card chest": ["Swap upgrade", "Swap unlocked", "Combat", "Jump"],
+    "Chaser card chest": ["Jump shoes"],
+    "Torch card chest": ["Swap upgrade", "Swap unlocked", "Combat", "Jump shoes"],
     # 75C2D434-4AE8-BCD0-DBEB-8E6CDA67BF45
-    "Circus small key chest 1": ["Combat", "Jump"],
-    "Contorts card chest": ["Combat", "Jump"],
-    "Fire pillar card chest": ["Combat", "Jump"],
+    "Circus small key chest 1": ["Combat", "Jump shoes"],
+    "Contorts card chest": ["Combat", "Jump shoes"],
+    "Fire pillar card chest": ["Combat", "Jump shoes"],
     # 69E8FBD6-2DA3-D25E-446F-6A59AC3E9FC2
-    "Circus small key chest 2": ["Combat", "Jump"],
+    "Circus small key chest 2": ["Combat", "Jump shoes"],
     # 6A95EB2F-75FD-8649-5E07-3ED37C69A9FB
-    "Circus small key chest 3": ["Combat", "Jump"],
+    "Circus small key chest 3": ["Combat", "Jump shoes"],
     # A2479A02-9B0D-751F-71A4-DB15C4982DF5
-    "Circus small key chest 4": ["Combat", "Jump"],
-    "Lion card chest": ["Combat", "Jump"],
-    "Arthur and Javiera card chest": ["Defeat Servants", "Combat", "Jump"],
+    "Circus small key chest 4": ["Combat", "Jump shoes"],
+    "Lion card chest": ["Combat", "Jump shoes"],
+    "Arthur and Javiera card chest": ["Defeat Servants", "Combat", "Jump shoes"],
     "Dog card chest": [],
     "Rock card chest": ["Swap upgrade", "Swap unlocked"],
-    "Frog card chest": ["Combat", "Jump"],
+    "Frog card chest": ["Combat", "Jump shoes"],
     # BE2FB96B-1D5F-FCD1-3F58-D158DB982C21
     "Crowd small key chest 1": ["Combat"],
     # 5743A883-D209-2518-70D7-869D14925B77
-    "Crowd small key chest 2": ["Combat", "Jump"],
+    "Crowd small key chest 2": ["Combat", "Jump shoes"],
     # 21EE2D01-54FB-F145-9464-4C2CC8725EB3
-    "Crowd small key chest 3": ["Combat", "Jump"],
-    "Person card chest": ["Combat", "Jump", "Keys:3"],
+    "Crowd small key chest 3": ["Combat", "Jump shoes"],
+    "Person card chest": ["Combat", "Jump shoes", "Keys:3"],
     "The Wall card chest": ["Defeat The Wall"],
-    "Extend upgrade chest": ["Jump"],
+    "Extend upgrade chest": ["Jump shoes"],
     # 868736EF-EC8B-74C9-ACAB-B7BC56A44394
-    "Crowd small key chest 4": ["Combat", "Jump"],
+    "Crowd small key chest 4": ["Combat", "Jump shoes"],
     "Intra card chest": [],
     "Marina chest": [],
     "Melos chest": [],
@@ -75,8 +75,8 @@ all_locations = {
     "Swap upgrade chest": [],
     "Red cube chest": [],
     # 6C8870D4-7600-6FFD-B425-2D951E65E160
-    "Hotel small key chest 1": ["Combat", "Jump"],
-    "Dust maid card chest": ["Combat", "Jump"],
+    "Hotel small key chest 1": ["Combat", "Jump shoes"],
+    "Dust maid card chest": ["Combat", "Jump shoes", "Keys:1"],
     "Dasher card chest": ["Keys:6"],
     # 64EE884F-EA96-FB09-8A9E-F75ABDB6DC0D
     "Hotel small key chest 2": ["Combat"],
@@ -90,7 +90,7 @@ all_locations = {
     # 019CBC29-3614-9302-6848-DDAEDC7C49E5
     "Hotel small key chest 6": [],
     # 9D6FDA36-0CC6-BACC-3844-AEFB6C5C6290
-    "Hotel small key chest 7": ["Jump"],
+    "Hotel small key chest 7": ["Jump shoes"],
     "Manager card chest": ["Defeat Manager"],
     "City man card chest": ["Swap upgrade", "Swap unlocked"],
     "Null card chest": ["Swap upgrade", "Swap unlocked"],
