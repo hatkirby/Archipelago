@@ -26,7 +26,7 @@ exits_by_region = {
             ["Fields", "Beach", []]
         ],
         "Beach to Red Sea exit": [
-            ["Beach", "Red Sea", ["Any Broom but swapper"]],
+            ["Beach", "Red Sea", ["Combat"]],
             ["Red Sea", "Beach", []]
         ]
     },
@@ -36,8 +36,8 @@ exits_by_region = {
             ["Overworld", "Bedroom", []]
         ],
         "Bedroom to Overworld post windmill exit": [
-            ["Bedroom", "Overworld post windmill", ["Windmill activated"]],
-            ["Overworld post windmill", "Bedroom", ["Windmill activated"]]
+            ["Bedroom", "Overworld post windmill", ["Windmill activated", "Combat", "Keys:3"]],
+            ["Overworld post windmill", "Bedroom", ["Windmill activated", "Combat", "Keys:3"]]
         ]
     },
     "Bedroom drawer": {
@@ -173,14 +173,19 @@ exits_by_region = {
     },
     "Hotel floor 4": {
         "Hotel floor 4 to Hotel floor 3": [
-            ["Hotel floor 4", "Hotel floor 3", []],
-            ["Hotel floor 3", "Hotel floor 4", []]
+            ["Hotel floor 4", "Hotel floor 3", ["Combat", "Jump"]],
+            ["Hotel floor 3", "Hotel floor 4", ["Combat", "Jump"]]
         ]
     },
     "Hotel floor 3": {
         "Hotel floor 3 to Hotel floor 2": [
-            ["Hotel floor 3", "Hotel floor 2", []],
+            ["Hotel floor 3", "Hotel floor 2", ["Keys:4"]],
             ["Hotel floor 2", "Hotel floor 3", []]
+        ],
+        "Hotel floor 3 to Hotel floor 2 right": [
+            # Door requires key and has key behind it
+            ["Hotel floor 3", "Hotel floor 2 right", ["Keys:6"]],
+            ["Hotel floor 2 right", "Hotel floor 3", []]
         ]
     },
     "Hotel floor 2": {
@@ -244,6 +249,7 @@ exits_by_region = {
              ["Red Sea", "Red Cave bottom", []]
          ]
     },
+    # Hidden path
     "Red Cave Isaac": {
         "Red Cave Isaac to Red Sea exit": [
              ["Red Cave Isaac", "Red Sea", []],
@@ -252,7 +258,7 @@ exits_by_region = {
     },
     "Street": {
         "Street to Overworld exit": [
-             ["Street", "Overworld", ["Keys:1"]],
+             ["Street", "Overworld", ["Combat", "Keys:1"]],
          ]
     }
 }

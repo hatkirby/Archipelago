@@ -1,15 +1,18 @@
 events_by_region = {
     "Bedroom": {
-        "Defeat Seer": ["Any Broom but swapper"],
+        "Defeat Seer": ["Combat", "Keys:2"],
         "Green key": ["Defeat Seer"]
     },
     "Red Cave top": {
-        "Defeat Rogue": ["Any Broom but swapper"],
+        "Defeat Rogue": ["Combat"],
         "Red key": ["Defeat Rogue"]
     },
     "Crowd floor 1": {
-        "Defeat The Wall": ["Any Broom but swapper", "Jump"],
+        "Defeat The Wall": ["Combat", "Jump", "Break the Film"],
         "Blue key": ["Defeat The Wall"]
+    },
+    "Crowd floor 3": {
+        "Break the Film": ["Combat", "Jump", "Keys:3"],
     },
     "Fields": {
         "Goldman moved": [],
@@ -18,16 +21,16 @@ events_by_region = {
         "Windmill activated": [],
     },
     "Hotel floor 1": {
-        "Defeat Manager": ["Any Broom but swapper", "Jump"],
+        "Defeat Manager": ["Keys:6", "Combat"],
     },
     "Circus": {
-        "Defeat Servants": ["Any Broom but swapper", "Jump"],
+        "Defeat Servants": ["Keys:3", "Combat", "Jump"],
     },
     "Apartment floor 3": {
-        "Defeat Watcher": ["Any Broom but swapper", "Jump"],
+        "Defeat Watcher": ["Combat"],
     },
     "Terminal": {
-        "Defeat Sage": ["Any Broom but swapper", "Cards:36"],
+        "Defeat Sage": ["Combat", "Cards:36"],
     },
     "Go top": {
         "Defeat Briar": ["Happy completed"],
@@ -37,14 +40,14 @@ events_by_region = {
         "Open 49 card gate": ["Cards:49"],
     },
     "Red Cave center": {
-        "Center left tentacle hit": ["Any Broom but swapper"],
-        "Center right tentacle hit": ["Any Broom but swapper"],
+        "Center left tentacle hit": ["Combat"],
+        "Center right tentacle hit": ["Combat"],
     },
     "Red Cave left": {
-        "Left tentacle hit": ["Any Broom but swapper"],
+        "Left tentacle hit": ["Combat", "Keys:6"],
     },
     "Red Cave right": {
-        "Right tentacle hit": ["Any Broom but swapper"],
+        "Right tentacle hit": ["Combat", "Keys:6"],
     },
     "Blue": {
         "Blue completed": ["Jump"],

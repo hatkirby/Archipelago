@@ -64,7 +64,7 @@ class AnodyneGameWorld(World):
                     location = self.get_location(location_name)
                     location.access_rule = (lambda reqs, name: (lambda state: (
                         all(Constants.check_access(state, self.player, item, name)
-                            for item in requirements)
+                            for item in reqs)
                     )))(requirements, region.name)
 
             self.multiworld.regions.append(region)
@@ -118,7 +118,7 @@ class AnodyneGameWorld(World):
             requirements.append("Open 49 card gate")
 
         self.multiworld.completion_condition[self.player] = lambda state: (
-            all(Constants.check_access(state, self.player, item, "") for item in requirements)
+            all(Constants.check_access(state, self.player, item, "Event") for item in requirements)
         )
 
     def create_items(self) -> None:
@@ -145,7 +145,7 @@ class AnodyneGameWorld(World):
                 for location in Locations.vanilla_key_locations[region]:
                     placed_items += 1
                     self.multiworld.get_location(location, self.player).place_locked_item(
-                        self.create_item("Key (" + region + ")"))
+                        self.create_item(f"Key ({region})"))
 
         start_broom: StartBroom = self.options.start_broom
         start_broom_item: str = ""

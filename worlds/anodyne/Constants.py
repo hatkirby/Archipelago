@@ -1,3 +1,5 @@
+import logging
+
 from typing import Callable, Dict, NamedTuple
 from BaseClasses import MultiWorld, CollectionState
 
@@ -31,7 +33,7 @@ def count_cards(state: CollectionState, player: int) -> int:
 
 
 def count_keys(state: CollectionState, player: int, map_name: str) -> int:
-    key_name: str = "Key (" + map_name + ")"
+    key_name: str = f"Key ({map_name})"
 
     if key_name not in Items.all_items:
         return 0
@@ -40,13 +42,17 @@ def count_keys(state: CollectionState, player: int, map_name: str) -> int:
 
 
 def check_access(state: CollectionState, player: int, rule: str, map_name: str) -> bool:
-    if rule == "Any Broom but swapper":
+    if rule == "Combat":
+        logging.info(f"Combat check in {map_name}")
         return state.has_any(items=["Broom", "Wide upgrade", "Long upgrade"], player=player)
     elif rule.startswith("Cards:"):
         count = int(rule[6:])
+        logging.info(f"Card {count} check in {map_name}")
         return count >= count_cards(state, player)
     elif rule.startswith("Keys:"):
         count = int(rule[5:])
-        return count >= count_keys(state, player, map_name)
+        logging.info(f"Key {count} check in {map_name}")
+        return count_keys(state, player, map_name) >= count
     else:
+        logging.info(f"Item {rule} check in {map_name}")
         return state.has(item=rule, player=player)

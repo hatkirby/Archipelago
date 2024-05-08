@@ -11,47 +11,47 @@ all_locations = {
     "Apartment small key chest 4": [],
     "Watcher card chest": [],
     "Fisherman card chest": [],
-    "Cat Statue chest": [],
-    "Blue cube chest": [],
+    "Cat Statue chest": ["Swap upgrade", "Swap unlocked"],
+    "Blue cube chest": ["Swap upgrade", "Swap unlocked"],
     # 40DE36CF-9238-F8B0-7A57-C6C8CA465CC2
     "Bedroom small key chest 1": [],
-    "Shieldy card chest": [],
-    "Slime card chest": [],
-    "Seer card chest": [],
+    "Shieldy card chest": ["Combat", "Keys:2"],
+    "Slime card chest": ["Combat"],
+    "Seer card chest": ["Defeat Seer"],
     # D41F2750-E3C7-BBB4-D650-FAFC190EBD32
-    "Bedroom small key chest 2": [],
-    "Pew Laser card chest": [],
+    "Bedroom small key chest 2": ["Windmill activated"],
+    "Pew Laser card chest": ["Windmill activated"],
     # 401939A4-41BA-E07E-3BA2-DC22513DCC5C
-    "Bedroom small key chest 3": [],
+    "Bedroom small key chest 3": ["Combat"],
     "Broom card chest": [],
-    "Chaser card chest": [],
-    "Torch card chest": [],
+    "Chaser card chest": ["Jump"],
+    "Torch card chest": ["Swap upgrade", "Swap unlocked", "Combat", "Jump"],
     # 75C2D434-4AE8-BCD0-DBEB-8E6CDA67BF45
-    "Circus small key chest 1": [],
-    "Contorts card chest": [],
-    "Fire pillar card chest": [],
+    "Circus small key chest 1": ["Combat", "Jump"],
+    "Contorts card chest": ["Combat", "Jump"],
+    "Fire pillar card chest": ["Combat", "Jump"],
     # 69E8FBD6-2DA3-D25E-446F-6A59AC3E9FC2
-    "Circus small key chest 2": [],
+    "Circus small key chest 2": ["Combat", "Jump"],
     # 6A95EB2F-75FD-8649-5E07-3ED37C69A9FB
-    "Circus small key chest 3": [],
+    "Circus small key chest 3": ["Combat", "Jump"],
     # A2479A02-9B0D-751F-71A4-DB15C4982DF5
-    "Circus small key chest 4": [],
-    "Lion card chest": [],
-    "Arthur and Javiera card chest": [],
+    "Circus small key chest 4": ["Combat", "Jump"],
+    "Lion card chest": ["Combat", "Jump"],
+    "Arthur and Javiera card chest": ["Defeat Servants", "Combat", "Jump"],
     "Dog card chest": [],
-    "Rock card chest": [],
-    "Frog card chest": [],
+    "Rock card chest": ["Swap upgrade", "Swap unlocked"],
+    "Frog card chest": ["Combat", "Jump"],
     # BE2FB96B-1D5F-FCD1-3F58-D158DB982C21
-    "Crowd small key chest 1": [],
+    "Crowd small key chest 1": ["Combat"],
     # 5743A883-D209-2518-70D7-869D14925B77
-    "Crowd small key chest 2": [],
+    "Crowd small key chest 2": ["Combat", "Jump"],
     # 21EE2D01-54FB-F145-9464-4C2CC8725EB3
-    "Crowd small key chest 3": [],
-    "Person card chest": [],
-    "The Wall card chest": [],
-    "Extend upgrade chest": [],
+    "Crowd small key chest 3": ["Combat", "Jump"],
+    "Person card chest": ["Combat", "Jump", "Keys:3"],
+    "The Wall card chest": ["Defeat The Wall"],
+    "Extend upgrade chest": ["Jump"],
     # 868736EF-EC8B-74C9-ACAB-B7BC56A44394
-    "Crowd small key chest 4": [],
+    "Crowd small key chest 4": ["Combat", "Jump"],
     "Intra card chest": [],
     "Marina chest": [],
     "Melos chest": [],
@@ -59,66 +59,71 @@ all_locations = {
     "White cube chest": [],
     "Young card chest": [],
     "Carved Rock card chest": [],
-    "Miao card chest": [],
-    "Mitra card chest": [],
-    "Goldman card chest": [],
-    "Rank card chest": [],
+    "Miao card chest": ["Combat"],
+    "Mitra card chest": ["Combat"],
+    "Goldman card chest": ["Goldman moved", "Combat"],
+    "Rank card chest": ["Swap upgrade", "Swap unlocked"],
+    # Hidden path
     "Spam Can chest": [],
+    # Hidden path
     "Glitch chest": [],
+    # Hidden path
     "Electric Monster chest": [],
-    "Mushroom card chest": [],
-    "Green cube chest": [],
+    "Mushroom card chest": ["Combat"],
+    # This is the one that takes 2 hours
+    "Green cube chest": ["Swap upgrade", "Swap unlocked"],
     "Swap upgrade chest": [],
     "Red cube chest": [],
     # 6C8870D4-7600-6FFD-B425-2D951E65E160
-    "Hotel small key chest 1": [],
-    "Dust maid card chest": [],
-    "Dasher card chest": [],
+    "Hotel small key chest 1": ["Combat", "Jump"],
+    "Dust maid card chest": ["Combat", "Jump"],
+    "Dasher card chest": ["Keys:6"],
     # 64EE884F-EA96-FB09-8A9E-F75ABDB6DC0D
-    "Hotel small key chest 2": [],
+    "Hotel small key chest 2": ["Combat"],
     # 075E6024-FE2D-9C4A-1D2B-D627655FD31A
-    "Hotel small key chest 3": [],
+    "Hotel small key chest 3": ["Combat"],
     "Burst plant card chest": [],
     # 1990B3A2-DBF8-85DA-C372-ADAFAA75744C
     "Hotel small key chest 4": [],
     # D2392D8D-0633-2640-09FA-4B921720BFC4
-    "Hotel small key chest 5": [],
+    "Hotel small key chest 5": ["Combat"],
     # 019CBC29-3614-9302-6848-DDAEDC7C49E5
     "Hotel small key chest 6": [],
     # 9D6FDA36-0CC6-BACC-3844-AEFB6C5C6290
-    "Hotel small key chest 7": [],
-    "Manager card chest": [],
-    "City man card chest": [],
-    "Null card chest": [],
+    "Hotel small key chest 7": ["Jump"],
+    "Manager card chest": ["Defeat Manager"],
+    "City man card chest": ["Swap upgrade", "Swap unlocked"],
+    "Null card chest": ["Swap upgrade", "Swap unlocked"],
     "Edward card chest": [],
     "Annoyer card chest": [],
-    "Slasher card chest": [],
+    "Slasher card chest": ["Combat"],
     # 72BAD10E-598F-F238-0103-60E1B36F6240
     "Red Cave small key chest 1": [],
     # AE87F1D5-57E0-1749-7E1E-1D0BCC1BCAB4
-    "Red Cave small key chest 2": [],
-    "Mover card chest": [],
-    "Rogue card chest": [],
+    "Red Cave small key chest 2": ["Combat"],
+    "Mover card chest": ["Keys:6"],
+    "Rogue card chest": ["Defeat Rogue"],
     # 4A9DC50D-8739-9AD8-2CB1-82ECE29D3B6F
-    "Red Cave small key chest 3": [],
+    "Red Cave small key chest 3": ["Combat"],
     # A7672339-F3FB-C49E-33CE-42A49D7E4533
     "Red Cave small key chest 4": [],
     # 83286BFB-FFDA-237E-BA57-CA2E532E1DC7
     "Red Cave small key chest 5": [],
     # CDA1FF45-0F88-4855-B0EC-A9B42376C33F
-    "Red Cave small key chest 6": [],
+    "Red Cave small key chest 6": ["Combat"],
     "Widen upgrade chest": [],
-    "Golden poop chest": [],
+    "Golden poop chest": ["Combat"],
     "Walker card chest": [],
     "Rock creature card chest": [],
     "Suburbian card chest": [],
     "Killer card chest": [],
     "Blue Cube King card chest": [],
     "Orange Cube King card chest": [],
-    "Triangle NPC card chest": [],
-    "Heart chest": [],
+    "Triangle NPC card chest": ["Swap upgrade", "Swap unlocked"],
+    # Wiggle glitch available
+    "Heart chest": ["Swap upgrade", "Swap unlocked"],
     # 3307AA58-CCF1-FB0D-1450-5AF0A0C458F7
-    "Street small key chest 1": ["Any broom but swapper"],
+    "Street small key chest 1": ["Combat"],
     "Broom chest": [],
     "Follower card chest": ["Swap upgrade", "Swap unlocked"],
     "Sage card chest": [],
@@ -186,11 +191,11 @@ locations_by_region = {
         "Crowd small key chest 1",
         "Crowd small key chest 2",
         "Crowd small key chest 3",
-        "Person card chest",
+        "Frog card chest",
         "Crowd small key chest 4"
     ],
     "Crowd floor 3": [
-        "Frog card chest"
+        "Person card chest",
     ],
     "Crowd jump challenge": [
         "Extend upgrade chest"
@@ -239,13 +244,15 @@ locations_by_region = {
         "Hotel small key chest 2"
     ],
     "Hotel floor 2": [
-        "Burst plant card chest",
-        # 1990B3A2-DBF8-85DA-C372-ADAFAA75744C
-        "Hotel small key chest 4",
         # D2392D8D-0633-2640-09FA-4B921720BFC4
         "Hotel small key chest 5",
         # 9D6FDA36-0CC6-BACC-3844-AEFB6C5C6290
         "Hotel small key chest 7"
+    ],
+    "Hotel floor 2 right": [
+        "Burst plant card chest",
+        # 1990B3A2-DBF8-85DA-C372-ADAFAA75744C
+        "Hotel small key chest 4",
     ],
     "Hotel floor 1": [
         "Manager card chest",

@@ -5,8 +5,8 @@ all_items = [
     "Wide upgrade",
     "Long upgrade",
     "Swap upgrade",
-    #cards
-    #type 0
+    # Cards
+    # Type 0
     "Edward card",
     "Annoyer card",
     "Seer card",
@@ -17,7 +17,7 @@ all_items = [
     "Watcher card",
     "Silverfish card",
     "Gas Guy card",
-    #type 10
+    # Type 10
     "Mitra card",
     "Miao card",
     "Windmill card",
@@ -28,7 +28,7 @@ all_items = [
     "Walker card",
     "Mover card",
     "Slasher card",
-    #type 20
+    # Type 20
     "Rogue card",
     "Chaser card",
     "Fire pillar card",
@@ -39,7 +39,7 @@ all_items = [
     "Person card",
     "Wall card",
     "Blue Cube King card",
-    #type 30
+    # Type 30
     "Orange Cube King card",
     "Dust maid card",
     "Dasher card",
@@ -50,7 +50,7 @@ all_items = [
     "Carved rock card",
     "City man card",
     "Intra card",
-    #type 40
+    # Type 40
     "Torch card",
     "Triangle NPC card",
     "Killer card",
@@ -59,9 +59,9 @@ all_items = [
     "Rank card",
     "Follower card",
     "Rock creature card",
-    #type 49
+    # Type 49
     "Null card",
-    #Secrets
+    # Secrets
     "Golden poop",
     "Spam can",
     "Glitch",
@@ -76,7 +76,7 @@ all_items = [
     "Blue cube",
     "White cube",
     "Golden broom",
-    #Keys
+    # Keys
     "Key (Apartment)",
     "Key (Bedroom)",
     "Key (Circus)",

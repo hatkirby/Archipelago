@@ -30,6 +30,7 @@ all_regions = [
         "Hotel floor 4",
         "Hotel floor 3",
         "Hotel floor 2",
+        "Hotel floor 2 right",
         "Hotel floor 1",
         "Nexus bottom",
         "Nexus top",
