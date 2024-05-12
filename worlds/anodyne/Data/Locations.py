@@ -127,8 +127,8 @@ all_locations = {
     "Broom chest": [],
     "Follower card chest": ["Swap upgrade", "Swap unlocked"],
     "Sage card chest": [],
-    "Windmill card chest": [],
-    "Golden Broom chest": []
+    "Windmill card chest": ["Windmill activated"],
+    "Golden Broom chest": ["Combat"]
 }
 
 locations_by_region = {

@@ -92,7 +92,7 @@ class AnodyneGameWorld(World):
                     requirements: list[str] = Events.events_by_region[region.name][event_name]
                     self.create_event(region, event_name, (lambda reqs, name: (lambda state: (
                         all(Constants.check_access(state, self.player, item, name)
-                            for item in requirements)
+                            for item in reqs)
                     )))(requirements, region.name))
         from Utils import visualize_regions
 
@@ -116,9 +116,9 @@ class AnodyneGameWorld(World):
             requirements.append("Defeat Watcher")
             requirements.append("Defeat Sage")
             requirements.append("Defeat Briar")
-        elif victory_condition.current_key == "all_cards":
-            requirements.append("Cards:49")
-            requirements.append("Open 49 card gate")
+        #elif victory_condition.current_key == "all_cards":
+            #requirements.append("Cards:49")
+            #requirements.append("Open 49 card gate")
 
         self.multiworld.completion_condition[self.player] = lambda state: (
             all(Constants.check_access(state, self.player, item, "Event") for item in requirements)
