@@ -94,7 +94,7 @@ regions_with_nexus_gate = [
     "Crowd floor 1",
     "Fields",
     "Forest",
-    "Go",
+    "Go bottom",
     "Happy",
     "Hotel floor 1",
     "Overworld",
@@ -105,3 +105,13 @@ regions_with_nexus_gate = [
     "Terminal",
     "Windmill"
 ]
+
+early_nexus_gates = [
+    "Beach",
+    "Cliff",
+    "Fields",
+    "Forest",
+    "Overworld",
+    "Red Sea"
+]
+

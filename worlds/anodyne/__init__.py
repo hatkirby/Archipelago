@@ -1,4 +1,7 @@
 import logging
+
+from BaseClasses import Region, Location, Item, ItemClassification, CollectionState
+from worlds.AutoWorld import WebWorld, World
 from typing import List, Callable
 
 from . import Constants
@@ -6,9 +9,6 @@ from . import Constants
 from .Data import Items, Locations, Regions, Exits, Events
 from .Options import AnodyneGameOptions, IncludeGreenCubeChest, KeyShuffle, StartBroom, \
     VictoryCondition  # , VictoryCondition
-
-from worlds.AutoWorld import WebWorld, World
-from BaseClasses import Region, Location, Item, ItemClassification, CollectionState
 
 
 class AnodyneLocation(Location):
@@ -116,17 +116,46 @@ class AnodyneGameWorld(World):
                     )))(requirements, region.name))
         from Utils import visualize_regions
 
-        self.multiworld.push_precollected(self.get_location("Fields Nexus Gate unlocked").item)
         visualize_regions(self.multiworld.get_region("Menu", self.player), "my_world.puml")
 
     def set_rules(self) -> None:
         green_cube_chest = bool(self.options.green_cube_chest)
+        nexus_gate_open = self.options.nexus_gates_open
+
+        victory_condition: VictoryCondition = self.options.victory_condition
+
+        gates_unlocked: list[str] = []
+        requirements: list[str] = []
 
         if not green_cube_chest:
             self.multiworld.exclude_locations[self.player].value.add("Green cube chest")
 
-        victory_condition: VictoryCondition = self.options.victory_condition
-        requirements: list[str] = []
+        # Street is always unlocked
+        if nexus_gate_open == "street_and_fields":
+            gates_unlocked.append("Fields")
+        elif nexus_gate_open == "early":
+            for region_name in Regions.early_nexus_gates:
+                gates_unlocked.append(region_name)
+        elif nexus_gate_open == "all":
+            for region_name in Regions.regions_with_nexus_gate:
+                gates_unlocked.append(region_name)
+        elif nexus_gate_open == "random_count":
+            random_nexus_gate_count = int(self.options.randomNexusGateOpenCount)
+
+            if random_nexus_gate_count == Regions.regions_with_nexus_gate:
+                for region_name in Regions.regions_with_nexus_gate:
+                    gates_unlocked.append(region_name)
+            else:
+                unused_gates = Regions.regions_with_nexus_gate.copy()
+                for _ in range(random_nexus_gate_count):
+                    gate_index = self.multiworld.random.randint(0, len(unused_gates) - 1)
+                    gate_name = unused_gates[gate_index]
+
+                    gates_unlocked.append(gate_name)
+                    unused_gates.remove(gate_name)
+
+        for region_name in gates_unlocked:
+            self.unlock_event(f"{region_name} Nexus Gate unlocked")
 
         if victory_condition.current_key == "all_bosses":
             requirements.append("Defeat Seer")
@@ -222,6 +251,9 @@ class AnodyneGameWorld(World):
         loc.place_locked_item(self.create_event_item(event_name))
         loc.access_rule = access_rule
         region.locations.append(loc)
+
+    def unlock_event(self, event_name: str):
+        self.multiworld.push_precollected(self.get_location(event_name).item)
 
     def create_event_item(self, name: str) -> Item:
         item = self.create_item(name)
