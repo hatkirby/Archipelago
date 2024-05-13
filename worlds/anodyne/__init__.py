@@ -172,29 +172,18 @@ class AnodyneGameWorld(World):
                     placed_items += 1
                     self.multiworld.get_location(location, self.player).place_locked_item(
                         self.create_item(f"Key ({region})"))
-        elif key_shuffle.current_key == "own_world":
+        elif key_shuffle.current_key != "unlocked":
             for key_item in Items.key_item_count:
                 key_count: int = Items.key_item_count[key_item]
                 placed_items += key_count
 
                 for _ in range(key_count):
+                    item_pool.append(self.create_item(key_item))
+
+                if key_shuffle.current_key == "own_world":
                     local_item_pool.add(key_item)
-                    item_pool.append(self.create_item(key_item))
-        elif key_shuffle.current_key == "any_world":
-            for key_item in Items.key_item_count:
-                key_count: int = Items.key_item_count[key_item]
-                placed_items += key_count
-
-                for _ in range(key_count):
-                    item_pool.append(self.create_item(key_item))
-        elif key_shuffle.current_key == "different_world":
-            for key_item in Items.key_item_count:
-                key_count: int = Items.key_item_count[key_item]
-                placed_items += key_count
-
-                for _ in range(key_count):
+                elif key_shuffle.current_key == "different_world":
                     non_local_item_pool.add(key_item)
-                    item_pool.append(self.create_item(key_item))
 
         start_broom: StartBroom = self.options.start_broom
         start_broom_item: str = ""
