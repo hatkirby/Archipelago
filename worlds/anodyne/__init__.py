@@ -179,6 +179,7 @@ class AnodyneGameWorld(World):
 
                 for _ in range(key_count):
                     local_item_pool.add(key_item)
+                    item_pool.append(self.create_item(key_item))
         elif key_shuffle.current_key == "any_world":
             for key_item in Items.key_item_count:
                 key_count: int = Items.key_item_count[key_item]
@@ -193,6 +194,7 @@ class AnodyneGameWorld(World):
 
                 for _ in range(key_count):
                     non_local_item_pool.add(key_item)
+                    item_pool.append(self.create_item(key_item))
 
         start_broom: StartBroom = self.options.start_broom
         start_broom_item: str = ""
@@ -218,13 +220,10 @@ class AnodyneGameWorld(World):
         if placed_items < len(Constants.location_name_to_id):
             item_pool.extend(self.create_filler() for _ in range(len(Constants.location_name_to_id) - placed_items))
 
-        logging.info("Created items: " + str(len(self.item_names)) +
-                     "/" + str(len(Items.all_items)))
-
         self.multiworld.itempool += item_pool
 
-        self.multiworld.local_items[self.player].value |= local_item_pool
-        self.multiworld.non_local_items[self.player].value |= non_local_item_pool
+        self.options.local_items.value |= local_item_pool
+        self.options.non_local_items.value |= non_local_item_pool
 
     def get_filler_item_name(self) -> str:
         return "Key"
