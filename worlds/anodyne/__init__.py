@@ -81,11 +81,31 @@ class AnodyneGameWorld(World):
                         r1 = self.multiworld.get_region(exit1, self.player)
                         r2 = self.multiworld.get_region(exit2, self.player)
 
-                        e = r1.create_exit(exit_name + " " + str(i + 1))
+                        e = r1.create_exit(f"{exit_name} {str(i + 1)}")
                         e.connect(r2)
                         e.access_rule = (lambda reqs, name: (lambda state: (
                             all(Constants.check_access(state, self.player, item, name)
                                 for item in reqs))))(requirements, region.name)
+
+            if region.name in Regions.regions_with_nexus_gate:
+                gate_name = f"{region.name} Nexus Gate"
+                event_name = f"{gate_name} unlocked"
+
+                nexus_region = self.multiworld.get_region("Nexus bottom", self.player)
+
+                self.create_event(region, event_name, lambda state: True)
+
+                e1 = region.create_exit(f"{gate_name} exit 1")
+                e1.connect(nexus_region)
+                e1.access_rule = ((lambda req, name: (lambda state: (
+                    Constants.check_access(state, self.player, req, name))))
+                                  (event_name, region.name))
+
+                e2 = nexus_region.create_exit(f"{gate_name} exit 2")
+                e2.connect(region)
+                e2.access_rule = ((lambda req, name: (lambda state: (
+                    Constants.check_access(state, self.player, req, name))))
+                                  (event_name, region.name))
 
             if region.name in Events.events_by_region:
                 for event_name in Events.events_by_region[region.name]:
@@ -96,6 +116,7 @@ class AnodyneGameWorld(World):
                     )))(requirements, region.name))
         from Utils import visualize_regions
 
+        self.multiworld.push_precollected(self.get_location("Fields Nexus Gate unlocked").item)
         visualize_regions(self.multiworld.get_region("Menu", self.player), "my_world.puml")
 
     def set_rules(self) -> None:
@@ -116,9 +137,9 @@ class AnodyneGameWorld(World):
             requirements.append("Defeat Watcher")
             requirements.append("Defeat Sage")
             requirements.append("Defeat Briar")
-        #elif victory_condition.current_key == "all_cards":
-            #requirements.append("Cards:49")
-            #requirements.append("Open 49 card gate")
+        elif victory_condition.current_key == "all_cards":
+            requirements.append("Cards:49")
+            requirements.append("Open 49 card gate")
 
         self.multiworld.completion_condition[self.player] = lambda state: (
             all(Constants.check_access(state, self.player, item, "Event") for item in requirements)
@@ -126,29 +147,52 @@ class AnodyneGameWorld(World):
 
     def create_items(self) -> None:
         placed_items = 0
-        excluded_items: set[str] = {"Jump shoes",
-                                    "Key"}
+        excluded_items: set[str] = {
+            "Jump shoes",
+            "Key",
+            "Key (Apartment)",
+            "Key (Bedroom)",
+            "Key (Circus)",
+            "Key (Crowd)",
+            "Key (Hotel)",
+            "Key (Red Cave)",
+            "Key (Street)"
+        }
         # TODO: Jump is not actually in the item pool atm, in the list to keep ids correct for game
+
+        item_pool: List[AnodyneItem] = []
+        local_item_pool: set[str] = set()
+        non_local_item_pool: set[str] = set()
 
         key_shuffle: KeyShuffle = self.options.key_shuffle
 
         if key_shuffle.current_key == "vanilla":
-            excluded_items.update(
-                [
-                    "Key (Apartment)",
-                    "Key (Bedroom)",
-                    "Key (Circus)",
-                    "Key (Crowd)",
-                    "Key (Hotel)",
-                    "Key (Red Cave)",
-                    "Key (Street)"
-                ]
-            )
             for region in Locations.vanilla_key_locations:
                 for location in Locations.vanilla_key_locations[region]:
                     placed_items += 1
                     self.multiworld.get_location(location, self.player).place_locked_item(
                         self.create_item(f"Key ({region})"))
+        elif key_shuffle.current_key == "own_world":
+            for key_item in Items.key_item_count:
+                key_count: int = Items.key_item_count[key_item]
+                placed_items += key_count
+
+                for _ in range(key_count):
+                    local_item_pool.add(key_item)
+        elif key_shuffle.current_key == "any_world":
+            for key_item in Items.key_item_count:
+                key_count: int = Items.key_item_count[key_item]
+                placed_items += key_count
+
+                for _ in range(key_count):
+                    item_pool.append(self.create_item(key_item))
+        elif key_shuffle.current_key == "different_world":
+            for key_item in Items.key_item_count:
+                key_count: int = Items.key_item_count[key_item]
+                placed_items += key_count
+
+                for _ in range(key_count):
+                    non_local_item_pool.add(key_item)
 
         start_broom: StartBroom = self.options.start_broom
         start_broom_item: str = ""
@@ -166,7 +210,6 @@ class AnodyneGameWorld(World):
             self.multiworld.push_precollected(self.create_item(start_broom_item))
             excluded_items.add(start_broom_item)
 
-        item_pool: List[AnodyneItem] = []
         for name in Items.all_items:
             if name not in excluded_items:
                 placed_items += 1
@@ -179,6 +222,9 @@ class AnodyneGameWorld(World):
                      "/" + str(len(Items.all_items)))
 
         self.multiworld.itempool += item_pool
+
+        self.multiworld.local_items[self.player].value |= local_item_pool
+        self.multiworld.non_local_items[self.player].value |= non_local_item_pool
 
     def get_filler_item_name(self) -> str:
         return "Key"
@@ -196,5 +242,6 @@ class AnodyneGameWorld(World):
 
     def fill_slot_data(self):
         return {
-            "death_link": self.options.death_link.value
+            "death_link": self.options.death_link.value,
+            "unlock_gates": self.options.key_shuffle.value == 1,
         }

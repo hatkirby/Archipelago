@@ -1,7 +1,9 @@
 all_regions = [
     "Menu",
     "Apartment floor 1",
+    "Apartment floor 1 top left",
     "Apartment floor 2",
+    "Apartment floor 2 top left",
     "Apartment floor 3",
     "Beach",
     "Bedroom",
@@ -44,6 +46,7 @@ all_regions = [
     "Red Cave Isaac",
     "Red Sea",
     "Suburb",
+    "Suburb card house",
     "Space",
     "Street",
     "Terminal",
@@ -70,13 +73,16 @@ dungeon_areas = {
               "Hotel floor 2 right",
               "Hotel floor 1"],
     "Apartment": ["Apartment floor 1",
+                  "Apartment floor 1 top left",
                   "Apartment floor 2",
+                  "Apartment floor 2 top left",
                   "Apartment floor 3"],
     "Circus": ["Circus"],
 }
 
 dungeon_area_to_dungeon = {name: dungeon for dungeon, names in dungeon_areas.items() for name in names}
 
+# The Street nexus gate is open from the start
 regions_with_nexus_gate = [
     "Apartment floor 1",
     "Beach",

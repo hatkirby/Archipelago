@@ -8,11 +8,12 @@ class KeyShuffle(Choice):
     """Select which broom to start with"""
     display_name = "Shuffle small keys"
     option_vanilla = 0
-    option_original_dungeon = 1
-    option_own_dungeons = 2
-    option_own_world = 3
-    option_any_world = 4
-    option_different_world = 5
+    option_unlocked = 1
+    option_original_dungeon = 2
+    option_own_dungeons = 3
+    option_own_world = 4
+    option_any_world = 5
+    option_different_world = 6
     default = 0
 
 class StartBroom(Choice):

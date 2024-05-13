@@ -1,15 +1,15 @@
 all_locations = {
     # 0AC41F72-EE1D-0D32-8F5D-8F25796B6396
-    "Apartment small key chest 1": [],
+    "Apartment small key chest 1": ["Combat", "Jump shoes"],
     # DE415E2A-06EE-83AC-F1A3-5DCA1FA44735
-    "Apartment small key chest 2": [],
-    "Silverfish card chest": [],
-    "Gas guy card chest": [],
+    "Apartment small key chest 2": ["Combat", "Jump shoes"],
+    "Silverfish card chest": ["Combat", "Jump shoes"],
+    "Gas guy card chest": ["Combat", "Jump shoes"],
     # 5B55A264-3FCD-CF38-175C-141B2D093029
-    "Apartment small key chest 3": [],
+    "Apartment small key chest 3": ["Combat", "Jump shoes"],
     # 2BBF01C8-8267-7E71-5BD4-325001DBC0BA
-    "Apartment small key chest 4": [],
-    "Watcher card chest": [],
+    "Apartment small key chest 4": ["Combat"],
+    "Watcher card chest": ["Defeat Watcher"],
     "Fisherman card chest": [],
     "Cat Statue chest": ["Swap upgrade", "Swap unlocked"],
     "Blue cube chest": ["Swap upgrade", "Swap unlocked"],
@@ -52,12 +52,12 @@ all_locations = {
     "Extend upgrade chest": ["Jump shoes"],
     # 868736EF-EC8B-74C9-ACAB-B7BC56A44394
     "Crowd small key chest 4": ["Combat", "Jump shoes"],
-    "Intra card chest": [],
+    "Intra card chest": ["Combat", "Jump shoes"],
     "Marina chest": [],
     "Melos chest": [],
     "Black cube chest": [],
-    "White cube chest": [],
-    "Young card chest": [],
+    "White cube chest": ["Jump shoes"],
+    "Young card chest": ["Swap upgrade", "Swap unlocked"],
     "Carved Rock card chest": [],
     "Miao card chest": ["Combat"],
     "Mitra card chest": ["Combat"],
@@ -72,8 +72,8 @@ all_locations = {
     "Mushroom card chest": ["Combat"],
     # This is the one that takes 2 hours
     "Green cube chest": ["Swap upgrade", "Swap unlocked"],
-    "Swap upgrade chest": [],
-    "Red cube chest": [],
+    "Swap upgrade chest": ["Swap upgrade", "Swap unlocked"],
+    "Red cube chest": ["Swap upgrade", "Swap unlocked"],
     # 6C8870D4-7600-6FFD-B425-2D951E65E160
     "Hotel small key chest 1": ["Combat", "Jump shoes"],
     "Dust maid card chest": ["Combat", "Jump shoes", "Keys:1"],
@@ -116,10 +116,10 @@ all_locations = {
     "Walker card chest": [],
     "Rock creature card chest": [],
     "Suburbian card chest": [],
-    "Killer card chest": [],
+    "Killer card chest": ["Combat", "Swap upgrade", "Swap unlocked"],
     "Blue Cube King card chest": [],
     "Orange Cube King card chest": [],
-    "Triangle NPC card chest": ["Swap upgrade", "Swap unlocked"],
+    "Triangle NPC card chest": ["Combat", "Swap upgrade", "Swap unlocked"],
     # Wiggle glitch available
     "Heart chest": ["Swap upgrade", "Swap unlocked"],
     # 3307AA58-CCF1-FB0D-1450-5AF0A0C458F7
@@ -138,7 +138,9 @@ locations_by_region = {
         # DE415E2A-06EE-83AC-F1A3-5DCA1FA44735
         "Apartment small key chest 2",
         "Silverfish card chest",
-        "Gas guy card chest",
+    ],
+    "Apartment floor 1 top left": [
+        "Gas guy card chest"
     ],
     "Apartment floor 2": [
         # 5B55A264-3FCD-CF38-175C-141B2D093029
@@ -302,8 +304,10 @@ locations_by_region = {
         "Golden poop chest"
     ],
     "Suburb": [
-        "Suburbian card chest",
         "Killer card chest"
+    ],
+    "Suburb card house": [
+        "Suburbian card chest",
     ],
     "Space": [
         "Blue Cube King card chest",

@@ -225,3 +225,13 @@ cards = [
     "Rock creature card",
     "Null card"
 ]
+
+key_item_count = {
+    "Key (Apartment)": 4,
+    "Key (Bedroom)": 3,
+    "Key (Circus)": 4,
+    "Key (Crowd)": 4,
+    "Key (Hotel)": 7,
+    "Key (Red Cave)": 6,
+    "Key (Street)": 1
+}

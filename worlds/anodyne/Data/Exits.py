@@ -12,12 +12,22 @@ exits_by_region = {
         "Apartment floor 1 to Apartment floor 2": [
             ["Apartment floor 1", "Apartment floor 2", []],
             ["Apartment floor 2", "Apartment floor 1", []]
+        ],
+        "Apartment floor 1 to Apartment floor 2 top left": [
+            ["Apartment floor 1", "Apartment floor 2 top left", ["Keys:4"]],
+            ["Apartment floor 2 top left", "Apartment floor 1", ["Keys:4"]]
         ]
     },
     "Apartment floor 2": {
         "Apartment floor 2 to Apartment floor 3": [
-            ["Apartment floor 2", "Apartment floor 3", []],
-            ["Apartment floor 3", "Apartment floor 2", []]
+            ["Apartment floor 2", "Apartment floor 3", ["Keys:3"]],
+            ["Apartment floor 3", "Apartment floor 2", ["Keys:3"]]
+        ]
+    },
+    "Apartment floor 2 top left": {
+        "Apartment floor 2 top left to Apartment floor 1 top left": [
+            ["Apartment floor 2 top left", "Apartment floor 1 top left", ["Combat"]],
+            ["Apartment floor 1 top left", "Apartment floor 2 top left", ["Combat"]]
         ]
     },
     "Beach": {
@@ -260,5 +270,11 @@ exits_by_region = {
         "Street to Overworld exit": [
              ["Street", "Overworld", ["Combat", "Keys:1"]],
          ]
+    },
+    "Suburb": {
+        "Suburb to Suburb card house": [
+            ["Suburb", "Suburb card house", ["Combat"]],
+            ["Suburb card house", "Suburb", ["Combat"]]
+        ]
     }
 }

@@ -27,7 +27,7 @@ events_by_region = {
         "Defeat Servants": ["Keys:3", "Combat", "Jump shoes"],
     },
     "Apartment floor 3": {
-        "Defeat Watcher": ["Combat"],
+        "Defeat Watcher": ["Combat", "Keys:4"],
     },
     "Terminal": {
         "Defeat Sage": ["Combat", "Cards:36"],
