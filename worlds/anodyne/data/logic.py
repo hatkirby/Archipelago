@@ -30,6 +30,7 @@ def get_logic(world: "AnodyneWorld") -> List[AnodyneConnection]:
         AnodyneConnection("overworld right", "young town"),
         AnodyneConnection("young town", "young town card gate", lambda state: anodyne_has_cards(state, 16, world)),
         AnodyneConnection("young town", "apartment 1f start", lambda state: state.has("Jump Shoes", world.player)),
+        AnodyneConnection("apartment 1f start", "apartment 2f rat maze"),
         AnodyneConnection("apartment 1f start", "apartment 1f couches",
                           lambda state: anodyne_has_small_keys(state, "Apartment", 4, world)),
         AnodyneConnection("apartment 1f start", "apartment 3f start",
