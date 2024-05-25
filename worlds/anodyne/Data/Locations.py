@@ -128,7 +128,21 @@ all_locations = {
     "Follower card chest": ["Swap upgrade", "Swap unlocked"],
     "Sage card chest": [],
     "Windmill card chest": ["Windmill activated"],
-    "Golden Broom chest": ["Combat"]
+    "Golden Broom chest": ["Combat"],
+    "Apartment Health Cicada": ["Defeat Watcher"],
+    "Beach Health Cicada": ["Cards:8"],
+    "Bedroom Health Cicada": ["Defeat Seer"],
+    # Has to be frame 4
+    "Cell Health Cicada": ["Cards:24"],
+    "Circus Health Cicada": ["Defeat Servants"],
+    "Crowd Health Cicada": ["Defeat The Wall"],
+    "Hotel Health Cicada": ["Defeat Manager"],
+    "Overworld Health Cicada": ["Combat", "Cards:4"],
+    "Red Cave Health Cicada": ["Defeat Rogue"],
+    "Suburb Health Cicada": ["Combat", "Swap upgrade", "Swap unlocked"],
+    "Green key item": ["Defeat Seer"],
+    "Red key item": ["Defeat Rogue"],
+    "Blue key item": ["Defeat The Wall"]
 }
 
 locations_by_region = {
@@ -154,7 +168,8 @@ locations_by_region = {
     "Beach": [
         "Fisherman card chest",
         "Cat Statue chest",
-        "Blue cube chest"
+        "Blue cube chest",
+        "Beach Health Cicada"
     ],
     "Bedroom": [
         "Bedroom small key chest 1",
@@ -163,14 +178,18 @@ locations_by_region = {
         "Seer card chest",
         "Bedroom small key chest 2",
         "Pew Laser card chest",
-        "Bedroom small key chest 3"
+        "Bedroom small key chest 3",
+        "Bedroom Health Cicada",
+        "Green key item"
+
     ],
     "Blank windmill": [
         "Broom card chest"
     ],
     "Cell": [
         "Chaser card chest",
-        "Torch card chest"
+        "Torch card chest",
+        "Cell Health Cicada"
     ],
     "Circus": [
         "Circus small key chest 1",
@@ -180,14 +199,17 @@ locations_by_region = {
         "Circus small key chest 3",
         "Circus small key chest 4",
         "Lion card chest",
-        "Arthur and Javiera card chest"
+        "Arthur and Javiera card chest",
+        "Circus Health Cicada"
     ],
     "Cliff post windmill": [
         "Dog card chest",
         "Rock card chest"
     ],
     "Crowd floor 1": [
-        "The Wall card chest"
+        "The Wall card chest",
+        "Crowd Health Cicada",
+        "Blue key item"
     ],
     "Crowd floor 2": [
         "Crowd small key chest 1",
@@ -259,7 +281,8 @@ locations_by_region = {
     "Hotel floor 1": [
         "Manager card chest",
         # 019CBC29-3614-9302-6848-DDAEDC7C49E5
-        "Hotel small key chest 6"
+        "Hotel small key chest 6",
+        "Hotel Health Cicada"
     ],
     "Nexus top": [
         "Null card chest"
@@ -268,7 +291,8 @@ locations_by_region = {
         "Edward card chest",
     ],
     "Overworld post windmill": [
-        "Annoyer card chest"
+        "Annoyer card chest",
+        "Overworld Health Cicada"
     ],
     "Red Sea": [
         "Walker card chest",
@@ -277,25 +301,27 @@ locations_by_region = {
     "Red Cave top": [
         "Slasher card chest",
         "Rogue card chest",
+        "Red Cave Health Cicada",
+        "Red key item"
     ],
     "Red Cave left": [
         # 4A9DC50D-8739-9AD8-2CB1-82ECE29D3B6F
         "Red Cave small key chest 3",
         # CDA1FF45-0F88-4855-B0EC-A9B42376C33F
-        "Red Cave small key chest 6",
+        "Red Cave small key chest 6"
     ],
     "Red Cave center": [
         "Mover card chest",
         # 72BAD10E-598F-F238-0103-60E1B36F6240
         "Red Cave small key chest 1",
         # AE87F1D5-57E0-1749-7E1E-1D0BCC1BCAB4
-        "Red Cave small key chest 2",
+        "Red Cave small key chest 2"
     ],
     "Red Cave right": [
         # A7672339-F3FB-C49E-33CE-42A49D7E4533
         "Red Cave small key chest 4",
         # 83286BFB-FFDA-237E-BA57-CA2E532E1DC7
-        "Red Cave small key chest 5",
+        "Red Cave small key chest 5"
     ],
     "Red Cave bottom": [
         "Widen upgrade chest"
@@ -308,6 +334,7 @@ locations_by_region = {
     ],
     "Suburb card house": [
         "Suburbian card chest",
+        "Suburb Health Cicada"
     ],
     "Space": [
         "Blue Cube King card chest",
@@ -376,3 +403,23 @@ vanilla_key_locations = {
         "Street small key chest 1"
     ]
 }
+
+health_cicada_locations = [
+    "Apartment Health Cicada",
+    "Beach Health Cicada",
+    "Bedroom Health Cicada",
+    # Has to be frame 4
+    "Cell Health Cicada",
+    "Circus Health Cicada",
+    "Crowd Health Cicada",
+    "Hotel Health Cicada",
+    "Overworld Health Cicada",
+    "Red Cave Health Cicada",
+    "Suburb Health Cicada"
+]
+
+big_key_locations = [
+    "Green key item",
+    "Red key item",
+    "Blue key item"
+]

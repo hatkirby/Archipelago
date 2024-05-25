@@ -1,5 +1,3 @@
-import logging
-
 from BaseClasses import Region, Location, Item, ItemClassification, CollectionState
 from worlds.AutoWorld import WebWorld, World
 from typing import List, Callable
@@ -39,6 +37,8 @@ class AnodyneGameWorld(World):
     item_name_to_id = Constants.item_name_to_id
     location_name_to_id = Constants.location_name_to_id
 
+    gates_unlocked: list[str] = []
+
     def create_item(self, name: str) -> Item:
         if name in Items.progression_items:
             item_class = ItemClassification.progression
@@ -52,10 +52,20 @@ class AnodyneGameWorld(World):
         return AnodyneItem(name, item_class, self.item_name_to_id.get(name, None), self.player)
 
     def create_regions(self) -> None:
+        include_health_cicadas = self.options.include_health_cicadas
+        include_big_keys = self.options.include_big_keys
+
         for region_name in Regions.all_regions:
             region = Region(region_name, self.player, self.multiworld)
             if region_name in Locations.locations_by_region:
                 for location_name in Locations.locations_by_region[region_name]:
+                    if (include_health_cicadas.current_key == "false"
+                            and location_name in Locations.health_cicada_locations):
+                        continue
+
+                    if include_big_keys.current_key == "false" and location_name in Locations.big_key_locations:
+                        continue
+
                     location_id = Constants.location_name_to_id[location_name]
                     requirements: list[str] = Locations.all_locations[location_name]
 
@@ -109,6 +119,9 @@ class AnodyneGameWorld(World):
 
             if region.name in Events.events_by_region:
                 for event_name in Events.events_by_region[region.name]:
+                    if include_big_keys.current_key == "true" and event_name in Events.big_key_events:
+                        continue
+
                     requirements: list[str] = Events.events_by_region[region.name][event_name]
                     self.create_event(region, event_name, (lambda reqs, name: (lambda state: (
                         all(Constants.check_access(state, self.player, item, name)
@@ -124,7 +137,6 @@ class AnodyneGameWorld(World):
 
         victory_condition: VictoryCondition = self.options.victory_condition
 
-        gates_unlocked: list[str] = []
         requirements: list[str] = []
 
         if not green_cube_chest:
@@ -132,29 +144,29 @@ class AnodyneGameWorld(World):
 
         # Street is always unlocked
         if nexus_gate_open == "street_and_fields":
-            gates_unlocked.append("Fields")
+            self.gates_unlocked.append("Fields")
         elif nexus_gate_open == "early":
             for region_name in Regions.early_nexus_gates:
-                gates_unlocked.append(region_name)
+                self.gates_unlocked.append(region_name)
         elif nexus_gate_open == "all":
             for region_name in Regions.regions_with_nexus_gate:
-                gates_unlocked.append(region_name)
+                self.gates_unlocked.append(region_name)
         elif nexus_gate_open == "random_count":
             random_nexus_gate_count = int(self.options.randomNexusGateOpenCount)
 
             if random_nexus_gate_count == Regions.regions_with_nexus_gate:
                 for region_name in Regions.regions_with_nexus_gate:
-                    gates_unlocked.append(region_name)
+                    self.gates_unlocked.append(region_name)
             else:
                 unused_gates = Regions.regions_with_nexus_gate.copy()
                 for _ in range(random_nexus_gate_count):
                     gate_index = self.multiworld.random.randint(0, len(unused_gates) - 1)
                     gate_name = unused_gates[gate_index]
 
-                    gates_unlocked.append(gate_name)
+                    self.gates_unlocked.append(gate_name)
                     unused_gates.remove(gate_name)
 
-        for region_name in gates_unlocked:
+        for region_name in self.gates_unlocked:
             self.unlock_event(f"{region_name} Nexus Gate unlocked")
 
         if victory_condition.current_key == "all_bosses":
@@ -175,7 +187,22 @@ class AnodyneGameWorld(World):
         )
 
     def create_items(self) -> None:
+        item_pool: List[AnodyneItem] = []
+        local_item_pool: set[str] = set()
+        non_local_item_pool: set[str] = set()
+
+        key_shuffle: KeyShuffle = self.options.key_shuffle
+
+        start_broom: StartBroom = self.options.start_broom
+        start_broom_item: str = ""
+
+        include_health_cicadas = self.options.include_health_cicadas
+        include_big_keys = self.options.include_big_keys
+
         placed_items = 0
+        location_count = len(Constants.location_name_to_id)
+
+        # TODO: Jump is not actually in the item pool atm, in the list to keep ids correct for game
         excluded_items: set[str] = {
             "Jump shoes",
             "Key",
@@ -185,15 +212,9 @@ class AnodyneGameWorld(World):
             "Key (Crowd)",
             "Key (Hotel)",
             "Key (Red Cave)",
-            "Key (Street)"
+            "Key (Street)",
+            "Health Cicada"
         }
-        # TODO: Jump is not actually in the item pool atm, in the list to keep ids correct for game
-
-        item_pool: List[AnodyneItem] = []
-        local_item_pool: set[str] = set()
-        non_local_item_pool: set[str] = set()
-
-        key_shuffle: KeyShuffle = self.options.key_shuffle
 
         if key_shuffle.current_key == "vanilla":
             for region in Locations.vanilla_key_locations:
@@ -214,9 +235,6 @@ class AnodyneGameWorld(World):
                 elif key_shuffle.current_key == "different_world":
                     non_local_item_pool.add(key_item)
 
-        start_broom: StartBroom = self.options.start_broom
-        start_broom_item: str = ""
-
         if start_broom.current_key == "normal":
             start_broom_item = "Broom"
         elif start_broom.current_key == "wide":
@@ -230,13 +248,24 @@ class AnodyneGameWorld(World):
             self.multiworld.push_precollected(self.create_item(start_broom_item))
             excluded_items.add(start_broom_item)
 
+        if include_health_cicadas.current_key == "false":
+            location_count - len(Locations.health_cicada_locations)
+        else:
+            for _ in Locations.health_cicada_locations:
+                placed_items += 1
+                item_pool.append(self.create_item("Health Cicada"))
+
+        if include_big_keys.current_key == "false":
+            location_count - len(Locations.big_key_locations)
+            excluded_items.update(Items.big_keys)
+
         for name in Items.all_items:
             if name not in excluded_items:
                 placed_items += 1
                 item_pool.append(self.create_item(name))
 
-        if placed_items < len(Constants.location_name_to_id):
-            item_pool.extend(self.create_filler() for _ in range(len(Constants.location_name_to_id) - placed_items))
+        if placed_items < location_count:
+            item_pool.extend(self.create_filler() for _ in range(location_count - placed_items))
 
         self.multiworld.itempool += item_pool
 
@@ -262,6 +291,7 @@ class AnodyneGameWorld(World):
 
     def fill_slot_data(self):
         return {
-            "death_link": self.options.death_link.value,
+            "death_link": self.options.death_link.value == 1,
             "unlock_gates": self.options.key_shuffle.value == 1,
+            "nexus_gates_unlocked": self.gates_unlocked
         }

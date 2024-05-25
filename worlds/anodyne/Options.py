@@ -49,6 +49,16 @@ class RandomNexusGateOpenCount(Range):
     default = 4
 
 
+class IncludeHealthCicadas(Toggle):
+    """Include health upgrades into the randomization."""
+    display_name = "Include Health Cicadas"
+
+
+class IncludeBigKeys(Toggle):
+    """Include the big keys into the randomization."""
+    display_name = "Include Big Keys"
+
+
 class VictoryCondition(Choice):
     """Select the end goal of your game."""
     display_name = "Victory condition"
@@ -68,6 +78,8 @@ class AnodyneGameOptions(PerGameCommonOptions):
     start_broom: StartBroom
     nexus_gates_open: NexusGatesOpen
     randomNexusGateOpenCount: RandomNexusGateOpenCount
+    include_health_cicadas: IncludeHealthCicadas
+    include_big_keys: IncludeBigKeys
     victory_condition: VictoryCondition
     green_cube_chest: IncludeGreenCubeChest
     death_link: DeathLink

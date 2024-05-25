@@ -83,7 +83,11 @@ all_items = [
     "Key (Crowd)",
     "Key (Hotel)",
     "Key (Red Cave)",
-    "Key (Street)"
+    "Key (Street)",
+    "Green key",
+    "Red key",
+    "Blue key",
+    "Health Cicada"
 ]
 
 progression_items = [
@@ -147,7 +151,11 @@ progression_items = [
     "Key (Crowd)",
     "Key (Hotel)",
     "Key (Red Cave)",
-    "Key (Street)"
+    "Key (Street)",
+    "Green key",
+    "Red key",
+    "Blue key",
+    "Health Cicada"
 ]
 
 useful_items = [
@@ -224,6 +232,12 @@ cards = [
     "Follower card",
     "Rock creature card",
     "Null card"
+]
+
+big_keys = [
+    "Green key",
+    "Red key",
+    "Blue key"
 ]
 
 key_item_count = {

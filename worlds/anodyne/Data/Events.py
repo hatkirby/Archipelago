@@ -3,10 +3,6 @@ events_by_region = {
         "Defeat Seer": ["Combat", "Keys:2"],
         "Green key": ["Defeat Seer"]
     },
-    "Red Cave top": {
-        "Defeat Rogue": ["Combat"],
-        "Red key": ["Defeat Rogue"]
-    },
     "Crowd floor 1": {
         "Defeat The Wall": ["Combat", "Jump shoes", "Break the Film"],
         "Blue key": ["Defeat The Wall"]
@@ -49,6 +45,10 @@ events_by_region = {
     "Red Cave right": {
         "Right tentacle hit": ["Combat", "Keys:6"],
     },
+    "Red Cave top": {
+        "Defeat Rogue": ["Combat"],
+        "Red key": ["Defeat Rogue"]
+    },
     "Blue": {
         "Blue completed": ["Jump shoes"],
     },
@@ -59,3 +59,9 @@ events_by_region = {
         "Jump shoes": [],
     }
 }
+
+big_key_events = [
+    "Green key",
+    "Red key",
+    "Blue key"
+]
