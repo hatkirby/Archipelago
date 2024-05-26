@@ -34,7 +34,7 @@ ANODYNE_LOCATIONS: List[LocationData] = [
     LocationData("Young Town - Health Cicada", "young town card gate"),
     LocationData("Apartment - 1F Exterior Chest", "apartment 1f start", dungeon="Apartment"),
     LocationData("Apartment - 1F Rat Maze Chest", "apartment 1f start", dungeon="Apartment"),
-    LocationData("Apartment - 1F Ledge Chest", "apartment 1f start", dungeon="Apartment"),
+    LocationData("Apartment - 1F Ledge Chest", "apartment 1f couches", dungeon="Apartment"),
     LocationData("Apartment - 1F Couches Chest", "apartment 1f couches", dungeon="Apartment"),
     LocationData("Apartment - 2F Rat Maze Chest", "apartment 2f rat maze", dungeon="Apartment"),
     LocationData("Apartment - 3F Gauntlet Chest", "apartment 3f start", dungeon="Apartment"),
