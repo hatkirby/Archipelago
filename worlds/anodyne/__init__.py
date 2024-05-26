@@ -14,7 +14,7 @@ from .options import AnodyneOptions
 
 
 class AnodyneWebWorld(WebWorld):
-    theme = "desert"
+    theme = "partyTime"
     tutorials = [Tutorial(
         "Multiworld Setup Guide",
         "A guide to playing Anodyne with Archipelago.",
@@ -35,7 +35,8 @@ class AnodyneLocation(Location):
 
 class AnodyneWorld(World):
     """
-    Anodyne is
+    Anodyne is a retro adventure game that plays like a combination of Link's Awakening or Yume Nikki. You traverse a
+    moody, dreamlike world with the goal of protecting The Legendary Briar from The Darkness, armed only with a broom.
     """
     game = "Anodyne"
     web = AnodyneWebWorld()
