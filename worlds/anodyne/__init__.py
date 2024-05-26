@@ -139,13 +139,17 @@ class AnodyneWorld(World):
                 self.random.shuffle(dungeon_locations)
                 try:
                     fill_restrictive(self.multiworld, collection_state, dungeon_locations, confined_dungeon_items,
-
                                      single_player_placement=True, lock=True, allow_excluded=True)
                     break
                 except FillError as exc:
                     if attempts_remaining == 0:
                         raise exc
                     logging.debug(f"Failed to shuffle dungeon items for player {self.player}. Retrying...")
+
+    def fill_slot_data(self):
+        slot_options = ["endgame_card_requirement"]
+
+        return self.options.as_dict(*slot_options)
 
     def get_filler_item_name(self) -> str:
         return "Heal"
