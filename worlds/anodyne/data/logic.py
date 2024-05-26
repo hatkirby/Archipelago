@@ -49,7 +49,7 @@ def get_logic(world: "AnodyneWorld") -> List[AnodyneConnection]:
         AnodyneConnection("fields top", "deep forest"),
         AnodyneConnection("fields top", "terminal start", lambda state: all([
             state.has("Jump Shoes", world.player),
-            state.has("Red Key", world.player),  # this isn't technically true because you can avoid the gate? hmm...
+            state.has("Red Key", world.player),  # avoidable in base game but required in modded game
         ])),
         AnodyneConnection("deep forest", "cliffs left"),
         AnodyneConnection("cliffs left", "mountain extend", lambda state: state.has("Jump Shoes", world.player)),
