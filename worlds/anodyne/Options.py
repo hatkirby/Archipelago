@@ -6,15 +6,33 @@ from .Data import Regions
 
 
 class KeyShuffle(Choice):
-    """Select which broom to start with"""
+    """Select how the keys will be handled."""
     display_name = "Shuffle small keys"
     option_vanilla = 0
     option_unlocked = 1
-    option_original_dungeon = 2
-    option_own_dungeons = 3
-    option_own_world = 4
-    option_any_world = 5
-    option_different_world = 6
+    option_own_world = 3
+    option_any_world = 4
+    option_different_world = 5
+    default = 0
+
+class BigKeyShuffle(Choice):
+    """Select how the big keys will be randomized."""
+    display_name = "Include Big Keys"
+    option_vanilla = 0
+    option_unlocked = 1
+    option_own_world = 3
+    option_any_world = 4
+    option_different_world = 5
+    default = 0
+
+
+class HealthCicadaShuffle(Choice):
+    """Select how the health cicadas will be randomized."""
+    display_name = "Include Health Cicadas"
+    option_vanilla = 0
+    option_own_world = 1
+    option_any_world = 2
+    option_different_world = 3
     default = 0
 
 
@@ -49,16 +67,6 @@ class RandomNexusGateOpenCount(Range):
     default = 4
 
 
-class IncludeHealthCicadas(Toggle):
-    """Include health upgrades into the randomization."""
-    display_name = "Include Health Cicadas"
-
-
-class IncludeBigKeys(Toggle):
-    """Include the big keys into the randomization."""
-    display_name = "Include Big Keys"
-
-
 class VictoryCondition(Choice):
     """Select the end goal of your game."""
     display_name = "Victory condition"
@@ -75,11 +83,11 @@ class IncludeGreenCubeChest(Toggle):
 @dataclass
 class AnodyneGameOptions(PerGameCommonOptions):
     key_shuffle: KeyShuffle
+    health_cicada_shuffle: HealthCicadaShuffle
+    big_key_shuffle: BigKeyShuffle
     start_broom: StartBroom
     nexus_gates_open: NexusGatesOpen
     randomNexusGateOpenCount: RandomNexusGateOpenCount
-    include_health_cicadas: IncludeHealthCicadas
-    include_big_keys: IncludeBigKeys
     victory_condition: VictoryCondition
     green_cube_chest: IncludeGreenCubeChest
     death_link: DeathLink

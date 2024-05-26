@@ -52,18 +52,19 @@ class AnodyneGameWorld(World):
         return AnodyneItem(name, item_class, self.item_name_to_id.get(name, None), self.player)
 
     def create_regions(self) -> None:
-        include_health_cicadas = self.options.include_health_cicadas
-        include_big_keys = self.options.include_big_keys
+        include_health_cicadas = self.options.health_cicada_shuffle
+        include_big_keys = self.options.big_key_shuffle
 
         for region_name in Regions.all_regions:
             region = Region(region_name, self.player, self.multiworld)
             if region_name in Locations.locations_by_region:
                 for location_name in Locations.locations_by_region[region_name]:
-                    if (include_health_cicadas.current_key == "false"
+                    if (include_health_cicadas.current_key == "vanilla"
                             and location_name in Locations.health_cicada_locations):
                         continue
 
-                    if include_big_keys.current_key == "false" and location_name in Locations.big_key_locations:
+                    if (include_big_keys.current_key == "vanilla"
+                            and location_name in Locations.big_key_locations):
                         continue
 
                     location_id = Constants.location_name_to_id[location_name]
@@ -119,7 +120,7 @@ class AnodyneGameWorld(World):
 
             if region.name in Events.events_by_region:
                 for event_name in Events.events_by_region[region.name]:
-                    if include_big_keys.current_key == "true" and event_name in Events.big_key_events:
+                    if include_big_keys.current_key != "vanilla" and event_name in Events.big_key_events:
                         continue
 
                     requirements: list[str] = Events.events_by_region[region.name][event_name]
@@ -196,8 +197,8 @@ class AnodyneGameWorld(World):
         start_broom: StartBroom = self.options.start_broom
         start_broom_item: str = ""
 
-        include_health_cicadas = self.options.include_health_cicadas
-        include_big_keys = self.options.include_big_keys
+        health_cicada_shuffle = self.options.health_cicada_shuffle
+        big_key_shuffle = self.options.big_key_shuffle
 
         placed_items = 0
         location_count = len(Constants.location_name_to_id)
@@ -248,16 +249,33 @@ class AnodyneGameWorld(World):
             self.multiworld.push_precollected(self.create_item(start_broom_item))
             excluded_items.add(start_broom_item)
 
-        if include_health_cicadas.current_key == "false":
+        if health_cicada_shuffle.current_key == "vanilla":
             location_count - len(Locations.health_cicada_locations)
         else:
-            for _ in Locations.health_cicada_locations:
-                placed_items += 1
-                item_pool.append(self.create_item("Health Cicada"))
+            placed_items += len(Locations.health_cicada_locations)
+            item_name = "Health Cicada"
 
-        if include_big_keys.current_key == "false":
+            if key_shuffle.current_key == "own_world":
+                local_item_pool.add(item_name)
+            elif key_shuffle.current_key == "different_world":
+                non_local_item_pool.add(item_name)
+
+            for _ in Locations.health_cicada_locations:
+                item_pool.append(self.create_item(item_name))
+
+        if big_key_shuffle.current_key == "vanilla":
             location_count - len(Locations.big_key_locations)
             excluded_items.update(Items.big_keys)
+        elif big_key_shuffle.current_key != "unlocked":
+            placed_items += len(Items.big_keys)
+
+            for big_key in Items.big_keys:
+                item_pool.append(self.create_item(big_key))
+
+                if key_shuffle.current_key == "own_world":
+                    local_item_pool.add(big_key)
+                elif key_shuffle.current_key == "different_world":
+                    non_local_item_pool.add(big_key)
 
         for name in Items.all_items:
             if name not in excluded_items:
@@ -293,5 +311,6 @@ class AnodyneGameWorld(World):
         return {
             "death_link": self.options.death_link.value == 1,
             "unlock_gates": self.options.key_shuffle.value == 1,
+            "unlock_big_gates": self.options.big_key_shuffle.value == 1,
             "nexus_gates_unlocked": self.gates_unlocked
         }
