@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import Dict
 
 from Options import Choice, DeathLink, PerGameCommonOptions, StartInventoryPool, Toggle, Range
-from .Data import Regions
+from .data import Regions
 
 
 class KeyShuffle(Choice):
@@ -14,6 +14,7 @@ class KeyShuffle(Choice):
     option_any_world = 4
     option_different_world = 5
     default = 0
+
 
 class BigKeyShuffle(Choice):
     """Select how the big keys will be randomized."""
@@ -87,7 +88,7 @@ class AnodyneGameOptions(PerGameCommonOptions):
     big_key_shuffle: BigKeyShuffle
     start_broom: StartBroom
     nexus_gates_open: NexusGatesOpen
-    randomNexusGateOpenCount: RandomNexusGateOpenCount
+    random_nexus_gate_open_count: RandomNexusGateOpenCount
     victory_condition: VictoryCondition
     green_cube_chest: IncludeGreenCubeChest
     death_link: DeathLink
