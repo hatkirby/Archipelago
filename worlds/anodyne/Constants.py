@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, List
 from BaseClasses import CollectionState
 from .Options import KeyShuffle
 
-from .data import Items, Locations, Regions
+from .data import Items, Locations
 
 if TYPE_CHECKING:
     from . import AnodyneWorld
@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 id_offset: int = 20130204
 
 item_name_to_id = {name: id for id, name in enumerate(Items.all_items, id_offset)}
-location_name_to_id = {name: id for id, name in enumerate(Locations.all_locations, id_offset)}
+location_name_to_id = {location.name: id for id, location in enumerate(Locations.all_locations, id_offset)}
 
 
 def count_cards(state: CollectionState, world: "AnodyneWorld") -> int:
@@ -40,16 +40,18 @@ def check_access(state: CollectionState, world: "AnodyneWorld", rule: str, map_n
     elif rule.startswith("Cards:"):
         count = int(rule[6:])
         logging.debug(f"Card {count} check in {map_name} ({world.player})")
-        return count >= count_cards(state, world)
+        return state.has("Card", world.player, count)
     elif rule.startswith("Keys:"):
         if world.options.key_shuffle == KeyShuffle.option_unlocked:
             logging.debug(f"Gates are unlocked ({world.player})")
             return True
 
-        count = int(rule[5:])
-        map_name = Regions.dungeon_area_to_dungeon.get(map_name, map_name)
-        logging.debug(f"Key {count} check in {map_name} having {count_keys(state,world,map_name)} ({world.player})")
-        return count_keys(state, world, map_name) >= count
+        values = rule.split(":")
+
+        count = int(values[2])
+        dungeon_name = values[1]
+        logging.debug(f"Key {count} check in {map_name} having {count_keys(state,world,dungeon_name)} ({world.player})")
+        return count_keys(state, world, dungeon_name) >= count
     else:
         logging.debug(f"Item {rule} check in {map_name} ({world.player})")
         return state.has(item=rule, player=world.player)

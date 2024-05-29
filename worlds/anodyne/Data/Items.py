@@ -87,14 +87,18 @@ all_items = [
     "Green key",
     "Red key",
     "Blue key",
-    "Health Cicada"
+    "Health Cicada",
+    "Card",
+    "Cardboard Box",
+    "Biking Shoes",
 ]
 
 progression_items = [
+    "Card",
     "Broom",
-    "Jump",
-    "Wide upgrade",
-    "Long upgrade",
+    "Cardboard Box",
+    "Biking Shoes",
+    "Jump shoes",
     "Swap upgrade",
     "Edward card",
     "Annoyer card",
@@ -127,7 +131,7 @@ progression_items = [
     "Wall card",
     "Blue Cube King card",
     "Orange Cube King card",
-    "Dustmaid card",
+    "Dust maid card",
     "Dasher card",
     "Burst plant card",
     "Manager card",
@@ -155,10 +159,12 @@ progression_items = [
     "Green key",
     "Red key",
     "Blue key",
-    "Health Cicada"
 ]
 
 useful_items = [
+    "Wide upgrade",
+    "Long upgrade",
+    "Health Cicada",
 ]
 
 trap_items = [
@@ -214,7 +220,7 @@ cards = [
     "Wall card",
     "Blue Cube King card",
     "Orange Cube King card",
-    "Dustmaid card",
+    "Dust maid card",
     "Dasher card",
     "Burst plant card",
     "Manager card",

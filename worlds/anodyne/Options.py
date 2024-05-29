@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Dict
 
 from Options import Choice, DeathLink, PerGameCommonOptions, StartInventoryPool, Toggle, Range
 from .data import Regions
@@ -9,11 +8,12 @@ class KeyShuffle(Choice):
     """Select how the keys will be handled."""
     display_name = "Shuffle small keys"
     option_vanilla = 0
-    option_unlocked = 1
+    option_original_dungeon = 1
+    option_unlocked = 2
     option_own_world = 3
     option_any_world = 4
     option_different_world = 5
-    default = 0
+    default = 1
 
 
 class BigKeyShuffle(Choice):
@@ -21,10 +21,10 @@ class BigKeyShuffle(Choice):
     display_name = "Include Big Keys"
     option_vanilla = 0
     option_unlocked = 1
-    option_own_world = 3
-    option_any_world = 4
-    option_different_world = 5
-    default = 0
+    option_own_world = 2
+    option_any_world = 3
+    option_different_world = 4
+    default = 3
 
 
 class HealthCicadaShuffle(Choice):
@@ -34,7 +34,7 @@ class HealthCicadaShuffle(Choice):
     option_own_world = 1
     option_any_world = 2
     option_different_world = 3
-    default = 0
+    default = 2
 
 
 class StartBroom(Choice):
@@ -69,11 +69,23 @@ class RandomNexusGateOpenCount(Range):
 
 
 class VictoryCondition(Choice):
-    """Select the end goal of your game."""
+    """
+    Select the end goal of your game.
+    All Bosses: Defeat all bosses, ending with Briar.
+    All Cards: Open the 49 card gate in the top section of the Nexus. Postgame must be enabled for this.
+    """
     display_name = "Victory condition"
     option_all_bosses = 0
     option_all_cards = 1
     default = 0
+
+
+class EnablePostgame(Toggle):
+    """
+    If true, Swap will be usable outside of GO in specific areas near postgame content.
+    If false, Swap is only used to access the top half of GO, and all postgame areas will be removed from logic.
+    """
+    display_name = "Enable Postgame"
 
 
 class IncludeGreenCubeChest(Toggle):
@@ -90,6 +102,7 @@ class AnodyneGameOptions(PerGameCommonOptions):
     nexus_gates_open: NexusGatesOpen
     random_nexus_gate_open_count: RandomNexusGateOpenCount
     victory_condition: VictoryCondition
+    enable_postgame: EnablePostgame
     green_cube_chest: IncludeGreenCubeChest
     death_link: DeathLink
     start_inventory_from_pool: StartInventoryPool

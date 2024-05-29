@@ -50,6 +50,7 @@ all_regions = [
     "Space",
     "Street",
     "Terminal",
+    "Windmill entrance",
     "Windmill",
     "Boss Rush"
 ]
@@ -78,6 +79,7 @@ dungeon_areas = {
                   "Apartment floor 2 top left",
                   "Apartment floor 3"],
     "Circus": ["Circus"],
+    "Street": ["Street"],
 }
 
 dungeon_area_to_dungeon = {name: dungeon for dungeon, names in dungeon_areas.items() for name in names}
@@ -103,7 +105,7 @@ regions_with_nexus_gate = [
     "Suburb",
     "Space",
     "Terminal",
-    "Windmill"
+    "Windmill entrance"
 ]
 
 early_nexus_gates = [
@@ -115,3 +117,12 @@ early_nexus_gates = [
     "Red Sea"
 ]
 
+postgame_regions = [
+    "Blank windmill",
+    "Blank ending",
+    "Debug",
+    "Drawer",
+    "Drawer dark",
+    "Boss Rush",
+    "Nexus top",
+]
