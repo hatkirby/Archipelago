@@ -56,7 +56,7 @@ class RandomizableFormOption(FormOption):
 
         self.setup(container, sizer)
 
-        self.random_button = wx.ToggleButton(container, wx.ID_ANY, "\xf0\x9f\x8e\xb2", style=wx.BU_EXACTFIT)
+        self.random_button = wx.ToggleButton(container, wx.ID_ANY, "\U0001F3B2", style=wx.BU_EXACTFIT)
         self.random_button.Bind(wx.EVT_TOGGLEBUTTON, self.on_random_clicked)
         sizer.Add(self.random_button)
 
