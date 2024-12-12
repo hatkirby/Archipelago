@@ -50,7 +50,7 @@ class YamlEditor(wx.Panel):
         self.editor.SetCaretForeground(wx.Colour(204, 204, 204))
 
         self.editor.SetModEventMask(wx.stc.STC_MOD_INSERTTEXT | wx.stc.STC_MOD_DELETETEXT | wx.stc.STC_PERFORMED_USER | wx.stc.STC_PERFORMED_UNDO | wx.stc.STC_PERFORMED_REDO)
-        self.editor.Bind(wx.stc.EVT_STC_CHANGE, self.on_text_edited, self)
+        self.editor.Bind(wx.stc.EVT_STC_CHANGE, self.on_text_edited)
 
         sizer = wx.BoxSizer(wx.VERTICAL)
         sizer.Add(self.editor, wx.SizerFlags().Proportion(1).Expand())
