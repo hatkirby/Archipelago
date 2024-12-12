@@ -1,8 +1,9 @@
 from enum import Enum
-from typing import Optional, List, Dict, Any, Tuple, Type, Union
+from typing import Optional, List, Dict, Type
 
 import Options
 from .utils import DoubleMap, OrderedBijection
+from .value import OptionValue, get_random_option_value_from_string
 from ..AutoWorld import World
 
 common_option_names = ["start_inventory", "local_items", "non_local_items", "start_hints", "start_location_hints",
@@ -27,38 +28,6 @@ class SetType(Enum):
     CUSTOM = 1
     ITEM = 2
     LOCATION = 3
-
-
-class RandomValueType(Enum):
-    UNIFORM = 1
-    LOW = 2
-    MIDDLE = 3
-    HIGH = 4
-
-
-class OptionValue:
-    value: Union[str, int, List[int], Dict[int, int]]
-    random: bool
-
-    weight: int
-    weighting: List["OptionValue"]
-
-    range_random_type: Optional[RandomValueType]
-    range_subset: Optional[Tuple[int, int]]
-
-    error: Optional[str]
-
-    def __init__(self):
-        self.random = False
-        self.weight = 50
-        self.weighting = []
-        self.range_random_type = None
-        self.range_subset = None
-        self.error = None
-
-
-def get_random_option_value_from_string(value: str) -> OptionValue:
-    pass
 
 
 class OptionDefinition:

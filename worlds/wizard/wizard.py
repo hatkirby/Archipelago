@@ -21,16 +21,17 @@ class FormOption:
 
         self.game_option = get_game_definitions().games.get(parent.slot.game).options.get(option_name)
 
-        def on_mouse_enter_window(event: wx.MouseEvent):
-            if option_name in parent.slot.options and parent.slot.options.get(option_name).error is not None:
-                parent.message_callback("Error", parent.slot.options.get(option_name).error)
-            else:
-                parent.message_callback(self.game_option.display_name, self.game_option.description)
-
         self.option_label = wx.StaticText(container, wx.ID_ANY, "")
         self.option_label.SetLabelText(f"{self.game_option.display_name}:")
-        self.option_label.Bind(wx.EVT_ENTER_WINDOW, on_mouse_enter_window)
+        self.option_label.Bind(wx.EVT_ENTER_WINDOW, self.on_mouse_enter_window)
         sizer.Add(self.option_label, wx.SizerFlags().Align(wx.ALIGN_TOP | wx.ALIGN_LEFT))
+
+    def on_mouse_enter_window(self, event: wx.MouseEvent):
+        option_name = self.game_option.name
+        if option_name in self.parent.slot.options and self.parent.slot.options.get(option_name).error is not None:
+            self.parent.message_callback("Error", self.parent.slot.options.get(option_name).error)
+        else:
+            self.parent.message_callback(self.game_option.display_name, self.game_option.description)
 
     def get_option_value(self):
         return self.parent.slot.options.get(self.game_option.name, self.game_option.default_value)
@@ -326,7 +327,8 @@ def make_form_option_for_option(parent: "WizardEditor", container: wx.Window, op
             return NamedRangeFormOption(parent, container, option_name, sizer)
         else:
             return RangeFormOption(parent, container, option_name, sizer)
-    elif game_option.type == OptionType.SET and game_option.set_type == SetType.CUSTOM and len(game_option.custom_set) <= 15:
+    elif game_option.type == OptionType.SET and game_option.set_type == SetType.CUSTOM and\
+            len(game_option.custom_set) <= 15:
         return ChecklistFormOption(parent, container, option_name, sizer)
     elif game_option.type == OptionType.SET:
         return OptionSetFormOption(parent, container, option_name, sizer)
@@ -512,7 +514,8 @@ class WizardEditor(wx.ScrolledWindow):
 
     def on_change_game(self, event: wx.CommandEvent):
         if self.slot.has_set_options():
-            if wx.MessageBox("This slot has options set on it. Changing the game will clear those options. Are you sure you want to proceed?", "Confirm", wx.YES_NO, self) == wx.NO:
+            if wx.MessageBox("This slot has options set on it. Changing the game will clear those options. Are you "
+                             "sure you want to proceed?", "Confirm", wx.YES_NO, self) == wx.NO:
                 self.game_box.SetSelection(self.game_box.FindString(self.slot.game))
                 return
 
