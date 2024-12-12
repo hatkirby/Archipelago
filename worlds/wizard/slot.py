@@ -118,7 +118,8 @@ class Slot:
 
             return
 
-        game_option = get_game_definitions().games.get(self.game).options.get(option_name)
+        game = get_game_definitions().games.get(self.game)
+        game_option = game.options.get(option_name)
 
         if game_option.type == OptionType.SELECT:
             if option_value.random:
@@ -157,12 +158,13 @@ class Slot:
             else:
                 self.yaml[self.game][option_name] = option_value.value
         elif game_option.type == OptionType.SET:
-            self.yaml[self.game][option_name] = [game_option.custom_set[i] for i in option_value.value]
-        elif game_option.type == OptionType.DICT:
-            self.yaml[self.game][option_name] = {}
+            option_set = game.get_option_set_elements(game_option)
 
-            for key, value in option_value.value.items():
-                self.yaml[self.game][option_name][game_option.custom_set[key]] = value
+            self.yaml[self.game][option_name] = [option_set[i] for i in option_value.value]
+        elif game_option.type == OptionType.DICT:
+            option_set = game.get_option_set_elements(game_option)
+
+            self.yaml[self.game][option_name] = {option_set[key]: value for key, value in option_value.value.items()}
 
         self.options[option_name] = option_value
 

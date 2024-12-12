@@ -3,6 +3,7 @@ from typing import Callable, Optional, List
 import wx
 
 from .definitions import get_game_definitions, OptionType, SetType, OptionDefinition, OptionValue
+from .set_dialog import OptionSetDialog
 from .slot import Slot
 from .utils import NumericPicker, EVT_PICK_NUMBER
 
@@ -270,7 +271,12 @@ class OptionSetFormOption(LiteralFormOption):
         sizer.Add(self.open_choice_btn, wx.SizerFlags().Expand())
 
     def on_option_set_clicked(self, event: wx.CommandEvent):
-        pass
+        osd = OptionSetDialog(get_game_definitions().games.get(self.parent.slot.game), self.game_option.name,
+                              self.get_option_value())
+        if osd.ShowModal() != wx.ID_OK:
+            return
+
+        self.parent.slot.set_option(self.game_option.name, osd.get_option_value())
 
     def populate_from_slot(self):
         FormOption.populate_from_slot(self)
