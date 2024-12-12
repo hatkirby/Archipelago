@@ -507,10 +507,10 @@ class WizardEditor(wx.ScrolledWindow):
         frame.SetMinSize(wx.Size(728, int(728 / 2)))
 
     def on_change_name(self, event: wx.CommandEvent):
-        pass
+        self.slot.name = self.name_box.GetValue()
 
     def on_change_description(self, event: wx.CommandEvent):
-        pass
+        self.slot.description = self.description_box.GetValue()
 
     def on_change_game(self, event: wx.CommandEvent):
         if self.slot.has_set_options():
