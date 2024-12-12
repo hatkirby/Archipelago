@@ -130,7 +130,7 @@ class RangeFormOption(RandomizableFormOption):
 
     def setup(self, container: wx.Window, sizer: wx.Sizer):
         self.numeric_picker = NumericPicker(container, wx.ID_ANY, self.game_option.min_value,
-                                            self.game_option.max_value, self.game_option.default_value.value)
+                                            self.game_option.max_value, self.game_option.min_value)
         self.numeric_picker.Bind(EVT_PICK_NUMBER, self.on_range_picker_changed)
 
         sizer.Add(self.numeric_picker, wx.SizerFlags().Expand())

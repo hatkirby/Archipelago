@@ -206,6 +206,14 @@ class Game:
 
         #"presets": world.web.options_presets,
 
+    def get_option_set_elements(self, option: OptionDefinition):
+        if option.set_type == SetType.ITEM:
+            return self.items
+        elif option.set_type == SetType.LOCATION:
+            return self.locations
+        elif option.set_type == SetType.CUSTOM:
+            return option.custom_set
+
 
 class GameDefinitions:
     games: Dict[str, Game]
