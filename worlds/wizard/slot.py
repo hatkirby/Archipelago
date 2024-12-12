@@ -311,6 +311,7 @@ class Slot:
 
         if value is not None:
             self.yaml["game"] = value
+            self.yaml[value] = {}
         else:
             del self.yaml["game"]
 
