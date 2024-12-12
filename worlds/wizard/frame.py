@@ -22,6 +22,8 @@ class WizardFrame(wx.Frame):
     def __init__(self):
         wx.Frame.__init__(self, None, title="Wizard")
 
+        self.SetSize(728, 728)
+
         self.slots = []
 
         self.make_menu_bar()
