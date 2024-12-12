@@ -116,7 +116,7 @@ class WizardFrame(wx.Frame):
 
             self.initialize_slot(load_slot)
         except Exception as ex:
-            wx.MessageBox(ex, "Error loading slot", wx.OK, self)
+            wx.MessageBox(str(ex), "Error loading slot", wx.OK, self)
 
     def on_save_slot(self, event: wx.CommandEvent):
         if not self.slot_list.GetSelection().IsOk() or self.slot_list.GetRootItem() == self.slot_list.GetSelection():
@@ -305,7 +305,7 @@ class WizardFrame(wx.Frame):
         try:
             slot.save(slot.filename)
         except Exception as ex:
-            wx.MessageBox(ex, "Error saving Slot", wx.OK, self)
+            wx.MessageBox(str(ex), "Error saving Slot", wx.OK, self)
             return False
 
         return True
