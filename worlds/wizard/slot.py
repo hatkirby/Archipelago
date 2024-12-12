@@ -103,7 +103,7 @@ class Slot:
     def to_yaml(self) -> str:
         return yaml.dump(self.yaml, sort_keys=False)
 
-    def set_option(self, option_name: str, option_value: OptionValue):
+    def set_option(self, option_name: str, option_value: Optional[OptionValue]):
         if not self.dirty:
             self.dirty = True
 
@@ -126,6 +126,8 @@ class Slot:
                 if option_value.weighting is None:
                     self.yaml[self.game][option_name] = "random"
                 else:
+                    self.yaml[self.game][option_name] = {}
+
                     for weight_value in option_value.weighting:
                         value_text = weight_value.value
                         if weight_value.value == "true":
@@ -145,6 +147,8 @@ class Slot:
                 if option_value.weighting is None:
                     self.yaml[self.game][option_name] = random_option_value_to_string(option_value)
                 else:
+                    self.yaml[self.game][option_name] = {}
+
                     for weight_value in option_value.weighting:
                         string_value = weight_value.value
                         if weight_value.random:

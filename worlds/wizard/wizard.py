@@ -3,6 +3,7 @@ from typing import Callable, Optional, List
 import wx
 
 from .definitions import get_game_definitions, OptionType, SetType, OptionDefinition, OptionValue
+from .random_choice_dialog import RandomChoiceDialog
 from .set_dialog import OptionSetDialog
 from .slot import Slot
 from .utils import NumericPicker, EVT_PICK_NUMBER
@@ -12,7 +13,6 @@ class FormOption:
     parent: "WizardEditor"
     game_option: OptionDefinition
 
-    option_name: str
     option_label: wx.StaticText
 
     save_to_slot: Callable[[], None]
@@ -65,6 +65,28 @@ class RandomizableFormOption(FormOption):
         self.random_button.SetValue(ov.random)
 
         # open the dialogs
+        if self.game_option.type == OptionType.SELECT:
+            rcd = RandomChoiceDialog(self.game_option, ov)
+            if rcd.ShowModal() != wx.ID_OK:
+                return
+
+            dlg_value = rcd.get_option_value()
+
+            # If randomization was just turned off, we need to choose a value to fall back to. If the default is
+            # non-random, then we can just unset the option, because that's basically the same as setting the default.
+            # If the default is random, arbitrarily select the first choice.
+            #
+            # If randomization is still on, just copy the option value from the dialog into the world.
+            if dlg_value.random:
+                self.parent.slot.set_option(self.game_option.name, dlg_value)
+            elif ov.random:
+                if self.game_option.default_value.random:
+                    dlg_value.value = self.game_option.choices.ordering[0][1]
+                    self.parent.slot.set_option(self.game_option.name, dlg_value)
+                else:
+                    self.parent.slot.set_option(self.game_option.name, None)
+
+        self.populate_from_slot()
 
     def populate_from_slot(self):
         FormOption.populate_from_slot(self)
