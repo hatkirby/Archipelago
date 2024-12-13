@@ -4,6 +4,7 @@ import wx
 
 from .definitions import get_game_definitions, OptionType, SetType, OptionDefinition, OptionValue
 from .random_choice_dialog import RandomChoiceDialog
+from .random_range_dialog import RandomRangeDialog
 from .set_dialog import OptionSetDialog
 from .slot import Slot
 from .utils import NumericPicker, EVT_PICK_NUMBER
@@ -82,6 +83,26 @@ class RandomizableFormOption(FormOption):
             elif ov.random:
                 if self.game_option.default_value.random:
                     dlg_value.value = self.game_option.choices.ordering[0][1]
+                    self.parent.slot.set_option(self.game_option.name, dlg_value)
+                else:
+                    self.parent.slot.set_option(self.game_option.name, None)
+        elif self.game_option.type == OptionType.RANGE:
+            rrd = RandomRangeDialog(self.game_option, ov)
+            if rrd.ShowModal() != wx.ID_OK:
+                return
+
+            dlg_value = rrd.get_option_value()
+
+            # If randomization was just turned off, we need to choose a value to fall back to. If the default is
+            # non-random, then we can just unset the option, because that's basically the same as setting the default.
+            # If the default is random, arbitrarily select the minimum value.
+            #
+            # If randomization is still on, just copy the option value from the dialog into the world.
+            if dlg_value.random:
+                self.parent.slot.set_option(self.game_option.name, dlg_value)
+            elif ov.random:
+                if self.game_option.default_value.random:
+                    dlg_value.value = self.game_option.min_value
                     self.parent.slot.set_option(self.game_option.name, dlg_value)
                 else:
                     self.parent.slot.set_option(self.game_option.name, None)

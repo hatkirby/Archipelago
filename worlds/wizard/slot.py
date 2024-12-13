@@ -150,11 +150,12 @@ class Slot:
                     self.yaml[self.game][option_name] = {}
 
                     for weight_value in option_value.weighting:
-                        string_value = weight_value.value
                         if weight_value.random:
                             string_value = random_option_value_to_string(weight_value)
-                        elif game_option.named_range and weight_value.value in game_option.value_names:
+                        elif game_option.named_range and weight_value.value in game_option.value_names.keys:
                             string_value = game_option.value_names.forward.get(weight_value.value)
+                        else:
+                            string_value = weight_value.value
 
                         self.yaml[self.game][option_name][string_value] = weight_value.weight
             elif game_option.named_range and option_value.value in game_option.value_names.keys:

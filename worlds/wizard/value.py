@@ -52,6 +52,8 @@ def get_random_option_value_from_string(value: str) -> OptionValue:
         if it == len(parts):
             result.error = f"Ranged random specifier \"{value}\" missing min and max values."
             return result
+    else:
+        result.range_subset = None
 
     if parts[it] in ["low", "middle", "high"]:
         if parts[it] == "low":
@@ -95,4 +97,20 @@ def get_random_option_value_from_string(value: str) -> OptionValue:
 
 
 def random_option_value_to_string(ov: OptionValue) -> str:
-    pass
+    pieces = ["random"]
+
+    if ov.range_subset is not None:
+        pieces.append("range")
+
+    if ov.range_random_type == RandomValueType.LOW:
+        pieces.append("low")
+    elif ov.range_random_type == RandomValueType.MIDDLE:
+        pieces.append("middle")
+    elif ov.range_random_type == RandomValueType.HIGH:
+        pieces.append("high")
+
+    if ov.range_subset is not None:
+        pieces.append(str(ov.range_subset[0]))
+        pieces.append(str(ov.range_subset[1]))
+
+    return "-".join(pieces)
