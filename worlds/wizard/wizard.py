@@ -501,7 +501,21 @@ class WizardEditor(wx.ScrolledWindow):
                 self.common_options_pane.GetPane().SetSizerAndFit(common_options_sizer)
                 self.top_sizer.Add(self.common_options_pane, wx.SizerFlags().DoubleBorder().Proportion(0).Expand())
 
-            # do presets
+            if len(game.presets) > 0:
+                self.preset_box.Clear()
+                self.preset_box.Append("")
+
+                for preset_name in game.presets.keys():
+                    self.preset_box.Append(preset_name)
+
+                self.preset_label.Show()
+                self.preset_box.Show()
+            else:
+                self.preset_label.Hide()
+                self.preset_box.Hide()
+        else:
+            self.preset_label.Hide()
+            self.preset_box.Hide()
 
         self.populate()
         self.fix_size()
@@ -555,4 +569,22 @@ class WizardEditor(wx.ScrolledWindow):
         self.rebuild()
 
     def on_change_preset(self, event: wx.CommandEvent):
-        pass
+        if self.preset_box.GetSelection() == 0:
+            return
+
+        if self.slot.has_set_options():
+            if wx.MessageBox("This slot has options set on it. Using a preset will clear these options. Are you sure "
+                             "you want to proceed?", "Confirm", wx.YES_NO, self) == wx.NO:
+                self.preset_box.SetSelection(0)
+                return
+
+        self.slot.clear_options()
+
+        game = get_game_definitions().games.get(self.slot.game)
+        preset = game.presets.get(self.preset_box.GetString(self.preset_box.GetSelection()))
+
+        for option_name, option_value in preset.items():
+            self.slot.set_option(option_name, option_value)
+
+        self.populate()
+        self.Layout()

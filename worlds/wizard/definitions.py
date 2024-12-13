@@ -68,42 +68,50 @@ class OptionDefinition:
                 self.set_type = SetType.ITEM
                 self.display_name = "Local Items"
                 self.description = "Forces these items to be in their native world."
+                self.default_value.value = []
             elif name == "non_local_items":
                 self.type = OptionType.SET
                 self.set_type = SetType.ITEM
                 self.display_name = "Non-Local Items"
                 self.description = "Forces these items to be outside their native world."
+                self.default_value.value = []
             elif name == "start_inventory":
                 self.type = OptionType.DICT
                 self.set_type = SetType.ITEM
                 self.display_name = "Start Inventory"
                 self.description = "Start with these items."
+                self.default_value.value = {}
             elif name == "start_inventory_from_pool":
                 self.type = OptionType.DICT
                 self.set_type = SetType.ITEM
                 self.display_name = "Start Inventory from Pool"
                 self.description = "Start with these items and don't place them in the world.\nThe game decides what " \
                                    "the replacement items will be."
+                self.default_value.value = {}
             elif name == "start_hints":
                 self.type = OptionType.SET
                 self.set_type = SetType.ITEM
                 self.display_name = "Start Hints"
                 self.description = "Start with these item's locations prefilled into the !hint command."
+                self.default_value.value = []
             elif name == "start_location_hints":
                 self.type = OptionType.SET
                 self.set_type = SetType.LOCATION
                 self.display_name = "Start Location Hints"
                 self.description = "Start with these locations and their item prefilled into the !hint command."
+                self.default_value.value = []
             elif name == "exclude_locations":
                 self.type = OptionType.SET
                 self.set_type = SetType.LOCATION
                 self.display_name = "Excluded Locations"
                 self.description = "Prevent these locations from having an important item."
+                self.default_value.value = []
             elif name == "priority_locations":
                 self.type = OptionType.SET
                 self.set_type = SetType.LOCATION
                 self.display_name = "Priority Locations"
                 self.description = "Force these locations to have an important item."
+                self.default_value.value = []
             elif name == "item_links":
                 self.type = OptionType.UNKNOWN
                 self.display_name = "Item Links"
@@ -204,7 +212,39 @@ class Game:
         self.locations = list(world.location_names) + list(world.location_name_groups.keys())
         self.locations.sort()
 
-        #"presets": world.web.options_presets,
+        for preset_name, preset_options in world.web.options_presets.items():
+            preset = {}
+
+            for option_name, option_value in preset_options.items():
+                game_option = self.options.get(option_name)
+                ov = OptionValue()
+
+                if option_value == "random":
+                    ov.random = True
+                    ov.weighting = None
+                elif game_option.type == OptionType.RANGE:
+                    if isinstance(option_value, str) and option_value in game_option.value_names.values:
+                        ov.value = game_option.value_names.backward.get(option_value)
+                    elif isinstance(option_value, int):
+                        ov.value = option_value
+                elif game_option.type == OptionType.SELECT:
+                    if isinstance(option_value, str) and option_value in game_option.choices.values:
+                        ov.value = option_value
+                    elif isinstance(option_value, int) and option_value in game_option.choices.keys:
+                        ov.value = game_option.choices.forward.get(option_value)
+                    elif isinstance(option_value, bool):
+                        if option_value:
+                            ov.value = "true"
+                        else:
+                            ov.value = "false"
+                elif game_option.type == OptionType.SET:
+                    option_set = self.get_option_set_elements(game_option)
+
+                    ov.value = [option_set.index(set_item) for set_item in option_value]
+
+                preset[option_name] = ov
+
+            self.presets[preset_name] = preset
 
     def get_option_set_elements(self, option: OptionDefinition):
         if option.set_type == SetType.ITEM:
