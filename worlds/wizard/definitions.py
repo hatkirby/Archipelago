@@ -53,70 +53,14 @@ class OptionDefinition:
     default_value: OptionValue
 
     def __init__(self, name: str, option: Options.AssembleOptions):
-        self.common = False
+        self.common = (name in common_option_names)
         self.name = name
         self.type = OptionType.UNKNOWN
         self.display_name = option.display_name if hasattr(option, "display_name") else name
         self.description = get_html_doc(option)
         self.default_value = OptionValue()
 
-        if name in common_option_names:
-            self.common = True
-
-            if name == "local_items":
-                self.type = OptionType.SET
-                self.set_type = SetType.ITEM
-                self.display_name = "Local Items"
-                self.description = "Forces these items to be in their native world."
-                self.default_value.value = []
-            elif name == "non_local_items":
-                self.type = OptionType.SET
-                self.set_type = SetType.ITEM
-                self.display_name = "Non-Local Items"
-                self.description = "Forces these items to be outside their native world."
-                self.default_value.value = []
-            elif name == "start_inventory":
-                self.type = OptionType.DICT
-                self.set_type = SetType.ITEM
-                self.display_name = "Start Inventory"
-                self.description = "Start with these items."
-                self.default_value.value = {}
-            elif name == "start_inventory_from_pool":
-                self.type = OptionType.DICT
-                self.set_type = SetType.ITEM
-                self.display_name = "Start Inventory from Pool"
-                self.description = "Start with these items and don't place them in the world.\nThe game decides what " \
-                                   "the replacement items will be."
-                self.default_value.value = {}
-            elif name == "start_hints":
-                self.type = OptionType.SET
-                self.set_type = SetType.ITEM
-                self.display_name = "Start Hints"
-                self.description = "Start with these item's locations prefilled into the !hint command."
-                self.default_value.value = []
-            elif name == "start_location_hints":
-                self.type = OptionType.SET
-                self.set_type = SetType.LOCATION
-                self.display_name = "Start Location Hints"
-                self.description = "Start with these locations and their item prefilled into the !hint command."
-                self.default_value.value = []
-            elif name == "exclude_locations":
-                self.type = OptionType.SET
-                self.set_type = SetType.LOCATION
-                self.display_name = "Excluded Locations"
-                self.description = "Prevent these locations from having an important item."
-                self.default_value.value = []
-            elif name == "priority_locations":
-                self.type = OptionType.SET
-                self.set_type = SetType.LOCATION
-                self.display_name = "Priority Locations"
-                self.description = "Force these locations to have an important item."
-                self.default_value.value = []
-            elif name == "item_links":
-                self.type = OptionType.UNKNOWN
-                self.display_name = "Item Links"
-                self.description = "Share part of your item pool with other players."
-        elif (issubclass(option, Options.Choice) or issubclass(option, Options.Toggle)) and not issubclass(option, Options.TextChoice):
+        if (issubclass(option, Options.Choice) or issubclass(option, Options.Toggle)) and not issubclass(option, Options.TextChoice):
             self.type = OptionType.SELECT
             self.choice_names = []
             self.choices = OrderedBijection()
