@@ -16,8 +16,6 @@ class FormOption:
 
     option_label: wx.StaticText
 
-    save_to_slot: Callable[[], None]
-
     def __init__(self, parent: "WizardEditor", container: wx.Window, option_name: str, sizer: wx.Sizer):
         self.parent = parent
 
@@ -331,9 +329,6 @@ class OptionSetFormOption(LiteralFormOption):
         else:
             self.open_choice_btn.Enable()
 
-    def save_to_slot(self):
-        pass
-
 
 class ItemDictFormOption(LiteralFormOption):
     open_choice_btn: wx.Button
@@ -356,9 +351,6 @@ class ItemDictFormOption(LiteralFormOption):
             self.open_choice_btn.Disable()
         else:
             self.open_choice_btn.Enable()
-
-    def save_to_slot(self):
-        pass
 
 
 class YamlOnlyFormOption(LiteralFormOption):
