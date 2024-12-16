@@ -19,6 +19,8 @@ class WizardFrame(wx.Frame):
 
     slots: List[Slot]
 
+    close_menu_item_id: wx.WindowIDRef
+
     def __init__(self):
         wx.Frame.__init__(self, None, title="Wizard")
 
@@ -77,6 +79,8 @@ class WizardFrame(wx.Frame):
         save_slot_as_item = menu_file.Append(wx.ID_ANY, "Save Slot As...\tCtrl-Shift-S")
         close_slot_item = menu_file.Append(wx.ID_ANY, "&Close Slot\tCtrl-W")
         exit_item = menu_file.Append(wx.ID_EXIT)
+
+        self.close_menu_item_id = close_slot_item.GetId()
 
         menu_help = wx.Menu()
         about_item = menu_help.Append(wx.ID_ABOUT)
@@ -197,7 +201,13 @@ class WizardFrame(wx.Frame):
             self.slot_window.load_slot(slot)
 
     def on_slot_right_click(self, event: wx.TreeEvent):
-        pass
+        if not event.GetItem().IsOk() or event.GetItem() == self.slot_list.GetRootItem():
+            return
+
+        popup_menu = wx.Menu()
+        popup_menu.Append(self.close_menu_item_id, "&Close")
+
+        self.PopupMenu(popup_menu, self.ScreenToClient(wx.GetMousePosition()))
 
     def initialize_slot(self, new_slot: Slot):
         self.slots.append(new_slot)
