@@ -1,0 +1,1944 @@
+# for transit: only single color cubes need to be mentioned
+# it is assumbed that double gravity cubes can be brought through any connection
+"000":
+  # GAME START
+  locations:
+    - Tutorial Completed
+  connections:
+    A:
+      # opens via button
+      dest: "000_001"
+      pair: A
+      type: small
+      plane: orange
+    B:
+      # usually requires dark cube; that should be removed and the shortcut door can be vanilla
+      dest: "000_052"
+      pair: A
+      type: big
+      plane: orange
+      item: Blue Secret Path
+  transit:
+    - from: A
+      to: B
+      colors: [blue]
+    - from: B
+      to: A
+      colors: [blue, yellow]
+"000_001":
+  # INFINITE STAIRWELL
+  # button opens A and B
+  connections:
+    A:
+      dest: "000"
+      pair: A
+      type: small
+      plane: purple
+    B:
+      dest: "001"
+      pair: A
+      plane: orange
+      type: big
+    C:
+      # REQUIRES EXTERNAL BLUE CUBE
+      dest: "900"
+      pair: A
+      type: big
+      plane: orange
+      one_way: true
+      cube_req:
+        - color: blue
+          from: [A, B]
+  transit:
+    - from: A
+      to: B
+      colors: [blue, orange]
+    - from: A
+      to: C
+      colors: [blue, red]
+    - from: [B, C]
+      to: A
+      colors: [blue, purple]
+    - from: B
+      to: C
+      colors: [blue, red, yellow]
+    - from: C
+      to: B
+      colors: [blue]
+"900":
+  # GARNIER HALLWAY
+  # ignore the dark cube bridge; that's just for the ending
+  # FUSED WITH 062_900
+  connections:
+    A:
+      # only openable from other side
+      dest: "000_001"
+      pair: C
+      type: big
+      plane: purple
+    B:
+      # opens up automatically upon receiving the item
+      dest: "062/SecretHub"
+      pair: C
+      type: small
+      plane: orange
+  transit:
+    - from: A
+      to: B
+      colors: [red, yellow, orange]
+    - from: B
+      to: A
+      colors: [blue, green, purple]
+"001":
+  # BLUE
+  # the three laser areas are checks
+  # the lasers are items; all three are needed to unlock the dark cube
+  # purifying the tree is a check
+  # purifying tree opens both connections
+  # FUSED WITH 044_001A
+  locations:
+    - Blue - Red Laser Activated
+    - Blue - Yellow Laser Activated
+    - Blue - Green Laser Activated
+    - name: Blue - Tree Purified
+      item:
+        - Blue - Red Laser
+        - Blue - Yellow Laser
+        - Blue - Green Laser
+  cubes:
+    # Not actually sure how many of each cube can be taken out
+    - color: blue
+      amount: 1
+      to: [A, B]
+    - color: red
+      amount: 1
+      to: [A, B]
+    - color: green
+      amount: 1
+      to: [A, B]
+    - color: yellow
+      amount: 1
+      to: [A, B]
+    - color: blue
+      god: true
+      amount: 1
+      to: [A, B]
+  connections:
+    A:
+      dest: "000_001"
+      pair: B
+      type: big
+      plane: purple
+    B:
+      # theoretically this (and the other garden connections) could be broken
+      dest: "044"
+      pair: A
+      type: no_shuffle
+      plane: orange
+      one_way: true
+      item:
+        - Blue - Red Laser
+        - Blue - Yellow Laser
+        - Blue - Green Laser
+  transit:
+    - from: A
+      to: B
+      colors: [blue, orange]
+    - from: B
+      to: A
+      colors: [blue, purple]
+"044":
+  # GARDEN
+  # growing each garden is an item, and happens regardless of whether you plant the cube
+  # for the entrances: only openable from other side, tho could theoretically be broken and opened by planting the god cube
+  locations:
+    - name: Blue God Cube Planted
+      cube_req:
+        color: blue
+        god: true
+        from: [A, B, C, D, E, G, H, J, K, L]
+    - name: Red God Cube Planted
+      cube_req:
+        color: red
+        god: true
+        from: [A, B, C, D, F, G, H, I, K, L]
+    - name: Green God Cube Planted
+      cube_req:
+        color: green
+        god: true
+        from: [A, B, C, D, E, F, G, H, I, J, K]
+    - name: Yellow God Cube Planted
+      cube_req:
+        color: yellow
+        god: true
+        from: [A, B, C, D, E, F, G, H, I, K, L]
+    - name: Purple God Cube Planted
+      cube_req:
+        color: purple
+        god: true
+        from: [B, D, E, F, H, I, J, K, L]
+    - name: Orange God Cube Planted
+      cube_req:
+        color: orange
+        god: true
+        from: [A, C, E, F, G, I, J, K, L]
+  connections:
+    A:
+      dest: "001"
+      pair: B
+      type: no_shuffle
+      plane: purple
+    B:
+      # opened by button
+      dest: "044_014"
+      pair: A
+      type: big
+      plane: orange
+      item: Blue Garden
+    C:
+      dest: "003"
+      pair: B
+      type: no_shuffle
+      plane: purple
+    D:
+      # opened by button
+      dest: "044_045"
+      pair: A
+      type: big
+      plane: orange
+      item: Red Garden
+    E:
+      dest: "053"
+      pair: B
+      type: no_shuffle
+      plane: red
+    F:
+      # opened by button
+      dest: "044_057"
+      pair: A
+      type: big
+      plane: blue
+      item: Green Garden
+    G:
+      dest: "002"
+      pair: B
+      type: no_shuffle
+      plane: purple
+    H:
+      # opened by button
+      dest: "044_026"
+      pair: A
+      type: big
+      plane: orange
+      item: Yellow Garden
+    I:
+      dest: "051"
+      pair: B
+      type: no_shuffle
+      plane: blue
+    J:
+      # opened by button
+      dest: "033_063"
+      pair: A
+      type: big
+      plane: red
+      item: Purple Garden
+    K:
+      dest: "063/Inside"
+      pair: D
+      type: no_shuffle
+      plane: yellow
+    L:
+      # SPECIAL: In addition to the item, all six god cubes must be planted to use this.
+      # although maybe what we could do is make this only require orange garden, and also allow the final test door
+      # then make the puzzles in the endgame sequence checks (they can't be room shuffled anyway)
+      # and just make it so that you can't enter akshardam without all god cubes planted
+      dest: "044_501"
+      pair: A
+      type: no_shuffle
+      plane: green
+      item: Orange Garden
+  transit:
+    # This is a pretty open space. All connections have the potential to transit to one another.
+    # Cubes cannot come in from a connection if the connection plane is that color.
+    # Cubes cannot exit through a connection if the connection plane is opposite of that color.
+    # Cubes also cannot exit through the two connections for the garden that's the opposite color.
+    # This is because that garden is a roof in that gravity and the doors can't be reached.
+    - from: [A, B, C, D, E, G, H, J, K, L]
+      to: [A, B, F, G, H, I, K, L]
+      colors: [blue]
+    - from: [A, B, C, D, F, G, H, I, K, L]
+      to: [C, D, E, G, H, J, K, L]
+      colors: [red]
+    - from: [A, B, C, D, E, F, G, H, I, J, K]
+      to: [A, B, C, D, E, F, I, J, L]
+      colors: [green]
+    - from: [A, B, C, D, E, F, G, H, I, K, L]
+      to: [A, B, C, D, G, H, I, J, K]
+      colors: [yellow]
+    - from: [B, D, E, F, H, I, J, K, L]
+      to: [A, C, E, F, G, I, J]
+      colors: [purple]
+    - from: [A, C, E, F, G, I, J, K, L]
+      to: [B, D, E, F, H, K, L]
+      colors: [orange]
+"044_014":
+  # shortcut to top of tower is totally vanilla
+  # both entrances in tower open via button at the bottom
+  # tree puzzle opens entrance to tower, to exit, and to the yellow secret path
+  # shortcut within exterior is totally vanilla
+  # using the culled holes in the wall IS in logic
+  # no transit section because only double gravity cubes can be brought through this room
+  locations:
+    - Tower Orange Tree Puzzle Solved
+  connections:
+    A:
+      dest: "044"
+      pair: B
+      type: big
+      plane: purple
+    B:
+      dest: "PathToPyramid"
+      pair: A
+      type: no_shuffle
+      plane: blue
+      item: Stepwell Entrance
+    C:
+      dest: "613"
+      pair: B
+      type: big
+      plane: purple
+      item: Yellow Secret Path
+  cubes:
+    - color: orange
+      amount: 2
+      to: B
+"PathToPyramid":
+  # this encapsulates a bunch of rooms between blue garden and blue pyramid because they can't be shuffled
+  # 044_014 is attached to this too, but there is an item locked door between it and this
+  # button in 044_014 exit hallway opens both doors
+  # button in stepwell opens both doors
+  # putting the purple cube on the far side pad opens both doors
+  # button in following hallway opens both doors
+  # blue cube on pad under rng floor opens both doors in that room
+  # The purple cube can't be taken across stepwell or the rng room
+  # There are two blue cubes. Neither can be taken through the purple room
+  # You could take a blue cube to pyramid assuming you have a different blue cube to replace it with and then tree steal later
+  # But I don't want that to be in logic
+  connections:
+    A:
+      dest: "044_014"
+      pair: B
+      type: no_shuffle
+      plane: red
+    B:
+      dest: "045"
+      pair: A
+      type: big
+      plane: green
+  transit:
+    - from: A
+      to: B
+      colors: [blue, green]
+    - from: B
+      to: A
+      colors: [red]
+"045":
+  # BLUE PYRAMID HUB
+  locations:
+    - Pyramid First Exit Opened
+    - name: Pyramid Second Exit Opened
+      cube_req:
+        color: blue
+        from: [A, B, C, D, E, F]
+    - name: Pyramid Waterwheel Activated
+      item: Pyramid - Green Smoke Wall
+      cube_req:
+        color: blue
+        amount: 2
+        from: [A, B, C, D, E, F]
+  connections:
+    A:
+      # opens using button to purple/orange tree room
+      dest: "PathToPyramid"
+      pair: B
+      type: big
+      plane: yellow
+      item: Stepwell Entrance
+    B:
+      # opens using button to purple/orange tree room
+      dest: "045_018"
+      pair: A
+      type: big
+      plane: green
+      item: Path to Red
+    C:
+      # smoke wall, detach it from the cube pad and make the item just open it
+      dest: "045/RedExit"
+      pair: B
+      type: no_shuffle
+      plane: orange
+      item: Pyramid - Red Smoke Wall
+    D:
+      # opens by putting cube in the socket
+      dest: "045_053"
+      pair: A
+      type: big
+      plane: purple
+      item: Path to Green
+      cube_req:
+        color: blue
+        from: [A, B, C, E, F]
+    E:
+      # smoke wall, detach it from the cube pad and make the item just open it
+      dest: "045/GreenExit"
+      pair: B
+      type: no_shuffle
+      plane: yellow
+      item: Pyramid - Green Smoke Wall
+    F:
+      # opens using button to purple/orange tree room
+      dest: "045_073"
+      pair: A
+      type: big
+      plane: green
+      item: Apartments Entrance
+  transit:
+    - from: [A, E]
+      to: [B, F]
+      colors: [green]
+    - from: [B, F]
+      to: [A, E]
+      colors: [yellow]
+    - from: C
+      to: D
+      colors: [orange]
+    - from: D
+      to: C
+      colors: [purple]
+    - from: [A, B, C, D, E, F]
+      to: [A, B, C, D, E, F]
+      colors: [blue]
+"045_018":
+  # PURPLE/ORANGE TREE ROOM
+  # purple/orange pads puzzle opens both doors
+  locations:
+    - Purple/Orange Tree Puzzle Solved
+  connections:
+    A:
+      dest: "045"
+      pair: B
+      type: big
+      plane: yellow
+    B:
+      dest: "041_018"
+      pair: A
+      type: big
+      plane: red
+  cubes:
+    # Not listing the double cube tree here because they will be hardcoded
+    - color: red
+      amount: 2
+      to: B
+  transit:
+    - from: A
+      to: B
+      colors: [green]
+    - from: B
+      to: A
+      colors: [blue, yellow]
+"041_018":
+  # FUSED WITH BLIND SPHERE PUZZLE
+  # button opens all three doors
+  locations:
+    - Blind Sphere Puzzle Solved
+  connections:
+    A:
+      dest: "045_018"
+      pair: B
+      type: big
+      plane: blue
+    B:
+      dest: "018/Inside"
+      pair: A
+      type: big
+      plane: purple
+    C:
+      dest: "612_057"
+      pair: A
+      type: big
+      plane: blue
+      item: Red Secret Path
+  transit:
+    - from: A
+      to: B
+      colors: [red, green, yellow, purple]
+    - from: [A, B]
+      to: C
+      colors: [green]
+    - from: B
+      to: A
+      colors: [blue, green, yellow, orange]
+    - from: C
+      to: [A, B]
+      colors: [green, yellow]
+"018/Inside":
+  # PASTA TILE
+  # doing a weird thing here where we separate the inside and outside
+  # so that the yellow cube puzzle on the outside has to be done to get inside
+  # (not that it matters bc we can't currently approach from that direction)
+  # until room shuffle, that is!
+  # anyway, button opens both doors
+  connections:
+    A:
+      dest: "041_018"
+      pair: B
+      type: big
+      plane: orange
+    B:
+      dest: "018/Outside"
+      pair: A
+      type: no_shuffle
+      plane: purple
+  cubes:
+    - color: yellow
+      to: B
+  transit:
+    # B -> A is double grav only
+    - from: A
+      to: B
+      colors: [green]
+"018/Outside":
+  # STILL PASTA TILE (see above)
+  # yellow cube on pad opens both doors
+  connections:
+    A:
+      dest: "018/Inside"
+      pair: B
+      type: no_shuffle
+      plane: orange
+      cube_req:
+        color: yellow
+        from: B
+    B:
+      dest: "018_003B"
+      pair: A
+      type: big
+      plane: purple
+      cube_req:
+        color: yellow
+        from: A
+  transit:
+    - from: A
+      to: B
+      colors: [blue, red, yellow, purple]
+    - from: B
+      to: A
+      colors: [blue, red, green, orange]
+"018_003B":
+  # sphere puzzle opens both doors in that room
+  # button opens both doors in hallway
+  locations:
+    - Mini Sphere Puzzle Solved
+  connections:
+    A:
+      dest: "018/Outside"
+      pair: B
+      type: big
+      plane: orange
+    B:
+      dest: "003"
+      pair: A
+      type: big
+      plane: green
+      item: Red Entrance
+  transit:
+    - from: A
+      to: B
+      colors: [purple]
+    - from: B
+      to: A
+      colors: [yellow, orange]
+"003":
+  # RED
+  # this whole thing is pretty much vanilla
+  # purifying the tree opens both connections
+  # FUSED WITH 044_003
+  locations:
+    - Red - Tree Purified
+  connections:
+    A:
+      dest: "018_003B"
+      pair: B
+      type: big
+      plane: yellow
+    B:
+      # theoretically this (and the other garden connections) could be broken
+      dest: "044"
+      pair: C
+      type: no_shuffle
+      plane: orange
+      one_way: true
+  cubes:
+    # The regular red cube can't be taken out of here.
+    - color: red
+      god: true
+      to: B
+      # ^ It can also be taken into A using the red and orange cubes and instant gravity changes, but that seems pretty advanced
+    - color: orange
+      to: B
+  transit:
+    # B -> A could technically be solo red like the god cube, but for now it's only double grav
+    - from: A
+      to: B
+      colors: [red]
+"044_045":
+  # THE ARCHES
+  # Final Test Skip is in here. Maybe it's just a check and doesn't open (except in room shuffle).
+  locations:
+    - name: Final Test Puzzle Solved
+      cube_req:
+        # It would be cool to also allow the solution of having a green cube + only one green/yellow (no purple/orange)
+        # Since you can get green cubes from 053 pretty easily
+        - color: "green/yellow"
+          amount: 2
+          from: [A, B, C]
+        - color: "purple/orange"
+          from: [A, B, C]
+  connections:
+    A:
+      # opens with button
+      dest: "044"
+      pair: D
+      type: big
+      plane: purple
+    B:
+      # opens with button
+      dest: "045/RedExit"
+      pair: A
+      type: big
+      plane: orange
+    C:
+      # opens with button
+      dest: "073"
+      pair: D
+      type: small
+      plane: yellow
+      item: Arches Secret Passage
+    D:
+      # final test door. do not use for now.
+      dest: "045_804"
+      pair: A
+      type: big
+      plane: blue
+      item: Final Test Door
+  transit:
+    - from: [A, C]
+      to: B
+      colors: [blue, red, orange]
+    - from: A
+      to: C
+      colors: [blue, red, yellow, orange]
+    - from: [A, B, C]
+      to: D
+      colors: [blue, green]
+    - from: [B, C]
+      to: A
+      colors: [blue, red, purple]
+    - from: B
+      to: C
+      colors: [blue, red, yellow, purple]
+    - from: D
+      to: [A, B]
+      colors: [red]
+    - from: D
+      to: C
+      colors: [red, yellow]
+"045/RedExit":
+  locations:
+    - Pyramid Lower Tree Reached
+  connections:
+    A:
+      dest: "044_045"
+      pair: B
+      type: big
+      plane: purple
+    B:
+      dest: "045"
+      pair: C
+      type: no_shuffle
+      plane: purple
+  cubes:
+    - color: blue
+      to: B
+  transit:
+    - from: A
+      to: B
+      colors: [blue, red]
+    - from: B
+      to: A
+      colors: [red]
+"045_053":
+  connections:
+    A:
+      dest: "045"
+      pair: D
+      type: big
+      plane: orange
+    B:
+      dest: "053"
+      pair: A
+      type: big
+      plane: green
+  transit:
+    - from: A
+      to: B
+      colors: [blue, red, green, purple]
+    - from: B
+      to: A
+      colors: [blue, yellow, orange]
+"053":
+  # GREEN
+  locations:
+    - Green - Blue Waterwheel Activated
+    - name: Green - Tree Purified
+      item: Green - Water Room Entrance
+  connections:
+    A:
+      dest: "045_053"
+      pair: B
+      type: big
+      plane: yellow
+    B:
+      # theoretically this (and the other garden connections) could be broken
+      dest: "044"
+      pair: E
+      type: no_shuffle
+      plane: blue
+      item: Green - Water Room Entrance
+      one_way: true
+  cubes:
+    - color: blue
+      amount: 5
+      to: [A, B]
+    - color: green
+      god: true
+      item: Green - Water Room Entrance
+      to: B
+    - color: green
+      amount: 8
+      item: Green - Water Room Entrance
+      to: B
+  transit:
+    - from: A
+      to: B
+      colors: [blue, green, purple]
+    - from: B
+      to: A
+      colors: [yellow, purple, orange]
+"044_057":
+  connections:
+    A:
+      dest: "044"
+      pair: F
+      type: big
+      plane: red
+    B:
+      # this door isn't quite aligned with the warp...
+      dest: "057"
+      pair: A
+      type: big
+      plane: yellow
+  cubes:
+    - color: green
+      amount: 2
+      to: A
+    - color: blue
+      to: B
+  transit:
+    - from: A
+      to: B
+      colors: [blue, yellow]
+    - from: B
+      to: A
+      colors: [red, green]
+"612_057":
+  # This is the exit from the blind sphere puzzle
+  connections:
+    A:
+      dest: "041_018"
+      pair: C
+      type: big
+      plane: red
+    B:
+      dest: "057"
+      pair: B
+      type: big
+      plane: yellow
+  transit:
+    - from: A
+      to: B
+      colors: [blue, yellow, purple, orange]
+    - from: B
+      to: A
+      colors: [red, green, purple, orange]
+"057":
+  # FUSED WITH 057_045 because the warp is weird
+  # waterwheel puzzle opens the three doors in that room
+  # outside button opens that door and the blind sphere door
+  # hallway button opens both doors in there
+  locations:
+    - Water Through Portals Puzzle Solved
+  connections:
+    A:
+      dest: "044_057"
+      pair: B
+      type: big
+      plane: green
+    B:
+      dest: "612_057"
+      pair: B
+      type: big
+      plane: green
+      item: Red Secret Path
+    C:
+      dest: "045/GreenExit"
+      pair: A
+      type: big
+      plane: green
+  cubes:
+    - color: blue
+      amount: 4
+      to: [A, B, C]
+  transit:
+    - from: [A, B, C]
+      to: [A, B, C]
+      colors: [blue]
+    - from: A
+      to: B
+      colors: [purple]
+"045/GreenExit":
+  locations:
+    - Pyramid Upper Tree Reached
+  connections:
+    A:
+      dest: "057"
+      pair: C
+      type: big
+      plane: yellow
+    B:
+      dest: "045"
+      pair: E
+      type: no_shuffle
+      plane: green
+  cubes:
+    - color: blue
+      to: [A, B]
+  transit:
+    - from: A
+      to: B
+      colors: [blue, red, green]
+    - from: B
+      to: A
+      colors: [blue, yellow]
+"045_073":
+  # APARTMENTS
+  # button to skylight room opens the four connections
+  # the internal doors between halves of the room are vanilla
+  locations:
+    - name: Apartments Waterwheel Activated
+      item:
+        - Apartments Entrance
+        - Pyramid - Green Smoke Wall
+      cube_req:
+        color: blue
+        amount: 9
+        from: [A, B, C, D]
+  connections:
+    A:
+      dest: "045"
+      pair: F
+      type: big
+      plane: yellow
+    B:
+      dest: "073"
+      pair: A
+      type: big
+      plane: orange
+    C:
+      dest: "073_018"
+      pair: A
+      type: big
+      plane: purple
+      item: Orange Secret Path
+    D:
+      dest: "018_063"
+      pair: B
+      type: small
+      plane: purple
+      item: Secret Apartments Shortcut
+  transit:
+    - from: A
+      to: B
+      colors: [blue, red, green, purple]
+    - from: A
+      to: C
+      # green is a little nasty
+      colors: [blue, green, purple]
+    - from: A
+      to: D
+      # green is a little nasty (in a different way from C). purple is tedious.
+      colors: [blue, green, purple]
+    - from: B
+      to: A
+      # purple is doable but too gnarly imo
+      colors: [blue, yellow]
+    - from: B
+      to: C
+      # green is a little nasty like A->C
+      colors: [blue, green, yellow, purple]
+    - from: B
+      to: D
+      # green is a little nasty like A->D
+      colors: [blue, green, yellow, purple]
+    - from: C
+      to: A
+      colors: [blue, yellow, orange]
+    - from: C
+      to: B
+      # orange is a little nasty
+      colors: [blue, red, green, yellow, orange]
+    - from: C
+      to: D
+      # green is like A->D
+      colors: [blue, green, yellow]
+    - from: D
+      to: A
+      colors: [blue, yellow]
+    - from: D
+      to: B
+      colors: [blue, red, green, yellow, orange]
+    - from: D
+      to: C
+      colors: [blue, green, yellow]
+"073_018":
+  # button opens both doors
+  connections:
+    A:
+      dest: "045_073"
+      pair: C
+      type: big
+      plane: orange
+    B:
+      dest: "018/Secret"
+      pair: A
+      type: big
+      plane: blue
+  transit:
+    - from: A
+      to: B
+      colors: [blue, green]
+    - from: B
+      to: A
+      colors: [green, yellow, orange]
+"018/Secret":
+  # button opens both doors
+  connections:
+    A:
+      dest: "073_018"
+      pair: B
+      type: big
+      plane: red
+    B:
+      dest: "018_063"
+      pair: A
+      type: big
+      plane: blue
+  transit:
+    - from: A
+      to: B
+      colors: [blue, green, yellow]
+    - from: B
+      to: A
+      colors: [red, green, yellow]
+"018_063":
+  # press both buttons to open all three doors
+  connections:
+    A:
+      dest: "018/Secret"
+      pair: B
+      type: big
+      plane: red
+    B:
+      dest: "045_073"
+      pair: D
+      type: small
+      plane: orange
+    C:
+      dest: "063/Outside"
+      pair: B
+      type: big
+      plane: yellow
+  transit:
+    - from: A
+      to: B
+      colors: [blue, orange]
+    - from: A
+      to: C
+      colors: [yellow, orange]
+    - from: B
+      to: A
+      colors: [red]
+    - from: B
+      to: C
+      colors: [yellow]
+    - from: C
+      to: A
+      colors: [red, green, orange]
+    - from: C
+      to: B
+      colors: [blue, orange]
+"073":
+  # waterwheel puzzle opens the doors in the main room
+  # button in exit hallway opens both of those doors
+  locations:
+    - Skylight Room Waterwheel Activated
+    - name: Skylight Room Orange Secret
+      cube_req:
+        # purple/orange from B could work... how do I represent that
+        color: orange
+        from: [A, C, D]
+    - name: Skylight Room Red Secret
+      cube_req:
+        # blue/red from A or B could work
+        color: red
+        from: [C, D]
+  connections:
+    A:
+      dest: "045_073"
+      pair: B
+      type: big
+      plane: purple
+      item: Apartments Entrance
+    B:
+      dest: "073_062"
+      pair: A
+      type: big
+      plane: red
+      item: Large Gap Main Entrance
+    C:
+      dest: "073_026"
+      pair: A
+      type: big
+      plane: yellow
+      item: Skylight to Library Shortcut
+    D:
+      dest: "044_045"
+      pair: C
+      type: small
+      plane: green
+  cubes:
+    - color: blue
+      amount: 3
+      to: A
+  transit:
+    # everything -> B is double grav only
+    # the reverse is mostly true, but solo blue can be done B -> A
+    - from: A
+      to: C
+      colors: [red, yellow, orange]
+    - from: [A, C]
+      to: D
+      colors: [red]
+    - from: [B, C]
+      to: A
+      colors: [blue]
+    - from: D
+      to: A
+      colors: [yellow]
+    - from: D
+      to: C
+      colors: [red, orange]
+"073_062":
+  # this is where the solution to the blind sphere puzzle is
+  # button opens both doors
+  connections:
+    A:
+      dest: "073"
+      pair: B
+      type: big
+      plane: blue
+    B:
+      dest: "062/Inside"
+      pair: B
+      type: big
+      plane: green
+  transit:
+    - from: A
+      to: B
+      # idk about orange
+      colors: [red, green, purple]
+    - from: B
+      to: A
+      colors: [blue, yellow, purple, orange]
+"000_052":
+  # button opens both doors
+  connections:
+    A:
+      dest: "000"
+      pair: B
+      type: big
+      plane: purple
+    B:
+      dest: "052"
+      pair: A
+      type: big
+      plane: orange
+  transit:
+    - from: A
+      to: B
+      colors: [blue, orange]
+    - from: B
+      to: A
+      colors: [red, purple]
+"052":
+  # JERRY MCGUIRE PUZZLE
+  # exterior button opens both exterior doors
+  # puzzle solve opens both internal doors
+  # hallway button opens both doors
+  # exit button opens both doors
+  # none of the cubes can be taken out
+  # no transit block because only double grav cubes can be brought through this room
+  locations:
+    - Jerry McGuire Puzzle Solved
+  connections:
+    A:
+      dest: "000_052"
+      pair: B
+      type: big
+      plane: purple
+    B:
+      dest: "052_062"
+      pair: A
+      type: big
+      plane: green
+"052_062":
+  # button opens both doors
+  connections:
+    A:
+      dest: "052"
+      pair: B
+      type: big
+      plane: yellow
+    B:
+      dest: "062/Outside"
+      pair: A
+      type: big
+      plane: green
+  transit:
+    - from: A
+      to: B
+      colors: [green, orange]
+    - from: B
+      to: A
+      colors: [yellow, orange]
+"062/Outside":
+  # LARGE GAP EXTERIOR
+  # Large Gap has three outside parts:
+  # - the blue secret path area ("Outside")
+  # - the path to yellow area ("Inside")
+  # - the Secret Hub
+  # This is the first of those outside parts.
+  # button to interior opens all three doors
+  connections:
+    A:
+      dest: "052_062"
+      pair: B
+      type: big
+      plane: yellow
+      item: Blue Secret Path
+    B:
+      dest: "062/Inside"
+      pair: A
+      type: no_shuffle
+      plane: green
+      item: Large Gap Exterior Door
+    C:
+      dest: "062/SecretHub"
+      pair: E
+      type: no_shuffle
+      plane: yellow
+      item: Large Gap Exterior Secret Door
+  transit:
+    - from: A
+      to: B
+      colors: [green, orange]
+    - from: A
+      to: C
+      colors: [blue, red, purple, orange]
+    - from: B
+      to: A
+      colors: [blue, red, yellow, orange]
+    - from: B
+      to: C
+      colors: [blue, red, yellow, purple, orange]
+    - from: C
+      to: A
+      colors: [blue, red, orange]
+    - from: C
+      to: B
+      colors: [orange]
+"062/Inside":
+  # LARGE GAP INTERIOR
+  # This is the second outside part listed above + the buildings that form the path to yellow.
+  # Putting the purple gravity changed cube on the pad opens the door it usually would.
+  # Putting the orange cube into the socket opens both doors that go into the first building,
+  #   as well as the door into the second building. It is also a check.
+  # The button at the end of the second building opens that door, the secret hub door, the entrance to
+  #   the building, *and* the door between the parts of the gravity changer puzzle, since the puzzle
+  #   cannot be solved without access to the tree.
+  connections:
+    A:
+      dest: "062/Outside"
+      pair: B
+      type: no_shuffle
+      plane: yellow
+    B:
+      dest: "073_062"
+      pair: B
+      type: big
+      plane: yellow
+      item: Large Gap Main Entrance
+    C:
+      dest: "062_026"
+      pair: A
+      type: big
+      plane: yellow
+      item: Library Main Entrance
+    D:
+      dest: "062/SecretHub"
+      pair: D
+      type: no_shuffle
+      plane: yellow
+      item: Large Gap Interior Secret Door
+  cubes:
+    # Technically these could be color changed to purple and brought into B.
+    # Dunno how to represent exclusive OR yet though.
+    - color: orange
+      amount: 2
+      to: A
+  locations:
+    - Large Gap Puzzle Solved
+  transit:
+    # weird exits in here. most pairs can only allow double grav cubes
+    - from: A
+      to: B
+      colors: [purple]
+    - from: B
+      to: A
+      colors: [orange]
+    - from: [C, D]
+      to: [C, D]
+      colors: [red]
+"062/SecretHub":
+  # LARGE GAP SECRET HUB
+  # This is the secret area that is usually accessed through the puzzle in the shattered bridges room
+  # FUSED WITH 062_063. button in there opens both doors.
+  # pressing the button next to a door opens it
+  # for the shattered bridges entrance (no button), pressing any other button opens it
+  locations:
+    - Secret Hub Green Button
+    - Secret Hub Garnier Button
+    - Secret Hub Back Door Button
+    - Secret Hub Front Door Button
+  connections:
+    A:
+      dest: "604_062"
+      pair: B
+      type: small
+      plane: purple
+      item: Secret Hub Shattered Bridges Entrance
+    B:
+      dest: "063/Inside"
+      pair: B
+      type: small
+      plane: orange
+      item: Secret Hub Orange Entrance
+    C:
+      dest: "900"
+      pair: B
+      type: small
+      plane: purple
+      item: Secret Hub Garnier Entrance
+    D:
+      dest: "062/Inside"
+      pair: D
+      type: no_shuffle
+      plane: green
+    E:
+      dest: "062/Outside"
+      pair: C
+      type: no_shuffle
+      plane: green
+  transit:
+    - from: A
+      to: C
+      colors: [red]
+    - from: [A, C]
+      to: D
+      colors: [red, orange]
+    - from: [A, C]
+      to: E
+      colors: [blue, red, green, orange]
+    - from: C
+      to: A
+      colors: [blue, red]
+    - from: [D, E]
+      to: A
+      colors: [blue, red, purple]
+    - from: D
+      to: C
+      colors: [red, orange]
+    - from: D
+      to: E
+      colors: [blue, red, purple, orange]
+    - from: E
+      to: C
+      colors: [blue, purple]
+    - from: E
+      to: D
+      colors: [blue, purple, orange]
+"062_026":
+  # button opens both sides
+  connections:
+    A:
+      dest: "062/Inside"
+      pair: C
+      type: big
+      plane: green
+    B:
+      dest: "026"
+      pair: A
+      type: big
+      plane: yellow
+  transit:
+    - from: A
+      to: B
+      colors: [blue, red, yellow, purple, orange]
+    - from: B
+      to: A
+      colors: [blue, red, green, purple, orange]
+"026":
+  # THE LIBRARY (SECOND HUB)
+  # entering the room opens all doors
+  connections:
+    A:
+      dest: "062_026"
+      pair: B
+      type: big
+      plane: green
+      item: Library Main Entrance
+    B:
+      dest: "026_002"
+      pair: A
+      type: big
+      plane: yellow
+      item: Path to Yellow
+    C:
+      dest: "026/YellowExit"
+      pair: B
+      type: no_shuffle
+      plane: yellow
+      item: Library - Yellow Smoke Wall
+    D:
+      dest: "026_051"
+      pair: A
+      type: big
+      plane: orange
+      item: Library - Purple Entrance
+  locations:
+    - Single Socket Puzzle Solved
+    - name: Double Socket Puzzle Solved
+      cube_req:
+        color: blue
+        from: [A, B, C, D]
+  cubes:
+    - color: red
+      amount: 2
+      to: [A, B, C, D]
+  transit:
+    - from: [A, B, C, D]
+      to: [A, B, C, D]
+      colors: [blue, red]
+    - from: [A, D]
+      to: [B, C]
+      colors: [yellow]
+    - from: [A, B, C]
+      to: D
+      colors: [orange]
+    - from: [B, C, D]
+      to: A
+      colors: [green]
+"026_002":
+  # The puzzle room is in a separate scene, and there's a clean warp to it, but there's no door.
+  # I guess no shuffle for now, and maybe we can add a door later?
+  # the doors open upon entering the room
+  connections:
+    A:
+      dest: "026"
+      pair: B
+      type: big
+      plane: green
+    B:
+      dest: "026_002/PuzzleRoom"
+      pair: A
+      type: no_shuffle
+      plane: yellow
+    C:
+      dest: "026_015"
+      pair: A
+      type: big
+      plane: blue
+      item: Yellow Secret Path
+  locations:
+    - name: Yellow Cube Fetch Quest Completed
+      cube_req:
+        color: yellow
+        from: [A, C]
+  transit:
+    - from: A
+      to: B
+      colors: [red, yellow]
+    - from: A
+      to: C
+      colors: [blue, yellow]
+    - from: [B, C]
+      to: A
+      colors: [red, green]
+    - from: B
+      to: C
+      colors: [blue, purple, orange]
+    - from: C
+      to: B
+      colors: [red, yellow, purple, orange]
+"026_015":
+  # button opens both doors
+  connections:
+    A:
+      dest: "026_002"
+      pair: C
+      type: big
+      plane: red
+    B:
+      dest: "613"
+      pair: A
+      type: big
+      plane: purple
+  transit:
+    - from: A
+      to: B
+      colors: [green, purple]
+    - from: B
+      to: A
+      colors: [yellow, orange]
+"613":
+  # LONG BRIDGE LONG TOWER
+  # green cube in socket opens entrance + tower door
+  # button in tower opens tower door + the exit
+  connections:
+    A:
+      dest: "026_015"
+      pair: B
+      type: big
+      plane: orange
+    B:
+      dest: "044_014"
+      pair: C
+      type: big
+      plane: orange
+  locations:
+    - Long Bridge Long Tower Puzzle Solved
+  cubes:
+    - color: green
+      to: [A, B]
+    - color: orange
+      amount: 3
+      to: [A]
+  transit:
+    - from: A
+      to: B
+      # red is tedious but cool
+      # green requires solving the puzzle (important for tree shuffle)
+      colors: [red, green]
+    - from: B
+      to: A
+      # green is tedious (requires walking up all of the stairs)
+      colors: [green]
+"026_002/PuzzleRoom":
+  # color changers probably need to be annotated
+  # entering the room opens the door
+  connections:
+    A:
+      dest: "026_002"
+      pair: B
+      type: no_shuffle
+      plane: green
+    B:
+      dest: "002"
+      pair: A
+      type: big
+      plane: blue
+      item: Yellow Entrance
+  cubes:
+    - color: red
+      amount: 2
+      to: [A]
+  color_changers:
+    - color: yellow
+      from:
+        blue: A
+        red: [A, B, self]
+        green: B # you gotta fall right on it
+        purple: [A, B] # you gotta fall on it but you have multiple attempts
+        orange: [A, B] # you gotta fall on it but you have multiple attempts
+      to: B
+  locations:
+    - Yellow Entrance Puzzle Solved
+  transit:
+    - from: B
+      to: A
+      colors: [red, green]
+"002":
+  # YELLOW
+  # green/yellow tree location
+  # I'm gonna make this vanilla for now and maybe later the towers could be progressive
+  # internal red and blue cubes can't make it to either connection
+  connections:
+    A:
+      dest: "026_002/PuzzleRoom"
+      pair: B
+      type: big
+      plane: red
+    B:
+      # theoretically this (and the other garden connections) could be broken
+      dest: "044"
+      pair: G
+      type: no_shuffle
+      plane: orange
+      one_way: true
+  cubes:
+    - color: yellow
+      to: [A, B]
+    - color: green
+      to: [A]
+    - color: yellow
+      god: true
+      to: [A, B]
+  locations:
+    - Yellow - Blue Tower Solved
+    - Yellow - Green Tower Solved
+    - Yellow - Red Tower Solved
+    - Yellow - Tree Purified
+  transit:
+    - from: A
+      to: B
+      colors: [yellow, orange]
+    - from: B
+      to: A
+      colors: [yellow]
+"044_026":
+  # the small door to exit the building is locked by the same item as the big door
+  # entering the region opens the three doors inside the building
+  # pressing the button opens the external big door
+  connections:
+    A:
+      dest: "044"
+      pair: H
+      type: big
+      plane: purple
+    B:
+      dest: "026/YellowExit"
+      pair: A
+      type: big
+      plane: green
+    C:
+      dest: "073_026"
+      pair: B
+      type: big
+      plane: red
+      item: Skylight to Library Shortcut
+  transit:
+    - from: A
+      to: B
+      colors: [red, orange]
+    - from: A
+      to: C
+      # purple can be done by walking on seams... idk if we should expect it
+      colors: [red]
+    - from: [B, C]
+      to: A
+      colors: [yellow, purple]
+    - from: B
+      to: C
+      colors: [red]
+"073_026":
+  # button opens both doors
+  connections:
+    A:
+      dest: "073"
+      pair: C
+      type: big
+      plane: green
+    B:
+      dest: "044_026"
+      pair: C
+      type: big
+      plane: blue
+  transit:
+    - from: A
+      to: B
+      colors: [blue, yellow]
+    - from: B
+      to: A
+      colors: [red, green, orange]
+"026/YellowExit":
+  connections:
+    A:
+      dest: "044_026"
+      pair: B
+      type: big
+      plane: yellow
+    B:
+      dest: "026"
+      pair: C
+      type: no_shuffle
+      plane: green
+  cubes:
+    - color: blue
+      to: [A, B]
+  transit:
+    - from: A
+      to: B
+      colors: [blue, red, green]
+    - from: B
+      to: A
+      colors: [blue, red, yellow]
+"026_051":
+  # button opens both doors
+  connections:
+    A:
+      dest: "026"
+      pair: D
+      type: big
+      plane: purple
+    B:
+      dest: "051"
+      pair: A
+      type: big
+      plane: orange
+  transit:
+    - from: A
+      to: B
+      colors: [red, green, yellow, orange]
+    - from: B
+      to: A
+      colors: [red, green, yellow, purple]
+"051":
+  # PURPLE
+  # most of the color changers are useless
+  # the red one can get you a couple of reds though
+  # ignoring that for now
+  connections:
+    A:
+      dest: "026_051"
+      pair: B
+      type: big
+      plane: purple
+      item: Library - Purple Entrance
+    B:
+      dest: "044"
+      pair: I
+      type: no_shuffle
+      plane: red
+      one_way: true
+  cubes:
+    - color: purple
+      god: true
+      # for A, you have to drop it on the door as you fall but it's cool
+      to: [A, B]
+    - color: red
+      to: [A, B]
+    - color: purple
+      amount: 2
+      to: [A, B]
+  locations:
+    - Purple - Tree Purified
+  transit:
+    - from: A
+      to: B
+      colors: [red]
+    - from: B
+      to: A
+      # these are both a little rough
+      colors: [blue, purple]
+"033_063":
+  # SHATTERED BRIDGES
+  # Partially fused with 611; the part before the large door belongs to this region
+  connections:
+    A:
+      dest: "044"
+      pair: J
+      type: big
+      plane: blue
+    B:
+      dest: "063/Inside"
+      pair: A
+      type: big
+      plane: orange
+      item: Orange Entrance
+    C:
+      dest: "611"
+      pair: A
+      type: no_shuffle
+      plane: orange
+      item: Secret Hub Shattered Bridges Entrance
+  locations:
+    - Shattered Bridges Puzzle Solved
+    - name: Shattered Bridges Secret Puzzle Solved
+      cube_req:
+        color: purple
+        # canonically you would get it from A but i'm not sure how to represent that yet
+        from: [B, C]
+  cubes:
+    - color: red
+      amount: 2
+      to: [B, C]
+  transit:
+    - from: A
+      to: B
+      colors: [red, green, yellow, orange]
+    - from: A
+      to: C
+      # green and yellow are nasty
+      colors: [red, green, yellow]
+    - from: B
+      to: A
+      colors: [red, green, yellow, purple]
+    - from: B
+      to: C
+      # green and yellow are nasty
+      colors: [blue, red, green, yellow]
+    - from: C
+      to: A
+      colors: [red, purple]
+    - from: C
+      to: B
+      colors: [red]
+"611":
+  # NOWHERE SECRET
+  connections:
+    A:
+      dest: "033_063"
+      pair: C
+      type: no_shuffle
+      plane: purple
+    B:
+      dest: "604"
+      pair: A
+      type: big
+      plane: blue
+  transit:
+    - from: A
+      to: B
+      colors: [green]
+    - from: B
+      to: A
+      colors: [red, yellow, purple]
+"604":
+  # TETROMINO NON EUCLIDEAN
+  connections:
+    A:
+      dest: "611"
+      pair: B
+      type: big
+      plane: red
+    B:
+      dest: "604_062"
+      pair: A
+      type: big
+      plane: orange
+  locations:
+    - Non-Euclidean Tetromino Puzzle Solved
+  cubes:
+    - color: green
+      to: [A, B]
+  transit:
+    - from: [A, B]
+      to: [A, B]
+      colors: [green]
+"604_062":
+  connections:
+    A:
+      dest: "604"
+      pair: B
+      type: big
+      plane: purple
+    B:
+      dest: "062/SecretHub"
+      pair: A
+      type: small
+      plane: orange
+  transit:
+    - from: A
+      to: B
+      colors: [blue, red, green, yellow, orange]
+    - from: B
+      to: A
+      colors: [blue, red, green, yellow, purple]
+"063/Inside":
+  # ORANGE
+  # god cube and location currently depend on the door item
+  # in the future they could rely on the dark cube instead
+  connections:
+    A:
+      dest: "033_063"
+      pair: B
+      type: big
+      plane: purple
+    B:
+      dest: "062/SecretHub"
+      pair: B
+      type: small
+      plane: purple
+    C:
+      dest: "063/Outside"
+      pair: A
+      type: no_shuffle
+      plane: blue
+      item: Orange Tower Door
+    D:
+      dest: "044"
+      pair: K
+      type: no_shuffle
+      plane: green
+      one_way: true
+      item: Orange Tower Door
+  locations:
+    - Orange - Inside Puzzle Solved
+    - name: Orange - Tree Purified
+      item: Orange Tower Door
+  cubes:
+    - color: orange
+      god: true
+      item: Orange Tower Door
+      to: [C, D]
+    - color: orange
+      to: [C, D]
+    - color: blue
+      to: [C]
+  transit:
+    - from: A
+      to: B
+      colors: [green, yellow]
+    - from: [A, B, D]
+      to: C
+      colors: [blue, orange]
+    - from: [A, B, C]
+      to: D
+      colors: [green, orange]
+    - from: [C, D]
+      to: A
+      # purple is kind of nasty
+      colors: [red, purple]
+    - from: C
+      to: B
+      # green and yellow are tedious
+      colors: [green, yellow, purple]
+    - from: D
+      to: B
+      # yellow is tedious
+      colors: [yellow, purple]
+"063/Outside":
+  connections:
+    A:
+      dest: "063/Inside"
+      pair: C
+      type: no_shuffle
+      plane: red
+    B:
+      dest: "018_063"
+      pair: C
+      type: big
+      plane: green
+      item: Orange Shortcut from Apartments
+  cubes:
+    - color: orange
+      to: [A, B]
+  transit:
+    - from: A
+      to: B
+      colors: [blue, green, orange]
+    - from: B
+      to: A
+      colors: [red, yellow, orange]
+"044_501":
+  # FUSED with everything up to and including 803
+  connections:
+    A:
+      dest: "044"
+      pair: L
+      type: no_shuffle
+      plane: yellow
+    B:
+      dest: "804"
+      pair: A
+      type: no_shuffle
+      plane: green
+      one_way: true
+  locations:
+    - Rainbow - Orange Tree Puzzle Solved
+    - Rainbow - Water Portal Puzzle Solved
+    - Rainbow - Color Changer Puzzle Solved
+    - Rainbow - Giant Gate Opened
+  cubes:
+    - color: orange
+      amount: 3
+      to: [A]
+"045_804":
+  connections:
+    A:
+      dest: "044_045"
+      pair: D
+      type: big
+      plane: red
+    B:
+      dest: "804"
+      pair: B
+      type: big
+      plane: yellow
+  transit:
+    - from: A
+      to: B
+      colors: [blue, yellow, purple, orange]
+    - from: B
+      to: A
+      colors: [red, green, purple, orange]
+"804":
+  # Fused with everything before Akshardam
+  # Red/blue cube tree location
+  connections:
+    A:
+      dest: "044_501"
+      pair: B
+      type: no_shuffle
+      plane: yellow
+    B:
+      dest: "045_804"
+      pair: B
+      type: big
+      plane: green
+      item: Final Test Door
+  locations:
+    - Rainbow - Double Gravity Puzzle Solved
+    - Rainbow - First Water Tetromino Puzzle Solved
+    - Rainbow - Second Water Tetromino Puzzle Solved
