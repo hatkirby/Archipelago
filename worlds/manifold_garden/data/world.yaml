@@ -1896,11 +1896,11 @@
       type: no_shuffle
       plane: green
       one_way: true
+      item: Rainbow - Giant Gate Area
   locations:
     - Rainbow - Orange Tree Puzzle Solved
     - Rainbow - Water Portal Puzzle Solved
     - Rainbow - Color Changer Puzzle Solved
-    - Rainbow - Giant Gate Opened
   cubes:
     - color: orange
       amount: 3
