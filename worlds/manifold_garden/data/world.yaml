@@ -562,7 +562,8 @@
 "003":
   # RED
   # this whole thing is pretty much vanilla
-  # purifying the tree opens both connections
+  # purifying the tree opens connection to garden
+  # entering the scene opens connection to mini sphere puzzle
   # FUSED WITH 044_003
   locations:
     - Red - Tree Purified

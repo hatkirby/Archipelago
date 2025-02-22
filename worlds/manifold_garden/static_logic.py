@@ -236,8 +236,8 @@ def load_static_logic():
     STATIC_LOGIC = ManifoldGardenStaticLogic()
     STATIC_LOGIC.rooms = {}
 
-    file = pkgutil.get_data(__name__, "data/world.yaml")
-    config = Utils.parse_yaml(file)
+    config_file = pkgutil.get_data(__name__, "data/world.yaml")
+    config = Utils.parse_yaml(config_file)
 
     for room_name, room_data in config.items():
         STATIC_LOGIC.rooms[room_name] = process_room(room_name, room_data)
@@ -255,35 +255,11 @@ def load_static_logic():
                         or other_conn.plane != cdata.plane.opposite():
                     logging.warning(f"{rname}:{cname} does not match paired connection")
 
-    items = set()
-    locations = set()
-    for room_data in STATIC_LOGIC.rooms.values():
-        for conn_data in room_data.connections.values():
-            if conn_data.requirements is not None and conn_data.requirements.items is not None:
-                for item in conn_data.requirements.items:
-                    items.add(item)
+    ids_file = pkgutil.get_data(__name__, "data/ids.yaml")
+    ids = Utils.parse_yaml(ids_file)
 
-        for tree_data in room_data.trees:
-            if tree_data.requirements is not None and tree_data.requirements.items is not None:
-                for item in tree_data.requirements.items:
-                    items.add(item)
-
-        for loc_data in room_data.locations:
-            locations.add(loc_data.name)
-            if loc_data.requirements is not None and loc_data.requirements.items is not None:
-                for item in loc_data.requirements.items:
-                    items.add(item)
-
-    items.add("Nothing")
-
-    STATIC_LOGIC.locations = {name: code for code, name in enumerate(locations)}
-    STATIC_LOGIC.items = {name: code for code, name in enumerate(items)}
-
-    print(items)
-    print(len(items))
-
-    print(locations)
-    print(len(locations))
+    STATIC_LOGIC.locations = ids["locations"]
+    STATIC_LOGIC.items = ids["items"]
 
 
 load_static_logic()

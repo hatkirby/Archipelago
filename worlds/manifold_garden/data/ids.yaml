@@ -1,0 +1,100 @@
+items:
+  Apartments Entrance: 20202017
+  Arches Secret Passage: 20202045
+  Blue - Green Laser: 20202023
+  Blue - Red Laser: 20202014
+  Blue - Yellow Laser: 20202026
+  Blue Garden: 20202039
+  Blue Secret Path: 20202048
+  Final Test Door: 20202020
+  Green - Water Room Entrance: 20202041
+  Green Garden: 20202015
+  Large Gap Exterior Door: 20202035
+  Large Gap Exterior Secret Door: 20202029
+  Large Gap Interior Secret Door: 20202011
+  Large Gap Main Entrance: 20202037
+  Library - Purple Entrance: 20202046
+  Library - Yellow Smoke Wall: 20202024
+  Library Main Entrance: 20202012
+  Nothing: 20202050
+  Orange Entrance: 20202043
+  Orange Garden: 20202019
+  Orange Secret Path: 20202030
+  Orange Shortcut from Apartments: 20202031
+  Orange Tower Door: 20202032
+  Path to Green: 20202049
+  Path to Red: 20202018
+  Path to Yellow: 20202040
+  Purple Garden: 20202036
+  Pyramid - Green Smoke Wall: 20202028
+  Pyramid - Red Smoke Wall: 20202047
+  Red Entrance: 20202025
+  Red Garden: 20202013
+  Red Secret Path: 20202034
+  Secret Apartments Shortcut: 20202044
+  Secret Hub Garnier Entrance: 20202042
+  Secret Hub Orange Entrance: 20202033
+  Secret Hub Shattered Bridges Entrance: 20202010
+  Skylight to Library Shortcut: 20202038
+  Stepwell Entrance: 20202016
+  Yellow Entrance: 20202021
+  Yellow Garden: 20202027
+  Yellow Secret Path: 20202022
+locations:
+  Apartments Waterwheel Activated: 20202027
+  Blind Sphere Puzzle Solved: 20202019
+  Blue - Green Laser Activated: 20202041
+  Blue - Red Laser Activated: 20202010
+  Blue - Tree Purified: 20202056
+  Blue - Yellow Laser Activated: 20202046
+  Blue God Cube Planted: 20202014
+  Double Socket Puzzle Solved: 20202049
+  Final Test Puzzle Solved: 20202060
+  Green - Blue Waterwheel Activated: 20202034
+  Green - Tree Purified: 20202053
+  Green God Cube Planted: 20202051
+  Jerry McGuire Puzzle Solved: 20202025
+  Large Gap Puzzle Solved: 20202029
+  Long Bridge Long Tower Puzzle Solved: 20202026
+  Mini Sphere Puzzle Solved: 20202037
+  Non-Euclidean Tetromino Puzzle Solved: 20202042
+  Orange - Inside Puzzle Solved: 20202061
+  Orange - Tree Purified: 20202040
+  Orange God Cube Planted: 20202050
+  Purple - Tree Purified: 20202021
+  Purple God Cube Planted: 20202058
+  Purple/Orange Tree Puzzle Solved: 20202054
+  Pyramid First Exit Opened: 20202059
+  Pyramid Lower Tree Reached: 20202028
+  Pyramid Second Exit Opened: 20202023
+  Pyramid Upper Tree Reached: 20202031
+  Pyramid Waterwheel Activated: 20202062
+  Rainbow - Color Changer Puzzle Solved: 20202020
+  Rainbow - Double Gravity Puzzle Solved: 20202030
+  Rainbow - First Water Tetromino Puzzle Solved: 20202044
+  Rainbow - Giant Gate Opened: 20202065
+  Rainbow - Orange Tree Puzzle Solved: 20202012
+  Rainbow - Second Water Tetromino Puzzle Solved: 20202064
+  Rainbow - Water Portal Puzzle Solved: 20202018
+  Red - Tree Purified: 20202063
+  Red God Cube Planted: 20202048
+  Secret Hub Back Door Button: 20202047
+  Secret Hub Front Door Button: 20202039
+  Secret Hub Garnier Button: 20202015
+  Secret Hub Green Button: 20202024
+  Shattered Bridges Puzzle Solved: 20202052
+  Shattered Bridges Secret Puzzle Solved: 20202017
+  Single Socket Puzzle Solved: 20202016
+  Skylight Room Orange Secret: 20202033
+  Skylight Room Red Secret: 20202013
+  Skylight Room Waterwheel Activated: 20202066
+  Tower Orange Tree Puzzle Solved: 20202032
+  Tutorial Completed: 20202022
+  Water Through Portals Puzzle Solved: 20202038
+  Yellow - Blue Tower Solved: 20202011
+  Yellow - Green Tower Solved: 20202035
+  Yellow - Red Tower Solved: 20202055
+  Yellow - Tree Purified: 20202043
+  Yellow Cube Fetch Quest Completed: 20202036
+  Yellow Entrance Puzzle Solved: 20202045
+  Yellow God Cube Planted: 20202057
