@@ -877,7 +877,6 @@
       pair: B
       type: small
       plane: purple
-      item: Secret Apartments Shortcut
   transit:
     - from: A
       to: B
@@ -975,6 +974,7 @@
       pair: D
       type: small
       plane: orange
+      one_way: true
     C:
       dest: "063/Outside"
       pair: B
@@ -1871,7 +1871,7 @@
       pair: C
       type: big
       plane: green
-      item: Orange Shortcut from Apartments
+      item: Orange Secret Path
   cubes:
     - color: orange
       to: [A, B]
