@@ -272,4 +272,18 @@ def create_regions(world: "ManifoldGardenWorld"):
                 new_location.access_rule = _make_req_check_lambda(world, location.requirements)
                 end_room_region.locations.append(new_location)
 
+    # Set up mandala warp into Orange. Orange's inside and outside are distinct areas. The mandala warp takes you
+    # outside, but the warp becomes active if you enter the map at all. This means that you could enter the inside once,
+    # then travel to another god cube world and use the mandala room to warp to Orange's outside.
+    orange_inside_region = regions["063/Inside"]
+    orange_outside_region = regions["063/Outside"]
+
+    for warp_region_name in ["001", "003", "053", "002", "051"]:
+        warp_region = regions[warp_region_name]
+        warp_connection = Entrance(world.player, f"Orange mandala warp from {warp_region_name}", warp_region)
+        warp_connection.connect(orange_outside_region)
+        warp_connection.access_rule = lambda state: state.can_reach_region("063/Inside", world.player)
+        warp_region.exits.append(warp_connection)
+        world.multiworld.register_indirect_condition(orange_inside_region, warp_connection)
+
     world.multiworld.regions += regions.values()
