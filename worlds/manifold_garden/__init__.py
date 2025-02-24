@@ -1,4 +1,4 @@
-from BaseClasses import ItemClassification
+from BaseClasses import ItemClassification, Tutorial
 from worlds.AutoWorld import WebWorld, World
 from .datatypes import Requirements
 from .items import ManifoldGardenItem
@@ -10,6 +10,14 @@ from .static_logic import STATIC_LOGIC
 class ManifoldGardenWebWorld(WebWorld):
     rich_text_options_doc = True
     theme = "party"
+    tutorials = [Tutorial(
+        "Multiworld Setup Guide",
+        "A guide to playing Manifold Garden with Archipelago.",
+        "English",
+        "setup_en.md",
+        "setup/en",
+        ["hatkirby"]
+    )]
 
 
 class ManifoldGardenWorld(World):
