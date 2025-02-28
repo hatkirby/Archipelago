@@ -1,7 +1,8 @@
 from typing import Callable, NamedTuple, TYPE_CHECKING
 
 from BaseClasses import Region, Entrance, ItemClassification, CollectionState
-from .datatypes import Room, merge_requirements, CubeRequirement, Requirements, GravityDirection, CubeType
+from .datatypes import Room, merge_requirements, CubeRequirement, Requirements, GravityDirection, CubeType, \
+    EntranceIdentifier
 from .items import ManifoldGardenItem
 from .locations import ManifoldGardenLocation
 from .static_logic import STATIC_LOGIC
@@ -55,18 +56,19 @@ def _make_req_check_lambda(world: "ManifoldGardenWorld", requirements: Requireme
     return lambda state: _check_requirements(state, world, requirements)
 
 
-def _get_door_full_requirements(room_name: str, conn_name: str) -> Requirements | None:
+def _get_door_full_requirements(room_name: str, conn_name: str, world: "ManifoldGardenWorld") -> Requirements | None:
     room_data = STATIC_LOGIC.rooms[room_name]
     conn_data = room_data.connections[conn_name]
 
-    paired_room = STATIC_LOGIC.rooms[conn_data.destination]
-    paired_conn = paired_room.connections[conn_data.pair]
+    paired_entrance = world.get_entrance_pair(EntranceIdentifier(room_name, conn_name))
+    paired_room = STATIC_LOGIC.rooms[paired_entrance.room]
+    paired_conn = paired_room.connections[paired_entrance.entrance]
 
     requirements = merge_requirements(conn_data.requirements, paired_conn.requirements)
 
     if paired_conn.one_way:
         add_req = Requirements()
-        add_req.rooms = [conn_data.destination]
+        add_req.rooms = [paired_entrance.room]
 
         requirements = merge_requirements(requirements, add_req)
 
@@ -136,7 +138,7 @@ def _create_cube_graph(world: "ManifoldGardenWorld", req: CubeRequirement, start
         regions[region_name] = new_region
 
         _create_connection(world, regions, regions[starting_room], new_region, None,
-                           _get_door_full_requirements(connection.room_name, connection.room_exit))
+                           _get_door_full_requirements(connection.room_name, connection.room_exit, world))
 
     tree_regions = []
 
@@ -148,12 +150,14 @@ def _create_cube_graph(world: "ManifoldGardenWorld", req: CubeRequirement, start
         current_room = STATIC_LOGIC.rooms[next_connection.room_name]
         current_connection = current_room.connections[next_connection.room_exit]
 
-        paired_room = STATIC_LOGIC.rooms[current_connection.destination]
+        paired_entrance = world.get_entrance_pair(EntranceIdentifier(next_connection.room_name,
+                                                                     next_connection.room_exit))
+        paired_room = STATIC_LOGIC.rooms[paired_entrance.room]
 
         for tree in paired_room.trees:
             if tree.color == req.color and tree.cube_type == req.cube_type\
-                    and current_connection.pair in tree.to_connections:
-                tree_region_name = make_tree_region_name(current_connection.destination, tree.to_connections)
+                    and paired_entrance.entrance in tree.to_connections:
+                tree_region_name = make_tree_region_name(paired_entrance.room, tree.to_connections)
                 if tree_region_name not in tree_regions:
                     new_region = Region(tree_region_name, world.player, world.multiworld)
                     regions[tree_region_name] = new_region
@@ -169,7 +173,7 @@ def _create_cube_graph(world: "ManifoldGardenWorld", req: CubeRequirement, start
                             event_location.place_locked_item(event_item)
 
                 add_reqs = Requirements()
-                add_reqs.rooms = [current_connection.destination]
+                add_reqs.rooms = [paired_entrance.room]
 
                 tree_requirements = merge_requirements(add_reqs, tree.requirements)
 
@@ -177,9 +181,9 @@ def _create_cube_graph(world: "ManifoldGardenWorld", req: CubeRequirement, start
                                    tree_requirements)
 
         for from_transit_name, from_transit_data in paired_room.transit.items():
-            if current_connection.pair in from_transit_data and \
-                    (req.color & from_transit_data[current_connection.pair]) != 0:
-                following_info = ConnectionInfo(current_connection.destination, from_transit_name)
+            if paired_entrance.entrance in from_transit_data and \
+                    (req.color & from_transit_data[paired_entrance.entrance]) != 0:
+                following_info = ConnectionInfo(paired_entrance.room, from_transit_name)
                 following_region_name = following_info.make_region_name()
 
                 if following_info not in visited:
@@ -190,7 +194,7 @@ def _create_cube_graph(world: "ManifoldGardenWorld", req: CubeRequirement, start
                     visited.add(following_info)
 
                 _create_connection(world, regions, connection_region, regions[following_region_name], None,
-                                   _get_door_full_requirements(current_connection.destination, current_connection.pair))
+                                   _get_door_full_requirements(paired_entrance.room, paired_entrance.entrance, world))
 
     final_region_name = f"{region_name_prefix}DONE"
     final_region = Region(final_region_name, world.player, world.multiworld)
@@ -229,15 +233,16 @@ def create_regions(world: "ManifoldGardenWorld"):
     # Create the normal connections.
     for room_name, room_data in STATIC_LOGIC.rooms.items():
         for conn_name, conn_data in room_data.connections.items():
-            other_conn = STATIC_LOGIC.rooms[conn_data.destination].connections[conn_data.pair]
+            paired_entrance = world.get_entrance_pair(EntranceIdentifier(room_name, conn_name))
+            other_conn = STATIC_LOGIC.rooms[paired_entrance.room].connections[paired_entrance.entrance]
 
             if other_conn.one_way:
                 continue
 
             # We are going to ignore connections with cube requirements for now.
-            _create_connection(world, regions, regions[room_name], regions[conn_data.destination],
+            _create_connection(world, regions, regions[room_name], regions[paired_entrance.room],
                                f"{room_name}:{conn_name}",
-                               _get_door_full_requirements(room_name, conn_name))
+                               _get_door_full_requirements(room_name, conn_name, world))
 
     # Connect the start of the game.
     regions["Menu"].connect(regions["000"])
@@ -254,6 +259,10 @@ def create_regions(world: "ManifoldGardenWorld"):
         needed_cube_graphs: set[CubeRequirement] = set()
 
         for location in room_data.locations:
+            if location.name == "Apartments Waterwheel Activated" and\
+                    not world.options.apartments_waterwheel_puzzle.value:
+                continue
+
             if location.requirements is not None and location.requirements.has_single_cube_requirements():
                 for req in location.requirements.cubes:
                     needed_cube_graphs.add(req)
@@ -261,6 +270,10 @@ def create_regions(world: "ManifoldGardenWorld"):
         cube_graph_end_rooms = {req: _create_cube_graph(world, req, room_name, regions) for req in needed_cube_graphs}
 
         for location in room_data.locations:
+            if location.name == "Apartments Waterwheel Activated" and\
+                    not world.options.apartments_waterwheel_puzzle.value:
+                continue
+
             if location.requirements is not None and location.requirements.has_single_cube_requirements():
                 # can't deal with multiple reqs rn lol let's just pretend it's always one
                 req = location.requirements.cubes[0]

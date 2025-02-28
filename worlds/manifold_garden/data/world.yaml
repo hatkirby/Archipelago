@@ -599,13 +599,9 @@
   locations:
     - name: Final Test Puzzle Solved
       cube_req:
-        # It would be cool to also allow the solution of having a green cube + only one green/yellow (no purple/orange)
-        # Since you can get green cubes from 053 pretty easily
-        - color: "green/yellow"
-          amount: 2
-          from: [A, B, C]
-        - color: "purple/orange"
-          from: [A, B, C]
+        # This is puzzle is a special case and we'll probably do something in code for it.
+        color: green
+        from: [A, B, C]
   connections:
     A:
       # opens with button
@@ -621,9 +617,10 @@
       plane: orange
     C:
       # opens with button
+      # can't be shuffled because there are no other possible pairs
       dest: "073"
       pair: D
-      type: small
+      type: no_shuffle
       plane: yellow
       item: Arches Secret Passage
     D:
@@ -1034,9 +1031,10 @@
       plane: yellow
       item: Skylight to Library Shortcut
     D:
+      # can't be shuffled because there are no other possible pairs
       dest: "044_045"
       pair: C
-      type: small
+      type: no_shuffle
       plane: green
   cubes:
     - color: blue
@@ -1508,7 +1506,8 @@
   transit:
     - from: B
       to: A
-      colors: [red, green]
+      # yellow is ridiculous, but it's also sort of the canon solution to the yellow fetch quest
+      colors: [red, green, yellow]
 "002":
   # YELLOW
   # green/yellow tree location
@@ -1708,8 +1707,8 @@
     - name: Shattered Bridges Secret Puzzle Solved
       cube_req:
         color: purple
-        # canonically you would get it from A but i'm not sure how to represent that yet
-        from: [B, C]
+        # from A requires using the red cube in this room
+        from: [A, B, C]
   cubes:
     - color: red
       amount: 2

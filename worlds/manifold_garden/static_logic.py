@@ -3,7 +3,7 @@ import pkgutil
 
 import Utils
 from .datatypes import ManifoldGardenStaticLogic, Room, Connection, ConnectionType, GravityDirection, Requirements, \
-    CubeRequirement, CubeType, LocationInfo, TreeInfo
+    CubeRequirement, CubeType, LocationInfo, TreeInfo, ConnectionFilter, EntranceIdentifier
 
 STATIC_LOGIC: ManifoldGardenStaticLogic
 
@@ -235,12 +235,19 @@ def load_static_logic():
 
     STATIC_LOGIC = ManifoldGardenStaticLogic()
     STATIC_LOGIC.rooms = {}
+    STATIC_LOGIC.entrances = {}
 
     config_file = pkgutil.get_data(__name__, "data/world.yaml")
     config = Utils.parse_yaml(config_file)
 
     for room_name, room_data in config.items():
-        STATIC_LOGIC.rooms[room_name] = process_room(room_name, room_data)
+        new_room: Room = process_room(room_name, room_data)
+        STATIC_LOGIC.rooms[room_name] = new_room
+
+        for conn_name, conn_data in new_room.connections.items():
+            conn_filter = ConnectionFilter(conn_data.type, conn_data.plane)
+            STATIC_LOGIC.entrances.setdefault(conn_filter, [])
+            STATIC_LOGIC.entrances[conn_filter].append(EntranceIdentifier(room_name, conn_name))
 
     for rname, rdata in STATIC_LOGIC.rooms.items():
         for cname, cdata in rdata.connections.items():

@@ -1,6 +1,7 @@
 from BaseClasses import ItemClassification, Tutorial
 from worlds.AutoWorld import WebWorld, World
-from .datatypes import Requirements
+from .datatypes import Requirements, EntranceIdentifier
+from .entrances import EntranceRandomizer
 from .items import ManifoldGardenItem
 from .options import ManifoldGardenOptions
 from .regions import create_regions
@@ -37,8 +38,24 @@ class ManifoldGardenWorld(World):
     item_name_to_id = STATIC_LOGIC.items
     location_name_to_id = STATIC_LOGIC.locations
 
+    er: EntranceRandomizer | None
+
+    def generate_early(self):
+        if self.options.room_shuffle.value:
+            self.er = EntranceRandomizer(self)
+            self.er.randomize()
+        else:
+            self.er = None
+
     def create_regions(self):
         create_regions(self)
+
+    def get_entrance_pair(self, entrance: EntranceIdentifier):
+        if self.er is not None and entrance in self.er.connection_by_pair:
+            return self.er.connection_by_pair[entrance]
+        else:
+            conn_data = STATIC_LOGIC.rooms[entrance.room].connections[entrance.entrance]
+            return EntranceIdentifier(conn_data.destination, conn_data.pair)
 
     def create_items(self):
         for item_name, item_code in STATIC_LOGIC.items.items():
@@ -54,3 +71,12 @@ class ManifoldGardenWorld(World):
 
     def set_rules(self):
         self.multiworld.completion_condition[self.player] = lambda state: state.has("Victory", self.player)
+
+    def fill_slot_data(self):
+        slot_data = {}
+
+        if self.er is not None:
+            slot_data["connections"] = [[connection.cur_room, connection.exit, connection.other_room,
+                                         connection.entrance] for connection in self.er.connections]
+
+        return slot_data

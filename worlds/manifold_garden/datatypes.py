@@ -16,6 +16,9 @@ class GravityDirection(IntFlag):
     PURPLE = auto()
     ORANGE = auto()
 
+    def is_single(self) -> bool:
+        return self in list(GravityDirection)
+
     def opposite(self):
         if self == GravityDirection.BLUE:
             return GravityDirection.RED
@@ -119,6 +122,16 @@ class Connection:
                f" type={self.type or 'NONE'}, plane={self.plane or 'NONE'})"
 
 
+class ConnectionFilter(NamedTuple):
+    door_type: ConnectionType
+    plane: GravityDirection
+
+
+class EntranceIdentifier(NamedTuple):
+    room: str
+    entrance: str
+
+
 class TreeInfo:
     color: GravityDirection
     cube_type: CubeType
@@ -143,3 +156,4 @@ class ManifoldGardenStaticLogic:
     rooms: dict[str, Room]
     locations: dict[str, int]
     items: dict[str, int]
+    entrances: dict[ConnectionFilter, list[EntranceIdentifier]]
