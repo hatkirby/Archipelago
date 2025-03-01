@@ -40,15 +40,16 @@
       plane: orange
       type: big
     C:
-      # REQUIRES EXTERNAL BLUE CUBE
       dest: "900"
       pair: A
       type: big
       plane: orange
-      one_way: true
+      item: Garnier Hallway
+  locations:
+    - name: Tutorial - Blue Cube Fetched
       cube_req:
-        - color: blue
-          from: [A, B]
+        color: blue
+        from: [A, B, C]
   transit:
     - from: A
       to: B
@@ -1268,7 +1269,7 @@
       pair: B
       type: small
       plane: purple
-      item: Secret Hub Garnier Entrance
+      item: Garnier Hallway
     D:
       dest: "062/Inside"
       pair: D
@@ -1356,8 +1357,8 @@
       plane: orange
       item: Library - Purple Entrance
   locations:
-    - Single Socket Puzzle Solved
-    - name: Double Socket Puzzle Solved
+    - Library - Single Socket Puzzle Solved
+    - name: Library - Double Socket Puzzle Solved
       cube_req:
         color: blue
         from: [A, B, C, D]
@@ -1400,7 +1401,7 @@
       plane: blue
       item: Yellow Secret Path
   locations:
-    - name: Yellow Cube Fetch Quest Completed
+    - name: Library - Yellow Cube Fetched
       cube_req:
         color: yellow
         from: [A, C]

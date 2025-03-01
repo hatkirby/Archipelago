@@ -7,6 +7,7 @@ items:
   Blue Garden: 20202039
   Blue Secret Path: 20202048
   Final Test Door: 20202020
+  Garnier Hallway: 20202042
   Green - Water Room Entrance: 20202041
   Green Garden: 20202015
   Large Gap Exterior Door: 20202035
@@ -31,7 +32,6 @@ items:
   Red Entrance: 20202025
   Red Garden: 20202013
   Red Secret Path: 20202034
-  Secret Hub Garnier Entrance: 20202042
   Secret Hub Orange Entrance: 20202033
   Secret Hub Shattered Bridges Entrance: 20202010
   Skylight to Library Shortcut: 20202038
@@ -47,13 +47,15 @@ locations:
   Blue - Tree Purified: 20202056
   Blue - Yellow Laser Activated: 20202046
   Blue God Cube Planted: 20202014
-  Double Socket Puzzle Solved: 20202049
   Final Test Puzzle Solved: 20202060
   Green - Blue Waterwheel Activated: 20202034
   Green - Tree Purified: 20202053
   Green God Cube Planted: 20202051
   Jerry McGuire Puzzle Solved: 20202025
   Large Gap Puzzle Solved: 20202029
+  Library - Double Socket Puzzle Solved: 20202049
+  Library - Single Socket Puzzle Solved: 20202016
+  Library - Yellow Cube Fetched: 20202036
   Long Bridge Long Tower Puzzle Solved: 20202026
   Mini Sphere Puzzle Solved: 20202037
   Non-Euclidean Tetromino Puzzle Solved: 20202042
@@ -82,17 +84,16 @@ locations:
   Secret Hub Green Button: 20202024
   Shattered Bridges Puzzle Solved: 20202052
   Shattered Bridges Secret Puzzle Solved: 20202017
-  Single Socket Puzzle Solved: 20202016
   Skylight Room Orange Secret: 20202033
   Skylight Room Red Secret: 20202013
   Skylight Room Waterwheel Activated: 20202066
   Tower Orange Tree Puzzle Solved: 20202032
+  Tutorial - Blue Cube Fetched: 20202067
   Tutorial Completed: 20202022
   Water Through Portals Puzzle Solved: 20202038
   Yellow - Blue Tower Solved: 20202011
   Yellow - Green Tower Solved: 20202035
   Yellow - Red Tower Solved: 20202055
   Yellow - Tree Purified: 20202043
-  Yellow Cube Fetch Quest Completed: 20202036
   Yellow Entrance Puzzle Solved: 20202045
   Yellow God Cube Planted: 20202057
