@@ -1841,9 +1841,12 @@
     - from: A
       to: B
       colors: [green, yellow]
-    - from: [A, B, D]
+    - from: [A, B]
       to: C
       colors: [blue, orange]
+    - from: D
+      to: C
+      colors: [orange]
     - from: [A, B, C]
       to: D
       colors: [green, orange]
